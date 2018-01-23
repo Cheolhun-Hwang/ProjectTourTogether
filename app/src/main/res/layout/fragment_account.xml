@@ -19,21 +19,22 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="24dp"
                 android:src="@drawable/noimage"
-                android:id="@+id/imageView2" />
+                android:id="@+id/account_userImage" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="7dp"
-                android:layout_toEndOf="@+id/imageView2"
+                android:layout_toEndOf="@+id/account_userImage"
                 android:text="User Name"
                 android:textColor="@color/black"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:id="@+id/textView" />
+                android:id="@+id/account_username" />
 
             <ImageView
+                android:id="@+id/account_settingBTN"
                 android:layout_width="36sp"
                 android:layout_height="36sp"
                 android:layout_alignParentEnd="true"

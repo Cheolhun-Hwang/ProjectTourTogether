@@ -93,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
                 DAO.setUser(user);
 
                 DAO.init_mainPostList();
+                DAO.init_bookmarkSpot();
+                DAO.init_myCourse();
                 DAO.loadData_mainPostList();
 
                 Message msg = handler.obtainMessage();

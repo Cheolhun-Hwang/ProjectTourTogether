@@ -7,9 +7,12 @@ import java.util.ArrayList;
  */
 
 public class DAO {
+    public static String ServiceKey="";
     public static USER user;
     public static Setting setting;
     public static ArrayList<mainPostItem> mainPostList;
+    public static ArrayList<TourApiItem> bookmarkSpotList;
+    public static ArrayList<TourApiItem> myCourseList;
 
     public static void setUser(USER user){
         DAO.user = user;
@@ -18,7 +21,52 @@ public class DAO {
     public static void init_mainPostList(){
         DAO.mainPostList = new ArrayList<mainPostItem>();
     }
+    public static void init_bookmarkSpot(){
+        DAO.bookmarkSpotList = new ArrayList<TourApiItem>();
 
+        //temp
+        TourApiItem tourApiItem = new TourApiItem();
+        tourApiItem.setAddr1("161, Sajik-ro, Jongno-gu, Seoul");
+        tourApiItem.setAddr2("");
+        tourApiItem.setAreaCode("1");
+        tourApiItem.setCat1("A02");
+        tourApiItem.setCat2("A0201");
+        tourApiItem.setCat3("A02010100");
+        tourApiItem.setContentID("126508");
+        tourApiItem.setContentTypeID("12");
+        tourApiItem.setFirstImage("http://tong.visitkorea.or.kr/cms/resource/40/1568040_image2_1.jpg");
+        tourApiItem.setMapx(126.9767235747);
+        tourApiItem.setMapy(37.5801859611);
+        tourApiItem.setModifyDateTIme("20171111153343");
+        tourApiItem.setReadCount("107744");
+        tourApiItem.setSigunguCode("23");
+        tourApiItem.setTitle("Gyeongbokgung Palace (경복궁)");
+
+        DAO.bookmarkSpotList.add(tourApiItem);
+    }
+    public static void init_myCourse(){
+        DAO.myCourseList = new ArrayList<TourApiItem>();
+
+        //temp
+        TourApiItem tourApiItem = new TourApiItem();
+        tourApiItem.setAddr1("161, Sajik-ro, Jongno-gu, Seoul");
+        tourApiItem.setAddr2("");
+        tourApiItem.setAreaCode("1");
+        tourApiItem.setCat1("A02");
+        tourApiItem.setCat2("A0201");
+        tourApiItem.setCat3("A02010100");
+        tourApiItem.setContentID("126508");
+        tourApiItem.setContentTypeID("12");
+        tourApiItem.setFirstImage("http://tong.visitkorea.or.kr/cms/resource/40/1568040_image2_1.jpg");
+        tourApiItem.setMapx(126.9767235747);
+        tourApiItem.setMapy(37.5801859611);
+        tourApiItem.setModifyDateTIme("20171111153343");
+        tourApiItem.setReadCount("107744");
+        tourApiItem.setSigunguCode("23");
+        tourApiItem.setTitle("Gyeongbokgung Palace (경복궁) 2");
+
+        DAO.myCourseList.add(tourApiItem);
+    }
     public static void loadData_mainPostList(){
         //temp
         mainPostItem mainPostItem1 = new mainPostItem();

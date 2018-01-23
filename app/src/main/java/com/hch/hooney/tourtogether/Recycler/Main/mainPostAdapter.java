@@ -96,6 +96,8 @@ public class mainPostAdapter extends RecyclerView.Adapter {
                 Toast.makeText(mContext, "Comment !!", Toast.LENGTH_SHORT).show();
             }
         });
+
+        setAnimation(hold.itemView, position);
     }
 
     @Override

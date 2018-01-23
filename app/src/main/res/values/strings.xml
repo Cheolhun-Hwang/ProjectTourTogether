@@ -3,7 +3,7 @@
 
     <string name="nav_home">Home</string>
     <string name="nav_search">Search</string>
-    <string name="nav_course">Course</string>
+    <string name="nav_course">Route</string>
     <string name="nav_account">Account</string>
 
     <string name="search_q1">1. Set Location</string>
@@ -23,8 +23,11 @@
 
     <string name="account_tab1">Bookmark\nSpot</string>
     <string name="account_tab2">Bookmark\nCourse</string>
-    <string name="account_tab3">My Course</string>
+    <string name="account_tab3">My Travel\nRoute</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bookmark_add">Complete Adding to My Route.</string>
+    <string name="mycourse_info">Record your own travel route.</string>
+
+    <string name="bookmark_remove">Complete Removing from Bookmark.</string>
+    <string name="mycourse_remove">Complete Removing from My Route.</string>
 </resources>

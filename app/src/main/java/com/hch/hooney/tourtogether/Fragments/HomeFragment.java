@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
 
     private void init(){
         mainRecyclerview = (RecyclerView) view.findViewById(R.id.home_mainRecyclerView);
-        mainRecyclerview.setHasFixedSize(true);
+        mainRecyclerview.setHasFixedSize(false);
         mainRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     }
 

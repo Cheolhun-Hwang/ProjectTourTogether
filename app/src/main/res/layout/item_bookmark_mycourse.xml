@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_marginBottom="10dp"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/bookmark_mycourse_num"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:text="0"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/bookmark_mycourse_imageview"
+            android:src="@drawable/noimage"
+            android:scaleType="centerCrop"
+            android:layout_width="120dp"
+            android:layout_height="96dp" />
+        <TextView
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:id="@+id/bookmark_mycourse_title"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="spotTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:padding="5dp"
+            android:orientation="vertical"
+            android:layout_weight="1.5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:scaleType="fitXY"
+                    android:id="@+id/bookmark_mycourse_upImageView"
+                    android:src="@drawable/arrow_up"
+                    android:background="@color/alpha"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+                <ImageButton
+                    android:id="@+id/bookmark_mycourse_closeImageView"
+                    android:src="@drawable/ic_close_red"
+                    android:background="@color/alpha"
+                    android:layout_width="24dp"
+                    android:layout_height="36dp" />
+                <ImageButton
+                    android:scaleType="fitXY"
+                    android:id="@+id/bookmark_mycourse_downImageView"
+                    android:src="@drawable/arrow_down"
+                    android:background="@color/alpha"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
