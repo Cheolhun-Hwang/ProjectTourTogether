@@ -4,10 +4,167 @@
     android:layout_height="match_parent"
     tools:context="com.hch.hooney.tourtogether.Fragments.SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/nav_search" />
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="30dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:paddingLeft="15dp"
+                android:text="@string/search_q1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/MainColor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="35dp">
+                <TextView
+                    android:gravity="center|left"
+                    android:layout_weight="1"
+                    android:textColor="@color/grey_500"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:paddingLeft="20dp"
+                    android:text="now..."
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <LinearLayout
+                    android:layout_weight="1.5"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Auto"
+                        android:background="@drawable/round"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <Button
+                        android:textColor="@color/white"
+                        android:layout_margin="5dp"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:background="@drawable/round"
+                        android:layout_weight="1"
+                        android:text="Select"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="30dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:paddingLeft="15dp"
+                android:text="@string/search_q2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/MainColor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableLayout
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:padding="1dp"
+                    android:background="@color/grey_400"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp">
+                    <TableRow
+                        android:layout_weight="1">
+                        <Button
+                            android:text="@string/search_tab1"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:textColor="@color/grey_400"
+                            android:layout_margin="1dp"
+                            android:background="@color/white"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                        <Button
+                            android:text="@string/search_tab2"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:textColor="@color/grey_400"
+                            android:layout_margin="1dp"
+                            android:background="@color/white"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                    </TableRow>
+                    <TableRow
+                        android:layout_weight="1" >
+                        <Button
+                            android:text="@string/search_tab3"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:textColor="@color/grey_400"
+                            android:layout_margin="1dp"
+                            android:background="@color/white"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                        <Button
+                            android:text="@string/search_tab4"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:textColor="@color/grey_400"
+                            android:layout_margin="1dp"
+                            android:background="@color/white"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center|bottom"
+            android:padding="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:text="Search"
+                android:background="@drawable/round"
+                android:layout_width="110sp"
+                android:layout_height="40sp" />
+        </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>

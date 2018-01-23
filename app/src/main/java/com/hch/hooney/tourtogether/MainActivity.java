@@ -1,6 +1,8 @@
 package com.hch.hooney.tourtogether;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -10,6 +12,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.hch.hooney.tourtogether.DAO.DAO;
+import com.hch.hooney.tourtogether.DAO.USER;
 import com.hch.hooney.tourtogether.Fragments.AccountFragment;
 import com.hch.hooney.tourtogether.Fragments.CourseFragment;
 import com.hch.hooney.tourtogether.Fragments.HomeFragment;
@@ -25,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     //variable
     private FragmentManager manager;
+
+    private Thread loadDateToServer;
+    private Handler handler;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -55,12 +62,45 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(!(init())){
-            Log.e(TAG, "Init Method Error....");
-        }
-        if(!(event())){
-            Log.e(TAG, "Event Method Error....");
-        }
+        handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                switch (msg.what){
+                    case 1001:
+                        if(!(init())){
+                            Log.e(TAG, "Init Method Error....");
+                        }
+                        if(!(event())){
+                            Log.e(TAG, "Event Method Error....");
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
+
+        loadDateToServer = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                USER user = new USER();
+                user.setUID("0000");
+                user.setUNAME("Honney");
+                user.setUCOUNTRY("KR");
+                user.setUPROFILEIMAGE("https://yt3.ggpht.com/-iLYgyUzcTzQ/AAAAAAAAAAI/AAAAAAAAAAA/_N59TIbtHlI/s108-c-k-no-mo-rj-c0xffffff/photo.jpg");
+                user.setUUID("qewqsa");
+                DAO.setUser(user);
+
+                DAO.init_mainPostList();
+                DAO.loadData_mainPostList();
+
+                Message msg = handler.obtainMessage();
+                msg.what = 1001;
+                handler.sendMessage(msg);
+            }
+        });
+        loadDateToServer.start();
     }
 
     private boolean init(){

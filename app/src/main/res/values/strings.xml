@@ -6,6 +6,25 @@
     <string name="nav_course">Course</string>
     <string name="nav_account">Account</string>
 
+    <string name="search_q1">1. Set Location</string>
+    <string name="search_q2">2. Set Field</string>
+
+    <string name="search_tab1">Tourist\ndestination</string>
+    <string name="search_tab2">Cultural\nFacilities</string>
+    <string name="search_tab3">Leisure\nSports</string>
+    <string name="search_tab4">Festival</string>
+
+    <string name="recommend_tab1">Family</string>
+    <string name="recommend_tab2">Alone</string>
+    <string name="recommend_tab3">Healing</string>
+    <string name="recommend_tab4">Walking</string>
+    <string name="recommend_tab5">Camping</string>
+    <string name="recommend_tab6">Taste</string>
+
+    <string name="account_tab1">Bookmark\nSpot</string>
+    <string name="account_tab2">Bookmark\nCourse</string>
+    <string name="account_tab3">My Course</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
