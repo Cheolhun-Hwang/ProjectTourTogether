@@ -24,53 +24,136 @@
                 android:textColor="@color/MainColor"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
             <LinearLayout
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:gravity="center"
-                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="35dp">
-                <TextView
-                    android:gravity="center|left"
-                    android:layout_weight="1"
-                    android:textColor="@color/grey_500"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:paddingLeft="20dp"
-                    android:text="now..."
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                android:layout_height="wrap_content">
                 <LinearLayout
-                    android:layout_weight="1.5"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="35dp">
                     <Button
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:layout_margin="5dp"
+                        android:id="@+id/course_area_btn"
                         android:layout_weight="1"
-                        android:text="Auto"
-                        android:background="@drawable/round"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:background="@color/MainColor"
+                        android:text="@string/search_area"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="match_parent" />
                     <Button
-                        android:textColor="@color/white"
-                        android:layout_margin="5dp"
-                        android:textSize="12sp"
+                        android:id="@+id/course_radius_btn"
+                        android:textColor="@color/grey_500"
                         android:textStyle="bold"
-                        android:background="@drawable/round"
+                        android:background="@color/grey_200"
                         android:layout_weight="1"
-                        android:text="Select"
+                        android:text="@string/search_radius"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <LinearLayout
+                    android:background="@color/indigo_50"
+                    android:orientation="horizontal"
+                    android:id="@+id/course_area_layout"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp">
+                    <TextView
+                        android:id="@+id/course_area_show_location_textview"
+                        android:gravity="center|left"
+                        android:layout_weight="1"
+                        android:textColor="@color/grey_500"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:paddingLeft="20dp"
+                        android:text="now..."
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <LinearLayout
+                        android:layout_weight="1.5"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <Button
+                            android:id="@+id/course_area_find_location_btn"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:text="Auto"
+                            android:background="@drawable/round"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <Button
+                            android:id="@+id/course_radius_select_location_btn"
+                            android:textColor="@color/white"
+                            android:layout_margin="5dp"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:background="@drawable/round"
+                            android:layout_weight="1"
+                            android:text="Select"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:background="@color/indigo_50"
+                    android:id="@+id/course_radius_layout"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp">
+                    <TextView
+                        android:id="@+id/course_radius_show_location_textview"
+                        android:gravity="center|left"
+                        android:layout_weight="1"
+                        android:textColor="@color/grey_500"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:paddingLeft="20dp"
+                        android:text="now..."
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <Button
+                            android:id="@+id/course_radius_find_location_btn"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:layout_margin="5dp"
+                            android:text="Auto"
+                            android:background="@drawable/round"
+                            android:layout_width="45dp"
+                            android:layout_height="match_parent" />
+                        <Spinner
+                            android:id="@+id/course_radius_spinner"
+                            android:entries="@array/radius"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -105,6 +188,7 @@
                     <TableRow
                         android:layout_weight="1">
                         <Button
+                            android:id="@+id/course_field_tab1"
                             android:text="@string/recommend_tab1"
                             android:textStyle="bold"
                             android:textSize="13sp"
@@ -115,6 +199,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                         <Button
+                            android:id="@+id/course_field_tab2"
                             android:text="@string/recommend_tab2"
                             android:textStyle="bold"
                             android:textSize="13sp"
@@ -125,6 +210,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                         <Button
+                            android:id="@+id/course_field_tab3"
                             android:text="@string/recommend_tab3"
                             android:textStyle="bold"
                             android:textSize="13sp"
@@ -138,6 +224,7 @@
                     <TableRow
                         android:layout_weight="1" >
                         <Button
+                            android:id="@+id/course_field_tab4"
                             android:text="@string/recommend_tab4"
                             android:textStyle="bold"
                             android:textSize="13sp"
@@ -148,6 +235,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                         <Button
+                            android:id="@+id/course_field_tab5"
                             android:text="@string/recommend_tab5"
                             android:textStyle="bold"
                             android:textSize="13sp"
@@ -158,6 +246,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                         <Button
+                            android:id="@+id/course_field_tab6"
                             android:text="@string/recommend_tab6"
                             android:textStyle="bold"
                             android:textSize="13sp"
@@ -177,6 +266,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <Button
+                android:id="@+id/course_search_btn"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"

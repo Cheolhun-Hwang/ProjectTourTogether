@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.hch.hooney.tourtogether.Fragments.AccountFragment">
 
     <LinearLayout
@@ -52,6 +53,7 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
                 <android.support.design.widget.TabLayout
+                    app:tabIndicatorColor="@color/orange_500"
                     android:id="@+id/account_tabs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>

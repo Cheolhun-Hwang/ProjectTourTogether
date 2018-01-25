@@ -1,5 +1,6 @@
 package com.hch.hooney.tourtogether.DAO;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -12,6 +13,7 @@ public class DAO {
     public static Setting setting;
     public static ArrayList<mainPostItem> mainPostList;
     public static ArrayList<TourApiItem> bookmarkSpotList;
+    public static ArrayList<TourApiItem> bookmarkRouteList;
     public static ArrayList<TourApiItem> myCourseList;
 
     public static void setUser(USER user){
@@ -43,6 +45,44 @@ public class DAO {
         tourApiItem.setTitle("Gyeongbokgung Palace (경복궁)");
 
         DAO.bookmarkSpotList.add(tourApiItem);
+    }
+    public static void init_bookmarkRoute(){
+        DAO.bookmarkRouteList = new ArrayList<TourApiItem>();
+
+        //temp
+        TourApiItem tourApiItem1 = new TourApiItem();
+        tourApiItem1.setAreaCode("1");
+        tourApiItem1.setCat1("C01");
+        tourApiItem1.setCat2("C0112");
+        tourApiItem1.setCat3("C01120001");
+        tourApiItem1.setContentID("1914505");
+        tourApiItem1.setContentTypeID("25");
+        tourApiItem1.setFirstImage("http://tong.visitkorea.or.kr/cms/resource/40/1570340_image2_1.jpg");
+        tourApiItem1.setMapx(126.9786237129);
+        tourApiItem1.setMapy(37.5691567219);
+        tourApiItem1.setModifyDateTIme("20160927181406");
+        tourApiItem1.setReadCount("15135");
+        tourApiItem1.setSigunguCode("24");
+        tourApiItem1.setTitle("청계천을 돌아 경복궁에서 인사동까지");
+
+        DAO.bookmarkRouteList.add(tourApiItem1);
+
+        TourApiItem tourApiItem2 = new TourApiItem();
+        tourApiItem2.setAreaCode("1");
+        tourApiItem2.setCat1("C01");
+        tourApiItem2.setCat2("C0112");
+        tourApiItem2.setCat3("C01120001");
+        tourApiItem2.setContentID("2022929");
+        tourApiItem2.setContentTypeID("25");
+        tourApiItem2.setFirstImage("http://tong.visitkorea.or.kr/cms/resource/72/1782972_image2_1.jpg");
+        tourApiItem2.setMapx(126.9768292386);
+        tourApiItem2.setMapy(37.5759947835);
+        tourApiItem2.setModifyDateTIme("20170120141557");
+        tourApiItem2.setReadCount("14028");
+        tourApiItem2.setSigunguCode("99");
+        tourApiItem2.setTitle("낮이 좋아? 밤이 좋아? 서울의 주경, 야경 여행코스");
+
+        DAO.bookmarkRouteList.add(tourApiItem2);
     }
     public static void init_myCourse(){
         DAO.myCourseList = new ArrayList<TourApiItem>();

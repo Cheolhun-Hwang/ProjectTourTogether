@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
                 DAO.init_mainPostList();
                 DAO.init_bookmarkSpot();
+                DAO.init_bookmarkRoute();
                 DAO.init_myCourse();
                 DAO.loadData_mainPostList();
 
