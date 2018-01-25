@@ -1,6 +1,7 @@
 package com.hch.hooney.tourtogether.Fragments;
 
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -17,7 +18,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.R;
+import com.hch.hooney.tourtogether.SearchActivity;
 import com.hch.hooney.tourtogether.Service.GPS;
 
 /**
@@ -44,6 +47,8 @@ public class SearchFragment extends Fragment {
     private Button fieldTab2;
     private Button fieldTab3;
     private Button fieldTab4;
+    private Button fieldTab5;
+    private Button fieldTab6;
 
     private Button searchBTN;
 
@@ -53,6 +58,17 @@ public class SearchFragment extends Fragment {
     private boolean isSearchArea;  //true : Search Area false : Search Radius
     private int selectField; //0: None 1: Tourist Destination 2: Cultural Facilities 3: Leisure Sports 4: Festival
     private String radius;
+    private double lat;
+    private double lon;
+
+    private String URL;
+    private String CONTETNTTYPEID;
+    private String AREACODE;
+    private String CAT1;
+    private String CAT2;
+    private String CAT3;
+
+
 
     public SearchFragment() {
         // Required empty public constructor
@@ -91,6 +107,8 @@ public class SearchFragment extends Fragment {
         fieldTab2 = (Button) view.findViewById(R.id.search_field_tab2);
         fieldTab3 = (Button) view.findViewById(R.id.search_field_tab3);
         fieldTab4 = (Button) view.findViewById(R.id.search_field_tab4);
+        fieldTab5 = (Button) view.findViewById(R.id.search_field_tab5);
+        fieldTab6 = (Button) view.findViewById(R.id.search_field_tab6);
         searchBTN = (Button) view.findViewById(R.id.search_search_btn);
     }
 
@@ -119,6 +137,8 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=1;
+                CAT1="A01";
+                CONTETNTTYPEID="76";
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -127,6 +147,8 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=2;
+                CAT1="A02";
+                CONTETNTTYPEID="76";
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -147,14 +169,30 @@ public class SearchFragment extends Fragment {
                 selectFieldButton();
             }
         });
+        fieldTab5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectField=5;
+                clearFieldButton();
+                selectFieldButton();
+            }
+        });
+        fieldTab6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectField=6;
+                clearFieldButton();
+                selectFieldButton();
+            }
+        });
         searchAreaAutoFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkDangerousPermissions();
                 GPS gps = new GPS(getContext());
                 if(gps.isGetLocation()){
-                    double lat = gps.getLat();
-                    double lon = gps.getLon();
+                    lat = gps.getLat();
+                    lon = gps.getLon();
 
                     searchAreaShowLocation.setText("gps : " + lat + " / " + lon);
                     gps.stopUsingGPS();
@@ -169,8 +207,8 @@ public class SearchFragment extends Fragment {
                 checkDangerousPermissions();
                 GPS gps = new GPS(getContext());
                 if(gps.isGetLocation()){
-                    double lat = gps.getLat();
-                    double lon = gps.getLon();
+                    lat = gps.getLat();
+                    lon = gps.getLon();
 
                     searchRadiusShowLocation.setText("gps : " + lat + " / " + lon);
                     gps.stopUsingGPS();
@@ -182,7 +220,20 @@ public class SearchFragment extends Fragment {
         searchBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Radius : " + searchRadiusSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                URL = "http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList"+
+                        "?ServiceKey="+ DAO.ServiceKey+
+                        "&contentTypeId=76"+
+                        "&areaCode=1"+
+                        "&sigunguCode="+
+                        "&cat1="+
+                        "&cat2="+
+                        "&cat3="+
+                        "&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=P"+
+                        "&numOfRows=100"+
+                        "&pageNo=1 ";
+                Intent intent = new Intent(getContext(), SearchActivity.class);
+                intent.putExtra("url", URL);
+                startActivity(intent);
             }
         });
     }
@@ -217,6 +268,10 @@ public class SearchFragment extends Fragment {
         fieldTab3.setTextColor(getResources().getColor(R.color.grey_400));
         fieldTab4.setBackgroundColor(getResources().getColor(R.color.white));
         fieldTab4.setTextColor(getResources().getColor(R.color.grey_400));
+        fieldTab5.setBackgroundColor(getResources().getColor(R.color.white));
+        fieldTab5.setTextColor(getResources().getColor(R.color.grey_400));
+        fieldTab6.setBackgroundColor(getResources().getColor(R.color.white));
+        fieldTab6.setTextColor(getResources().getColor(R.color.grey_400));
     }
 
     private void selectFieldButton(){
@@ -236,6 +291,14 @@ public class SearchFragment extends Fragment {
             case 4:
                 fieldTab4.setBackgroundColor(getResources().getColor(R.color.MainColor));
                 fieldTab4.setTextColor(getResources().getColor(R.color.white));
+                break;
+            case 5:
+                fieldTab5.setBackgroundColor(getResources().getColor(R.color.MainColor));
+                fieldTab5.setTextColor(getResources().getColor(R.color.white));
+                break;
+            case 6:
+                fieldTab6.setBackgroundColor(getResources().getColor(R.color.MainColor));
+                fieldTab6.setTextColor(getResources().getColor(R.color.white));
                 break;
             default:
                 break;

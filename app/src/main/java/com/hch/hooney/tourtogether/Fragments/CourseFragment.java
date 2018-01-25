@@ -1,8 +1,12 @@
 package com.hch.hooney.tourtogether.Fragments;
 
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hch.hooney.tourtogether.R;
+import com.hch.hooney.tourtogether.Service.GPS;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +54,8 @@ public class CourseFragment extends Fragment {
     private boolean isSearchArea;  //true : Search Area false : Search Radius
     private int selectField; //0: None 1: Family 2: alone 3: healing 4: walking 5: camping 6:taste
     private String radius;
+    private double lat;
+    private double lon;
 
     public CourseFragment() {
         // Required empty public constructor
@@ -167,6 +174,44 @@ public class CourseFragment extends Fragment {
                 Toast.makeText(getContext(), "Radius : " + searchRadiusSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
             }
         });
+        searchAreaAutoFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkDangerousPermissions();
+                GPS gps = new GPS(getContext());
+                if(gps.isGetLocation()){
+                    lat = gps.getLat();
+                    lon = gps.getLon();
+
+                    searchAreaShowLocation.setText("gps : " + lat + " / " + lon);
+                    gps.stopUsingGPS();
+                }else{
+                    gps.showSettingAlert();
+                }
+            }
+        });
+        searchRadiusAutoFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkDangerousPermissions();
+                GPS gps = new GPS(getContext());
+                if(gps.isGetLocation()){
+                    lat = gps.getLat();
+                    lon = gps.getLon();
+
+                    searchRadiusShowLocation.setText("gps : " + lat + " / " + lon);
+                    gps.stopUsingGPS();
+                }else{
+                    gps.showSettingAlert();
+                }
+            }
+        });
+        searchBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Radius : " + searchRadiusSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void clearLocationFiledButton(){
@@ -235,5 +280,54 @@ public class CourseFragment extends Fragment {
                 break;
         }
     }
+
+    /* 사용자 권한 확인 메서드
+       - import android.Manifest; 를 시킬 것
+     */
+    private void checkDangerousPermissions() {
+        String[] permissions = {//import android.Manifest;
+                android.Manifest.permission.ACCESS_FINE_LOCATION,   //GPS 이용권한
+                android.Manifest.permission.ACCESS_COARSE_LOCATION, //네트워크/Wifi 이용 권한
+                android.Manifest.permission.INTERNET                 //인터넷 사용 권한
+        };
+
+        //권한을 가지고 있는지 체크
+        int permissionCheck = PackageManager.PERMISSION_GRANTED;
+        for (int i = 0; i < permissions.length; i++) {
+            permissionCheck = ContextCompat.checkSelfPermission(getActivity(), permissions[i]);
+            if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+                break;
+            }
+        }
+
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "권한있음");
+        } else {
+            Log.d(TAG, "권한없음");
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permissions[0])) {
+                Log.d(TAG, "권한설명란");
+            } else {
+                ActivityCompat.requestPermissions(getActivity(), permissions, 1);
+            }
+        }
+    }//end of checkDangerousPermissions
+
+    // 사용자의 권한 확인 후 사용자의 권한에 대한 응답 결과를 확인하는 콜백 메소드
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        if (requestCode == 1) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    //Toast.makeText(getApplicationContext(), permissions[i] + " 권한이 승인됨.", Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "권한 승인");
+                } else {
+                    //Toast.makeText(getApplicationContext(), permissions[i] + " 권한이 승인되지 않음.", Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "권한 승인되지 않음.");
+                }
+            }
+        }
+    }//end of onRequestPermissionsResult
 
 }

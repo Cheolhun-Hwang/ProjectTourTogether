@@ -191,7 +191,7 @@
                             android:id="@+id/search_field_tab1"
                             android:text="@string/search_tab1"
                             android:textStyle="bold"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
                             android:textColor="@color/grey_400"
                             android:layout_margin="1dp"
                             android:background="@color/white"
@@ -202,7 +202,18 @@
                             android:id="@+id/search_field_tab2"
                             android:text="@string/search_tab2"
                             android:textStyle="bold"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
+                            android:textColor="@color/grey_400"
+                            android:layout_margin="1dp"
+                            android:background="@color/white"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                        <Button
+                            android:id="@+id/search_field_tab3"
+                            android:text="@string/search_tab3"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
                             android:textColor="@color/grey_400"
                             android:layout_margin="1dp"
                             android:background="@color/white"
@@ -213,10 +224,10 @@
                     <TableRow
                         android:layout_weight="1" >
                         <Button
-                            android:id="@+id/search_field_tab3"
-                            android:text="@string/search_tab3"
+                            android:id="@+id/search_field_tab4"
+                            android:text="@string/search_tab4"
                             android:textStyle="bold"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
                             android:textColor="@color/grey_400"
                             android:layout_margin="1dp"
                             android:background="@color/white"
@@ -224,10 +235,21 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                         <Button
-                            android:id="@+id/search_field_tab4"
-                            android:text="@string/search_tab4"
+                            android:id="@+id/search_field_tab5"
+                            android:text="@string/search_tab5"
                             android:textStyle="bold"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
+                            android:textColor="@color/grey_400"
+                            android:layout_margin="1dp"
+                            android:background="@color/white"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                        <Button
+                            android:id="@+id/search_field_tab6"
+                            android:text="@string/search_tab6"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
                             android:textColor="@color/grey_400"
                             android:layout_margin="1dp"
                             android:background="@color/white"

@@ -11,10 +11,12 @@
     <string name="search_area">Search Area</string>
     <string name="search_radius">Search Radius</string>
 
-    <string name="search_tab1">Tourist\ndestination</string>
-    <string name="search_tab2">Cultural\nFacilities</string>
+    <string name="search_tab1">Nature</string>
+    <string name="search_tab2">Culture/\nHistory</string>
     <string name="search_tab3">Leisure\nSports</string>
-    <string name="search_tab4">Festival</string>
+    <string name="search_tab4">Shopping</string>
+    <string name="search_tab5">Trans\nportation</string>
+    <string name="search_tab6">Accom-\nmodation</string>
 
     <string name="recommend_tab1">Family</string>
     <string name="recommend_tab2">Alone</string>
