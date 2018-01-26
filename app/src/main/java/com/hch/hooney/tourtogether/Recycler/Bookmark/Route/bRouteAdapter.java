@@ -14,6 +14,10 @@ import com.hch.hooney.tourtogether.DAO.TourApiItem;
 import com.hch.hooney.tourtogether.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by qewqs on 2018-01-25.
  */
@@ -40,13 +44,14 @@ public class bRouteAdapter  extends RecyclerView.Adapter {
         bRouteHolder hold = (bRouteHolder)holder;
         TourApiItem item = DAO.bookmarkRouteList.get(position);
 
-        String dateTime = item.getModifyDateTIme();
-        String year = dateTime.substring(0, 4);
-        String month = dateTime.substring(4, 6);
-        String day = dateTime.substring(6, 8);
-        String hour = dateTime.substring(8, 10);
-        String min = dateTime.substring(10, 12);
-        hold.br_DateAndTime.setText(year+"-"+month+"-"+day+" "+hour+":"+min);
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyyMMddHHmmss").parse(item.getModifyDateTIme());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        hold.br_DateAndTime.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date));
 
         hold.br_title.setText(item.getTitle());
 

@@ -18,7 +18,10 @@ import com.hch.hooney.tourtogether.Recycler.Search.SearchResultAdapter;
 
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SearchActivity extends AppCompatActivity {
     private final String TAG = "SearchActivity";
@@ -29,11 +32,14 @@ public class SearchActivity extends AppCompatActivity {
     private ImageButton textFilterBTN;
     private TextView filedText;
     private ImageButton back;
+    private Button filterPop;
+    private Button filterReg;
 
     //variable
     private ArrayList<TourApiItem> searchResultList;
     private String filed_title;
     private String tourapi_URL;
+    private boolean isPopular;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +72,12 @@ public class SearchActivity extends AppCompatActivity {
         textFilterEdit = (EditText) findViewById(R.id.search_activity_search_edittext);
         textFilterBTN = (ImageButton) findViewById(R.id.search_activity_search_btn);
         filedText = (TextView) findViewById(R.id.search_activity_title_field_textview);
+        filterPop = (Button) findViewById(R.id.search_activity_filter_Popularity);
+        filterReg = (Button) findViewById(R.id.search_activity_filter_Register);
 
 
         //variable
+        isPopular = true;
         loadDataToTOURAPI();
     }
 
@@ -82,13 +91,142 @@ public class SearchActivity extends AppCompatActivity {
         textFilterBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                filter_titleText();
             }
         });
-
+        filterReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isPopular){
+                    clear_filterBTN();
+                    select_filterBTN();
+                    filterReg();
+                    isPopular = false;
+                }
+            }
+        });
+        filterPop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isPopular){
+                    clear_filterBTN();
+                    select_filterBTN();
+                    filterPop();
+                    isPopular = true;
+                }
+            }
+        });
     }
 
     private void setUI(){
+        searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList));
+    }
+
+    private void filter_titleText(){
+        if(textFilterEdit.getText().equals("")){
+            searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList));
+            return;
+        }else{
+            ArrayList<TourApiItem> tempList = new ArrayList<TourApiItem>();
+            for(int i=0; i<searchResultList.size();i++){
+                if(searchResultList.get(i).getTitle().toLowerCase().contains(textFilterEdit.getText().toString().toLowerCase())){
+                    tempList.add(searchResultList.get(i));
+                }
+            }
+            searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), tempList));
+        }
+    }
+
+    private void clear_filterBTN(){
+        filterPop.setBackgroundColor(getResources().getColor(R.color.grey_200));
+        filterPop.setTextColor(getResources().getColor(R.color.grey_400));
+        filterReg.setBackgroundColor(getResources().getColor(R.color.grey_200));
+        filterReg.setTextColor(getResources().getColor(R.color.grey_400));
+    }
+
+    private void select_filterBTN(){
+        if(!isPopular){
+            filterPop.setBackgroundColor(getResources().getColor(R.color.MainColor));
+            filterPop.setTextColor(getResources().getColor(R.color.white));
+        }else{
+            filterReg.setBackgroundColor(getResources().getColor(R.color.MainColor));
+            filterReg.setTextColor(getResources().getColor(R.color.white));
+        }
+    }
+
+    private void filterPop(){
+        ArrayList<TourApiItem> tempList = null;
+
+        for(int i =0 ; i<searchResultList.size();i++){
+            if( tempList == null){
+                tempList = new ArrayList<TourApiItem>();
+                tempList.add(searchResultList.get(i));
+            }else{
+                int tour_readCount = Integer.parseInt(searchResultList.get(i).getReadCount());
+
+                for(int j = 0 ; j<tempList.size() ; j++){
+                    int temp_readCount = Integer.parseInt(tempList.get(j).getReadCount());
+
+                    if(tour_readCount >= temp_readCount){
+                        tempList.add(j, searchResultList.get(i));
+                        break;
+                    }else if(tour_readCount < temp_readCount){
+                        if(j == tempList.size()-1){
+                            tempList.add(searchResultList.get(i));
+                            break;
+                        }
+                    }
+                }
+                //templist and
+            }
+        }
+        //searchlist end
+
+        searchResultList = tempList;
+        searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList));
+    }
+
+    private void filterReg(){
+        ArrayList<TourApiItem> tempList = null;
+
+        for(int i =0 ; i<searchResultList.size();i++){
+            if( tempList == null){
+                tempList = new ArrayList<TourApiItem>();
+                tempList.add(searchResultList.get(i));
+            }else{
+                Date tour_date = null;
+                try {
+                    tour_date =  new SimpleDateFormat("yyyyMMddHHmmss").parse(searchResultList.get(i).getModifyDateTIme());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                for(int j = 0 ; j<tempList.size() ; j++){
+                    Date compare_date = null;
+                    try {
+                        compare_date = new SimpleDateFormat("yyyyMMddHHmmss").parse(tempList.get(j).getModifyDateTIme());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    int compare = tour_date.compareTo(compare_date);
+                    if(compare >= 0){
+                        tempList.add(j, searchResultList.get(i));
+                        break;
+                    }else if(compare < 0){
+                        if(j == tempList.size()-1){
+                            tempList.add(searchResultList.get(i));
+                            break;
+                        }
+                    }
+                }
+                //templist and
+            }
+        }
+        //searchlist end
+
+        searchResultList = tempList;
         searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList));
     }
 

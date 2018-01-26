@@ -30,6 +30,9 @@
     <string name="account_tab2">코스\n북마크</string>
     <string name="account_tab3">나만의\n코스</string>
 
+    <string name="search_activity_Registered">등록순</string>
+    <string name="search_activity_Popularity">인기순</string>
+
     <string name="bookmark_add">나만의 코스에 추가하였습니다.</string>
     <string name="mycourse_info">나만의 코스를 만들어보세요.</string>
 

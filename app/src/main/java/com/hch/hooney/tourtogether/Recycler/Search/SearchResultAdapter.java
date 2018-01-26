@@ -13,7 +13,10 @@ import com.hch.hooney.tourtogether.DAO.TourApiItem;
 import com.hch.hooney.tourtogether.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by hooney on 2018. 1. 26..
@@ -45,14 +48,15 @@ public class SearchResultAdapter extends RecyclerView.Adapter {
 
         Picasso.with(mContext).load(item.getFirstImage()).into(hold.sr_Image);
 
-        String dateTime = item.getModifyDateTIme();
-        String year = dateTime.substring(0, 4);
-        String month = dateTime.substring(4, 6);
-        String day = dateTime.substring(6, 8);
-        String hour = dateTime.substring(8, 10);
-        String min = dateTime.substring(10, 12);
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyyMMddHHmmss").parse(item.getModifyDateTIme());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-        hold.sr_dateTime.setText(year+"-"+month+"-"+day+" "+hour+":"+min);
+        hold.sr_dateTime.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date));
+
 
         hold.sr_viewCount.setText("view : " + item.getReadCount());
 
