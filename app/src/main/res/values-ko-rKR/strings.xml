@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TourTogether</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_course">Route</string>
+    <string name="nav_account">Account</string>
+
+    <string name="search_q1">1. Set Location</string>
+    <string name="search_q2">2. Set Field</string>
+    <string name="search_area">Search Area</string>
+    <string name="search_radius">Search Radius</string>
+
+    <string name="search_tab1">자연</string>
+    <string name="search_tab2">문화/\n역사</string>
+    <string name="search_tab3">레저\n스포츠</string>
+    <string name="search_tab4">쇼핑</string>
+    <string name="search_tab5">먹거리</string>
+    <string name="search_tab6">숙박</string>
+
+    <string name="recommend_tab1">가족</string>
+    <string name="recommend_tab2">혼자</string>
+    <string name="recommend_tab3">힐링</string>
+    <string name="recommend_tab4">도보</string>
+    <string name="recommend_tab5">캠핑</string>
+    <string name="recommend_tab6">먹거리</string>
+
+    <string name="account_tab1">장소\n북마크</string>
+    <string name="account_tab2">코스\n북마크</string>
+    <string name="account_tab3">나만의\n코스</string>
+
+    <string name="bookmark_add">나만의 코스에 추가하였습니다.</string>
+    <string name="mycourse_info">나만의 코스를 만들어보세요.</string>
+
+    <string name="bookmark_remove">북마크에서 삭제하였습니다.</string>
+    <string name="mycourse_remove">나만의 코스에서 삭제하였습니다.</string>
+
+    <string name="service_location_check_gps_net">GPS 또는 WIFY 설정이 되어있는지 확인해주세요.</string>
+    <string name="service_location_check_gps">GPS 현재 설정.</string>
+    <string name="service_location_check_gps_msg">GPS가 비활성화 상태입니다.\n설정창으로 이동하시겠습니까?</string>
+</resources>

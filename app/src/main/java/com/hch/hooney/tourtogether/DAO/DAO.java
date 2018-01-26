@@ -16,7 +16,7 @@ public class DAO {
     public static String Language="";
     public static USER user;
     public static Setting setting;
-    public static ArrayList<mainPostItem> mainPostList;1
+    public static ArrayList<mainPostItem> mainPostList;
     public static ArrayList<TourApiItem> bookmarkSpotList;
     public static ArrayList<TourApiItem> bookmarkRouteList;
     public static ArrayList<TourApiItem> myCourseList;
