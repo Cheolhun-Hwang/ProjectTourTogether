@@ -1,6 +1,8 @@
 package com.hch.hooney.tourtogether.DAO;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -160,9 +162,14 @@ public class DAO {
         DAO.mainPostList.add(mainPostItem3);
     }
 
+    @SuppressLint("LongLogTag")
     public static void setCountryAndLanguage(Context mContext){
         Locale systemLocale = mContext.getResources().getConfiguration().locale;
         DAO.Country = systemLocale.getCountry();
         DAO.Language = systemLocale.getLanguage();
+
+        //  KR : ko       US : en
+
+        Log.d("Set Country and Language", DAO.Country + " / " + DAO.Language);
     }
 }

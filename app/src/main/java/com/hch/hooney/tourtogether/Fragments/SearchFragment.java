@@ -61,9 +61,11 @@ public class SearchFragment extends Fragment {
     private double lat;
     private double lon;
 
+    private String field;
     private String URL;
     private String CONTETNTTYPEID;
     private String AREACODE;
+    private String SIGUNGU;
     private String CAT1;
     private String CAT2;
     private String CAT3;
@@ -138,7 +140,14 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 selectField=1;
                 CAT1="A01";
-                CONTETNTTYPEID="76";
+                CAT2="";
+                if(DAO.Language == "ko"){
+                    CONTETNTTYPEID="12";
+                }else if(DAO.Language == "en"){
+                    CONTETNTTYPEID="76";
+                }
+
+                field = getString(R.string.search_tab1);
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -148,7 +157,13 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 selectField=2;
                 CAT1="A02";
-                CONTETNTTYPEID="76";
+                CAT2="";
+                if(DAO.Language == "ko"){
+                    CONTETNTTYPEID="12";
+                }else if(DAO.Language == "en"){
+                    CONTETNTTYPEID="78";
+                }
+                field = getString(R.string.search_tab2);
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -157,6 +172,14 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=3;
+                CAT1="A03";
+                CAT2="";
+                if(DAO.Language == "ko"){
+                    CONTETNTTYPEID="28";
+                }else if(DAO.Language == "en"){
+                    CONTETNTTYPEID="75";
+                }
+                field = getString(R.string.search_tab3);
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -165,6 +188,15 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=4;
+                CAT1="A04";
+                if(DAO.Language == "ko"){
+                    CAT2="A0401";
+                    CONTETNTTYPEID="38";
+                }else if(DAO.Language == "en"){
+                    CAT2="A0401";
+                    CONTETNTTYPEID="79";
+                }
+                field = getString(R.string.search_tab4);
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -173,6 +205,16 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=5;
+                if(DAO.Language == "ko"){
+                    CAT1="A05";
+                    CAT2="A0502";
+                    CONTETNTTYPEID="39";
+                }else if(DAO.Language == "en"){
+                    CAT1="A05";
+                    CAT2="A0502";
+                    CONTETNTTYPEID="82";
+                }
+                field = getString(R.string.search_tab5);
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -181,6 +223,16 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=6;
+                if(DAO.Language == "ko"){
+                    CAT1="B02";
+                    CAT2="B0201";
+                    CONTETNTTYPEID="32";
+                }else if(DAO.Language == "en"){
+                    CAT1="B02";
+                    CAT2="B0201";
+                    CONTETNTTYPEID="80";
+                }
+                field = getString(R.string.search_tab6);
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -220,19 +272,26 @@ public class SearchFragment extends Fragment {
         searchBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                URL = "http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList"+
+                String service="";
+                if(DAO.Language == "ko"){
+                    service="KorService";
+                }else if(DAO.Language == "en"){
+                    service="EngService";
+                }
+                URL = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+"/areaBasedList"+
                         "?ServiceKey="+ DAO.ServiceKey+
-                        "&contentTypeId=76"+
-                        "&areaCode=1"+
-                        "&sigunguCode="+
-                        "&cat1="+
-                        "&cat2="+
+                        "&contentTypeId="+CONTETNTTYPEID+
+                        "&areaCode=1"+AREACODE+
+                        "&sigunguCode="+SIGUNGU+
+                        "&cat1="+CAT1+
+                        "&cat2="+CAT2+
                         "&cat3="+
                         "&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=P"+
-                        "&numOfRows=100"+
+                        "&numOfRows=200"+
                         "&pageNo=1 ";
                 Intent intent = new Intent(getContext(), SearchActivity.class);
                 intent.putExtra("url", URL);
+                intent.putExtra("field", field);
                 startActivity(intent);
             }
         });

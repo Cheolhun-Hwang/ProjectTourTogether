@@ -2,15 +2,15 @@
 <resources>
     <string name="app_name">TourTogether</string>
 
-    <string name="nav_home">Home</string>
-    <string name="nav_search">Search</string>
-    <string name="nav_course">Route</string>
-    <string name="nav_account">Account</string>
+    <string name="nav_home">홈</string>
+    <string name="nav_search">장소검색</string>
+    <string name="nav_course">추천코스</string>
+    <string name="nav_account">내계정</string>
 
-    <string name="search_q1">1. Set Location</string>
-    <string name="search_q2">2. Set Field</string>
-    <string name="search_area">Search Area</string>
-    <string name="search_radius">Search Radius</string>
+    <string name="search_q1">1. 지역 선택</string>
+    <string name="search_q2">2. 분야 선택</string>
+    <string name="search_area">장소로 검색</string>
+    <string name="search_radius">반경으로 검색</string>
 
     <string name="search_tab1">자연</string>
     <string name="search_tab2">문화/\n역사</string>
@@ -39,4 +39,6 @@
     <string name="service_location_check_gps_net">GPS 또는 WIFY 설정이 되어있는지 확인해주세요.</string>
     <string name="service_location_check_gps">GPS 현재 설정.</string>
     <string name="service_location_check_gps_msg">GPS가 비활성화 상태입니다.\n설정창으로 이동하시겠습니까?</string>
+
+    <string name="error_intent">요청에 실패하였습니다.\n다시 시도해주십시오.</string>
 </resources>

@@ -15,7 +15,7 @@
     <string name="search_tab2">Culture/\nHistory</string>
     <string name="search_tab3">Leisure\nSports</string>
     <string name="search_tab4">Shopping</string>
-    <string name="search_tab5">Trans\nportation</string>
+    <string name="search_tab5">Food</string>
     <string name="search_tab6">Accom-\nmodation</string>
 
     <string name="recommend_tab1">Family</string>
@@ -38,4 +38,6 @@
     <string name="service_location_check_gps_net">Please check if GPS or network is allowed.</string>
     <string name="service_location_check_gps">GPS presence setting.</string>
     <string name="service_location_check_gps_msg">No GPS settings\nDo you want to go to the settings window?</string>
+
+    <string name="error_intent">Error. Please try again.</string>
 </resources>

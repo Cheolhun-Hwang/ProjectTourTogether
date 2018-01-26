@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 user.setUUID("qewqsa");
                 DAO.setUser(user);
 
+                DAO.setCountryAndLanguage(getApplicationContext());
                 DAO.init_mainPostList();
                 DAO.init_bookmarkSpot();
                 DAO.init_bookmarkRoute();
