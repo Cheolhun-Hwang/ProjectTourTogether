@@ -43,5 +43,11 @@
     <string name="service_location_check_gps">GPS 현재 설정.</string>
     <string name="service_location_check_gps_msg">GPS가 비활성화 상태입니다.\n설정창으로 이동하시겠습니까?</string>
 
+    <string name="notify_get_gps"></string>
+    <string name="notify_search_Fail">형식을 모두 채워주세요.</string>
+
+    <string name="error_location_set_areacode">잘못된 요청입니다.\nGPS를 다시 확인해주세요.</string>
     <string name="error_intent">요청에 실패하였습니다.\n다시 시도해주십시오.</string>
+    <string name="error_gps_loading">GPS 신호 준비중입니다.\n다시 시도해주세요.</string>
+    <string name="error_location_kr">현재 위치가 한국이 아닙니다.</string>
 </resources>

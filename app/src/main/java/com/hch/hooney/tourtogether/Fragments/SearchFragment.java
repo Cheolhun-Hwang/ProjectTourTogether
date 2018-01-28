@@ -3,7 +3,10 @@ package com.hch.hooney.tourtogether.Fragments;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +23,8 @@ import android.widget.Toast;
 
 import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.R;
+import com.hch.hooney.tourtogether.ResourceCTRL.ConvertAreaCode;
+import com.hch.hooney.tourtogether.ResourceCTRL.Location;
 import com.hch.hooney.tourtogether.SearchActivity;
 import com.hch.hooney.tourtogether.Service.GPS;
 
@@ -54,6 +59,7 @@ public class SearchFragment extends Fragment {
 
     //variable
     private View view;
+    private Handler handler;
 
     private boolean isSearchArea;  //true : Search Area false : Search Radius
     private int selectField; //0: None 1: Tourist Destination 2: Cultural Facilities 3: Leisure Sports 4: Festival
@@ -93,6 +99,70 @@ public class SearchFragment extends Fragment {
         //variable
         isSearchArea = true;
         selectField = 0;
+        handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                switch (msg.what){
+                    case 1001:
+                        checkDangerousPermissions();
+                        GPS gps_A = new GPS(getContext());
+                        if(gps_A.isGetLocation()){
+                            lat = gps_A.getLat();
+                            lon = gps_A.getLon();
+                            if(lat == 0.0 && lon == 0.0 ){
+                                Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_LONG).show();
+                            }else{
+                                Location location = new Location(getContext(), lat, lon);
+                                String areaResult = location.searchLocation();
+
+                                searchAreaShowLocation.setText(areaResult);
+                                if(DAO.Language == "en"){
+                                    Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_LONG).show();
+                                }
+                                ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
+                                convertAreaCode.filteringToAuto(areaResult);
+                                AREACODE = convertAreaCode.getAreaCode();
+                                SIGUNGU = convertAreaCode.getSigunguCode();
+
+                            }
+                            gps_A.stopUsingGPS();
+                        }else{
+                            gps_A.showSettingAlert();
+                        }
+                        break;
+                    case 1002:
+                        checkDangerousPermissions();
+                        GPS gps_R = new GPS(getContext());
+                        if(gps_R.isGetLocation()){
+                            lat = gps_R.getLat();
+                            lon = gps_R.getLon();
+                            if(lat == 0.0 && lon == 0.0 ){
+                                Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_LONG).show();
+                            }else{
+                                Location location = new Location(getContext(), lat, lon);
+                                String areaResult = location.searchLocation();
+
+                                searchRadiusShowLocation.setText(areaResult);
+                                if(DAO.Language == "en"){
+                                    Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_LONG).show();
+                                }
+                                ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
+                                convertAreaCode.filteringToAuto(areaResult);
+                                AREACODE = convertAreaCode.getAreaCode();
+                                SIGUNGU = convertAreaCode.getSigunguCode();
+
+                            }
+                            gps_R.stopUsingGPS();
+                        }else{
+                            gps_R.showSettingAlert();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
 
         //layout
         searchArea = (Button) view.findViewById(R.id.search_area_btn);
@@ -141,9 +211,11 @@ public class SearchFragment extends Fragment {
                 selectField=1;
                 CAT1="A01";
                 CAT2="";
-                if(DAO.Language == "ko"){
+                CAT3="";
+                Log.d(TAG, "DAO.Language : " + DAO.Language);
+                if(DAO.Language.equals("ko")){
                     CONTETNTTYPEID="12";
-                }else if(DAO.Language == "en"){
+                }else if(DAO.Language.equals("en")){
                     CONTETNTTYPEID="76";
                 }
 
@@ -158,9 +230,10 @@ public class SearchFragment extends Fragment {
                 selectField=2;
                 CAT1="A02";
                 CAT2="";
-                if(DAO.Language == "ko"){
+                CAT3="";
+                if(DAO.Language.equals("ko")){
                     CONTETNTTYPEID="12";
-                }else if(DAO.Language == "en"){
+                }else if(DAO.Language.equals("en")){
                     CONTETNTTYPEID="78";
                 }
                 field = getString(R.string.search_tab2);
@@ -174,9 +247,10 @@ public class SearchFragment extends Fragment {
                 selectField=3;
                 CAT1="A03";
                 CAT2="";
-                if(DAO.Language == "ko"){
+                CAT3="";
+                if(DAO.Language.equals("ko")){
                     CONTETNTTYPEID="28";
-                }else if(DAO.Language == "en"){
+                }else if(DAO.Language.equals("en")){
                     CONTETNTTYPEID="75";
                 }
                 field = getString(R.string.search_tab3);
@@ -189,10 +263,11 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 selectField=4;
                 CAT1="A04";
-                if(DAO.Language == "ko"){
+                CAT3="";
+                if(DAO.Language.equals("ko")){
                     CAT2="A0401";
                     CONTETNTTYPEID="38";
-                }else if(DAO.Language == "en"){
+                }else if(DAO.Language.equals("en")){
                     CAT2="A0401";
                     CONTETNTTYPEID="79";
                 }
@@ -205,11 +280,12 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=5;
-                if(DAO.Language == "ko"){
+                CAT3="";
+                if(DAO.Language.equals("ko")){
                     CAT1="A05";
                     CAT2="A0502";
                     CONTETNTTYPEID="39";
-                }else if(DAO.Language == "en"){
+                }else if(DAO.Language.equals("en")){
                     CAT1="A05";
                     CAT2="A0502";
                     CONTETNTTYPEID="82";
@@ -223,11 +299,12 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=6;
-                if(DAO.Language == "ko"){
+                CAT3="";
+                if(DAO.Language.equals("ko")){
                     CAT1="B02";
                     CAT2="B0201";
                     CONTETNTTYPEID="32";
-                }else if(DAO.Language == "en"){
+                }else if(DAO.Language.equals("en")){
                     CAT1="B02";
                     CAT2="B0201";
                     CONTETNTTYPEID="80";
@@ -240,59 +317,59 @@ public class SearchFragment extends Fragment {
         searchAreaAutoFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkDangerousPermissions();
-                GPS gps = new GPS(getContext());
-                if(gps.isGetLocation()){
-                    lat = gps.getLat();
-                    lon = gps.getLon();
-
-                    searchAreaShowLocation.setText("gps : " + lat + " / " + lon);
-                    gps.stopUsingGPS();
-                }else{
-                    gps.showSettingAlert();
-                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Message msg_getLocation = Message.obtain();
+                        msg_getLocation.what=1001;
+                        handler.sendMessage(msg_getLocation);
+                    }
+                }).start();
             }
         });
         searchRadiusAutoFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkDangerousPermissions();
-                GPS gps = new GPS(getContext());
-                if(gps.isGetLocation()){
-                    lat = gps.getLat();
-                    lon = gps.getLon();
-
-                    searchRadiusShowLocation.setText("gps : " + lat + " / " + lon);
-                    gps.stopUsingGPS();
-                }else{
-                    gps.showSettingAlert();
-                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Message msg_getLocation = Message.obtain();
+                        msg_getLocation.what=1002;
+                        handler.sendMessage(msg_getLocation);
+                    }
+                }).start();
             }
         });
         searchBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String service="";
-                if(DAO.Language == "ko"){
+                if(DAO.Language.equals("ko")){
                     service="KorService";
-                }else if(DAO.Language == "en"){
+                }else if(DAO.Language.equals("en")){
                     service="EngService";
                 }
+                Log.d(TAG, "Sevice : " + service);
                 URL = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+"/areaBasedList"+
                         "?ServiceKey="+ DAO.ServiceKey+
                         "&contentTypeId="+CONTETNTTYPEID+
-                        "&areaCode=1"+AREACODE+
+                        "&areaCode="+AREACODE+
                         "&sigunguCode="+SIGUNGU+
                         "&cat1="+CAT1+
                         "&cat2="+CAT2+
-                        "&cat3="+
+                        "&cat3="+CAT3+
                         "&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=P"+
                         "&numOfRows=200"+
                         "&pageNo=1 ";
-                Intent intent = new Intent(getContext(), SearchActivity.class);
-                intent.putExtra("url", URL);
-                intent.putExtra("field", field);
-                startActivity(intent);
+                if(CAT1 ==null || CAT2==null||CAT3==null||AREACODE==null||SIGUNGU==null){
+                    Toast.makeText(getContext(), getResources().getText(R.string.notify_search_Fail), Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(getContext(), SearchActivity.class);
+                    intent.putExtra("url", URL);
+                    intent.putExtra("field", field);
+                    intent.putExtra("contentTypeID", CONTETNTTYPEID);
+                    startActivity(intent);
+                }
             }
         });
     }

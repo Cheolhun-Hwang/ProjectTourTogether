@@ -3,6 +3,8 @@ package com.hch.hooney.tourtogether.Fragments;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -17,7 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.R;
+import com.hch.hooney.tourtogether.ResourceCTRL.ConvertAreaCode;
+import com.hch.hooney.tourtogether.ResourceCTRL.Location;
 import com.hch.hooney.tourtogether.Service.GPS;
 
 /**
@@ -50,12 +55,22 @@ public class CourseFragment extends Fragment {
     private Button searchBTN;
     //variable
     private View view;
+    private Handler handler;
 
     private boolean isSearchArea;  //true : Search Area false : Search Radius
     private int selectField; //0: None 1: Family 2: alone 3: healing 4: walking 5: camping 6:taste
     private String radius;
     private double lat;
     private double lon;
+
+    private String field;
+    private String URL;
+    private String CONTETNTTYPEID;
+    private String AREACODE;
+    private String SIGUNGU;
+    private String CAT1;
+    private String CAT2;
+    private String CAT3;
 
     public CourseFragment() {
         // Required empty public constructor
@@ -78,6 +93,70 @@ public class CourseFragment extends Fragment {
         //variable
         isSearchArea = true;
         selectField = 0;
+        handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                switch (msg.what){
+                    case 1001:
+                        checkDangerousPermissions();
+                        GPS gps_A = new GPS(getContext());
+                        if(gps_A.isGetLocation()){
+                            lat = gps_A.getLat();
+                            lon = gps_A.getLon();
+                            if(lat == 0.0 && lon == 0.0 ){
+                                Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_LONG).show();
+                            }else{
+                                Location location = new Location(getContext(), lat, lon);
+                                String areaResult = location.searchLocation();
+
+                                searchAreaShowLocation.setText(areaResult);
+                                if(DAO.Language == "en"){
+                                    Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_LONG).show();
+                                }
+                                ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
+                                convertAreaCode.filteringToAuto(areaResult);
+                                AREACODE = convertAreaCode.getAreaCode();
+                                SIGUNGU = convertAreaCode.getSigunguCode();
+
+                            }
+                            gps_A.stopUsingGPS();
+                        }else{
+                            gps_A.showSettingAlert();
+                        }
+                        break;
+                    case 1002:
+                        checkDangerousPermissions();
+                        GPS gps_R = new GPS(getContext());
+                        if(gps_R.isGetLocation()){
+                            lat = gps_R.getLat();
+                            lon = gps_R.getLon();
+                            if(lat == 0.0 && lon == 0.0 ){
+                                Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_LONG).show();
+                            }else{
+                                Location location = new Location(getContext(), lat, lon);
+                                String areaResult = location.searchLocation();
+
+                                searchRadiusShowLocation.setText(areaResult);
+                                if(DAO.Language == "en"){
+                                    Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_LONG).show();
+                                }
+                                ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
+                                convertAreaCode.filteringToAuto(areaResult);
+                                AREACODE = convertAreaCode.getAreaCode();
+                                SIGUNGU = convertAreaCode.getSigunguCode();
+
+                            }
+                            gps_R.stopUsingGPS();
+                        }else{
+                            gps_R.showSettingAlert();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
 
         //layout
         searchArea = (Button) view.findViewById(R.id.course_area_btn);
@@ -177,33 +256,27 @@ public class CourseFragment extends Fragment {
         searchAreaAutoFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkDangerousPermissions();
-                GPS gps = new GPS(getContext());
-                if(gps.isGetLocation()){
-                    lat = gps.getLat();
-                    lon = gps.getLon();
-
-                    searchAreaShowLocation.setText("gps : " + lat + " / " + lon);
-                    gps.stopUsingGPS();
-                }else{
-                    gps.showSettingAlert();
-                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Message msg_getLocation = Message.obtain();
+                        msg_getLocation.what=1001;
+                        handler.sendMessage(msg_getLocation);
+                    }
+                }).start();
             }
         });
         searchRadiusAutoFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkDangerousPermissions();
-                GPS gps = new GPS(getContext());
-                if(gps.isGetLocation()){
-                    lat = gps.getLat();
-                    lon = gps.getLon();
-
-                    searchRadiusShowLocation.setText("gps : " + lat + " / " + lon);
-                    gps.stopUsingGPS();
-                }else{
-                    gps.showSettingAlert();
-                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Message msg_getLocation = Message.obtain();
+                        msg_getLocation.what=1002;
+                        handler.sendMessage(msg_getLocation);
+                    }
+                }).start();
             }
         });
         searchBTN.setOnClickListener(new View.OnClickListener() {
