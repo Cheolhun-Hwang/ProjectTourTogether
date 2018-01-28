@@ -3,11 +3,19 @@ package com.hch.hooney.tourtogether;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.DAO.TourAPI.Accomodation;
 
+import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -19,6 +27,41 @@ import java.util.ArrayList;
 public class DiningAndAccomodationActivity extends AppCompatActivity {
     private final String TAG = "DiningAndAccomodationActivity";
     private ProgressDialog asyncDialog;
+
+    //layout
+    //share
+    private ImageButton back;
+    private TextView Field;
+    private ImageButton bookmaking;
+    private TextView modifyDate;
+    private TextView title;
+    private ImageView mainImage;
+    private TextView addr;
+
+    private LinearLayout homepageLayout;
+    private TextView homepage;
+    private LinearLayout telLayout;
+    private TextView tel;
+    private LinearLayout directionlayout;
+    private TextView direction;
+    private TextView overview;
+
+    private LinearLayout smallLayout;
+    private RecyclerView smallList;
+
+    private MapFragment mapFragment;
+
+
+    //d
+    private LinearLayout d_layout;
+
+
+    //a
+    private LinearLayout a_layout;
+
+    //variable
+    private GoogleMap googleMap;
+
 
     private Accomodation accomodation;
     private String url_basic_info;

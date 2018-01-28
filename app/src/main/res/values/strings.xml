@@ -53,4 +53,20 @@
 
     <string name="result_addr">Address</string>
     <string name="result_homepage">Homepage</string>
+    <string name="result_tel">Tel</string>
+    <string name="result_direction">Directions</string>
+    <string name="result_overview">Overview</string>
+    <string name="result_contactus">Contact Us</string>
+    <string name="result_parking">Parking</string>
+    <string name="result_cooking">Cooking</string>
+    <string name="result_chkIn">Check In</string>
+    <string name="result_chkOut">Check Out</string>
+    <string name="result_roomType">Room Type</string>
+    <string name="result_foodAndBeverage">Food And Beverage</string>
+    <string name="result_subFacility">Sub Facility</string>
+    <string name="result_reservation">Reservation</string>
+    <string name="result_openingHours">Opening Hour</string>
+    <string name="result_cookMenu">Menu</string>
+    <string name="result_rest">Day Off</string>
+    <string name="result_smoke">Smoking Place</string>
 </resources>
