@@ -1,9 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.hch.hooney.tourtogether.DiningAndAccomodationActivity">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@drawable/toplayout_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+        <ImageButton
+            android:id="@+id/da_result_back"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_chevron_left"
+            android:background="@color/alpha"
+            android:layout_width="48dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/da_result_field"
+            android:textStyle="bold"
+            android:textColor="@color/MainColor"
+            android:textSize="15sp"
+            android:text="Field"
+            android:paddingLeft="15dp"
+            android:gravity="left|center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/da_result_bookmarking"
+                android:scaleType="fitCenter"
+                android:src="@drawable/bookmark_undo"
+                android:layout_width="50dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:paddingRight="7dp"
+        android:paddingLeft="7dp"
+        android:orientation="horizontal"
+        android:id="@+id/da_result_modify_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center|right"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            android:id="@+id/da_result_modify"
+            android:textColor="@color/grey_600"
+            android:text="2018-00-00 00:00"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/da_result_title"
+            android:paddingTop="18dp"
+            android:paddingLeft="15dp"
+            android:paddingBottom="7dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="21sp"
+            android:text="Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/da_result_mainImage"
+            android:src="@drawable/noimage"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:paddingRight="7dp"
+                android:paddingLeft="7dp"
+                android:orientation="horizontal"
+                android:id="@+id/da_result_addr_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:text="@string/result_addr"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:gravity="center"
+                    android:paddingLeft="10sp"
+                    android:paddingRight="10sp"
+                    android:id="@+id/da_result_addr"
+                    android:textColor="@color/grey_600"
+                    android:text="0000"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:paddingRight="7dp"
+                android:paddingLeft="7dp"
+                android:orientation="horizontal"
+                android:id="@+id/da_result_homepage_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:text="@string/result_homepage"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:gravity="center"
+                    android:paddingLeft="10sp"
+                    android:paddingRight="10sp"
+                    android:id="@+id/da_result_homepage"
+                    android:textColor="@color/grey_600"
+                    android:text="0000"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+</LinearLayout>

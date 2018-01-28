@@ -1,10 +1,12 @@
 package com.hch.hooney.tourtogether;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.hch.hooney.tourtogether.DAO.DAO;
+import com.hch.hooney.tourtogether.DAO.TourAPI.Accomodation;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -15,7 +17,10 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class DiningAndAccomodationActivity extends AppCompatActivity {
+    private final String TAG = "DiningAndAccomodationActivity";
+    private ProgressDialog asyncDialog;
 
+    private Accomodation accomodation;
     private String url_basic_info;
     private String url_intro_info;
     private String url_images_info;
@@ -39,7 +44,25 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
             setURLS();
 
             if(ContentTypeID.equals("32")||ContentTypeID.equals("80")){
-                parse_xml_Accom_basic();
+                asyncDialog.show();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //loadDate
+                        parse_xml_Accom_basic();
+                        parse_xml_Accom_intro();
+                        parse_xml_Accom_smallImages();
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                setUI();
+                                asyncDialog.dismiss();
+                            }
+                        });
+
+                    }
+                }).start();
             }else{
 
             }
@@ -48,6 +71,18 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
     }
 
     private void init(){
+        asyncDialog = new ProgressDialog(getApplicationContext());
+        asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        asyncDialog.setMessage(getResources().getString(R.string.notify_loading_data));
+
+        if(ContentTypeID.equals("32")||ContentTypeID.equals("80")){
+            accomodation = new Accomodation();
+        }else{
+
+        }
+    }
+
+    private void setUI(){
 
     }
 
@@ -81,10 +116,8 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
 
     private void parse_xml_Accom_smallImages(){
         ArrayList<String> tempList = new ArrayList<String>();
-
-        StringBuffer buffer=new StringBuffer();
         try {
-            URL url= new URL(url_basic_info); //문자열로 된 요청 url을 URL 객체로 생성.
+            URL url= new URL(url_images_info); //문자열로 된 요청 url을 URL 객체로 생성.
             InputStream is = url.openStream();  //url위치로 입력스트림 연결
 
 
@@ -99,34 +132,23 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
 
             while( eventType != XmlPullParser.END_DOCUMENT ){
                 switch( eventType ){
-                    /*case XmlPullParser.START_DOCUMENT:
-                        buffer.append("Strat :");
-                        break;*/
-
+                    case XmlPullParser.START_DOCUMENT:
+                        break;
                     case XmlPullParser.START_TAG:
                         tag= xpp.getName();    //테그 이름 얻어오기
-
                         if(tag.equals("smallimageurl")){
-
+                            xpp.next();
+                            tempList.add(xpp.getText());
                         }
-
                         break;
-
                     case XmlPullParser.TEXT:
                         break;
-
                     case XmlPullParser.END_TAG:
-                        tag= xpp.getName();    //테그 이름 얻어오기
-
-                        if(tag.equals("item")) {
-
-                        }
                         break;
                 }
-
                 eventType= xpp.next();
             }
-
+            accomodation.setSmallImageList(tempList);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -137,9 +159,8 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
     private void parse_xml_Accom_intro(){
         StringBuffer buffer=new StringBuffer();
         try {
-            URL url= new URL(url_basic_info); //문자열로 된 요청 url을 URL 객체로 생성.
+            URL url= new URL(url_intro_info); //문자열로 된 요청 url을 URL 객체로 생성.
             InputStream is = url.openStream();  //url위치로 입력스트림 연결
-
 
             XmlPullParserFactory factory= XmlPullParserFactory.newInstance();
             XmlPullParser xpp= factory.newPullParser();
@@ -155,53 +176,52 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
                     /*case XmlPullParser.START_DOCUMENT:
                         buffer.append("Strat :");
                         break;*/
-
                     case XmlPullParser.START_TAG:
                         tag= xpp.getName();    //테그 이름 얻어오기
 
                         if(tag.equals("checkintime")){
-
+                            xpp.next();
+                            accomodation.setIntro_checkInTime(xpp.getText());
                         }else if(tag.equals("checkouttime")){
-
+                            xpp.next();
+                            accomodation.setIntro_checkOutTime(xpp.getText());
                         }else if(tag.equals("chkcooking")){
-
+                            xpp.next();
+                            accomodation.setIntro_chkCooking(xpp.getText());
                         }else if(tag.equals("foodplace")){
-
+                            xpp.next();
+                            accomodation.setIntro_foodPlace(xpp.getText());
                         }else if(tag.equals("infocenterlodging")){
-
+                            xpp.next();
+                            accomodation.setIntro_infoCenter(xpp.getText());
                         }else if(tag.equals("parkinglodging")){
-
+                            xpp.next();
+                            accomodation.setIntro_parking(xpp.getText());
                         }else if(tag.equals("reservationlodging")){
-
+                            xpp.next();
+                            accomodation.setIntro_reservation(xpp.getText());
                         }else if(tag.equals("roomtype")){
-
+                            xpp.next();
+                            accomodation.setIntro_roomtype(xpp.getText());
                         }else if(tag.equals("subfacility")){
-
+                            xpp.next();
+                            accomodation.setIntro_subFacility(xpp.getText());
                         }
-
-
                         break;
-
                     case XmlPullParser.TEXT:
                         break;
-
                     case XmlPullParser.END_TAG:
                         tag= xpp.getName();    //테그 이름 얻어오기
-
                         if(tag.equals("item")) {
-
                         }
                         break;
                 }
-
                 eventType= xpp.next();
             }
-
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }//getXmlData method...
 
     private void parse_xml_Accom_basic(){
@@ -209,7 +229,6 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
         try {
             URL url= new URL(url_basic_info); //문자열로 된 요청 url을 URL 객체로 생성.
             InputStream is = url.openStream();  //url위치로 입력스트림 연결
-
 
             XmlPullParserFactory factory= XmlPullParserFactory.newInstance();
             XmlPullParser xpp= factory.newPullParser();
@@ -230,46 +249,55 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
                         tag= xpp.getName();    //테그 이름 얻어오기
 
                         if(tag.equals("addr1")){
-
+                            xpp.next();
+                            accomodation.setBasic_addr1(xpp.getText());
+                        }else if(tag.equals("addr2")){
+                            xpp.next();
+                            String temp = accomodation.getBasic_addr1();
+                            accomodation.setBasic_addr1(temp+" "+xpp.getText());
                         }else if(tag.equals("contentid")){
-
+                            xpp.next();
+                            accomodation.setBasic_contentID(xpp.getText());
                         }else if(tag.equals("contenttypeid")){
-
+                            xpp.next();
+                            accomodation.setBasic_contentTypeID(xpp.getText());
                         }else if(tag.equals("directions")){
-
+                            xpp.next();
+                            accomodation.setBasic_directory(xpp.getText());
                         }else if(tag.equals("firstimage")){
-
+                            xpp.next();
+                            accomodation.setBasic_firstImage(xpp.getText());
                         }else if(tag.equals("homepage")){
-
+                            xpp.next();
+                            accomodation.setBasic_homepage(xpp.getText());
                         }else if(tag.equals("mapx")){
-
+                            xpp.next();
+                            accomodation.setBasic_mapX(Double.parseDouble(xpp.getText()));
                         }else if(tag.equals("mapy")){
-
+                            xpp.next();
+                            accomodation.setBasic_mapY(Double.parseDouble(xpp.getText()));
                         }else if(tag.equals("modifiedtime")){
-
+                            xpp.next();
+                            accomodation.setBasic_modifyDate(xpp.getText());
                         }else if(tag.equals("overview")){
-
+                            xpp.next();
+                            accomodation.setBasic_overView(xpp.getText());
                         }else if(tag.equals("tel")){
-
+                            xpp.next();
+                            accomodation.setBasic_tel(xpp.getText());
                         }else if(tag.equals("title")){
-
+                            xpp.next();
+                            accomodation.setBasic_title(xpp.getText());
                         }
-
-
                         break;
-
                     case XmlPullParser.TEXT:
                         break;
-
                     case XmlPullParser.END_TAG:
                         tag= xpp.getName();    //테그 이름 얻어오기
-
                         if(tag.equals("item")) {
-
                         }
                         break;
                 }
-
                 eventType= xpp.next();
             }
 

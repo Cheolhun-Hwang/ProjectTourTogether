@@ -45,6 +45,7 @@
 
     <string name="notify_get_gps"></string>
     <string name="notify_search_Fail">형식을 모두 채워주세요.</string>
+    <string name="notify_loading_data">Loading.</string>
 
     <string name="error_location_set_areacode">잘못된 요청입니다.\nGPS를 다시 확인해주세요.</string>
     <string name="error_intent">요청에 실패하였습니다.\n다시 시도해주십시오.</string>

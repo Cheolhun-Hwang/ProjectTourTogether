@@ -1,6 +1,7 @@
 package com.hch.hooney.tourtogether.Recycler.Search;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.hch.hooney.tourtogether.AnotherFieldActivity;
 import com.hch.hooney.tourtogether.DAO.TourApiItem;
+import com.hch.hooney.tourtogether.DiningAndAccomodationActivity;
 import com.hch.hooney.tourtogether.R;
 import com.squareup.picasso.Picasso;
 
@@ -44,7 +47,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         SearchResultHolder hold = (SearchResultHolder) holder;
-        TourApiItem item = resultList.get(position);
+        final TourApiItem item = resultList.get(position);
 
         Picasso.with(mContext).load(item.getFirstImage()).into(hold.sr_Image);
 
@@ -67,7 +70,15 @@ public class SearchResultAdapter extends RecyclerView.Adapter {
         hold.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Detail info...", Toast.LENGTH_SHORT).show();
+                if(item.getContentTypeID().equals("32")||item.getContentTypeID().equals("80")||
+                        item.getContentTypeID().equals("39")||item.getContentTypeID().equals("82")){
+                    Intent intent = new Intent(mContext, DiningAndAccomodationActivity.class);
+                    intent.putExtra("ContentTypeID", item.getContentTypeID());
+                    intent.putExtra("ContentID", item.getContentID());
+                    mContext.startActivity(intent);
+                }else{
+                    Intent intent = new Intent(mContext, AnotherFieldActivity.class);
+                }
             }
         });
 
