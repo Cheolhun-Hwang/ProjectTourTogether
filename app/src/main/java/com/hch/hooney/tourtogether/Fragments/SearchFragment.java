@@ -63,7 +63,7 @@ public class SearchFragment extends Fragment {
 
     private boolean isSearchArea;  //true : Search Area false : Search Radius
     private int selectField; //0: None 1: Tourist Destination 2: Cultural Facilities 3: Leisure Sports 4: Festival
-    private String radius;
+    private String radius_toString;
     private double lat;
     private double lon;
 
@@ -232,7 +232,7 @@ public class SearchFragment extends Fragment {
                 CAT2="";
                 CAT3="";
                 if(DAO.Language.equals("ko")){
-                    CONTETNTTYPEID="12";
+                    CONTETNTTYPEID="14";
                 }else if(DAO.Language.equals("en")){
                     CONTETNTTYPEID="78";
                 }
@@ -350,17 +350,32 @@ public class SearchFragment extends Fragment {
                     service="EngService";
                 }
                 Log.d(TAG, "Sevice : " + service);
-                URL = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+"/areaBasedList"+
-                        "?ServiceKey="+ DAO.ServiceKey+
-                        "&contentTypeId="+CONTETNTTYPEID+
-                        "&areaCode="+AREACODE+
-                        "&sigunguCode="+SIGUNGU+
-                        "&cat1="+CAT1+
-                        "&cat2="+CAT2+
-                        "&cat3="+CAT3+
-                        "&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=P"+
-                        "&numOfRows=200"+
-                        "&pageNo=1 ";
+                if(isSearchArea){
+                    URL = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+"/areaBasedList"+
+                            "?ServiceKey="+ DAO.ServiceKey+
+                            "&contentTypeId="+CONTETNTTYPEID+
+                            "&areaCode="+AREACODE+
+                            "&sigunguCode="+SIGUNGU+
+                            "&cat1="+CAT1+
+                            "&cat2="+CAT2+
+                            "&cat3="+CAT3+
+                            "&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=P"+
+                            "&numOfRows=200"+
+                            "&pageNo=1 ";
+                }else{
+                    String tempRadius = searchRadiusSpinner.getSelectedItem().toString()
+                            .replaceAll("km", "")
+                            .replaceAll(" ", "");
+                    radius_toString = tempRadius+"000";
+
+                    URL = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+
+                            "/locationBasedList?ServiceKey="+DAO.ServiceKey+
+                            "&contentTypeId="+CONTETNTTYPEID+
+                            "&mapX="+lon+
+                            "&mapY="+lat+
+                            "&radius="+radius_toString+
+                            "&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=P&numOfRows=200&pageNo=1";
+                }
                 if(CAT1 ==null || CAT2==null||CAT3==null||AREACODE==null||SIGUNGU==null){
                     Toast.makeText(getContext(), getResources().getText(R.string.notify_search_Fail), Toast.LENGTH_SHORT).show();
                 }else{

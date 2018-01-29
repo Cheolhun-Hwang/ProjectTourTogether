@@ -41,10 +41,12 @@
     <string name="service_location_check_gps_net">Please check if GPS or network is allowed.</string>
     <string name="service_location_check_gps">GPS presence setting.</string>
     <string name="service_location_check_gps_msg">No GPS settings\nDo you want to go to the settings window?</string>
-    
+
     <string name="notify_get_gps">It will automatically be returned\nto your Korean address.</string>
     <string name="notify_search_Fail">Please fill in the form.</string>
     <string name="notify_loading_data">Loading.</string>
+    <string name="notify_add_bookmarking">Complete Adding to Bookmark.</string>
+    <string name="notify_already_add_bookmarking">Already added it to your bookmarks.</string>
 
     <string name="error_location_set_areacode">Invalid request.\nPlease check your GPS again.</string>
     <string name="error_intent">Error. Please try again.</string>
@@ -58,6 +60,7 @@
     <string name="result_overview">Overview</string>
     <string name="result_contactus">Contact Us</string>
     <string name="result_parking">Parking</string>
+    <string name="result_parkingFee">Parking Fee</string>
     <string name="result_cooking">Cooking</string>
     <string name="result_chkIn">Check In</string>
     <string name="result_chkOut">Check Out</string>
@@ -65,8 +68,14 @@
     <string name="result_foodAndBeverage">Food And Beverage</string>
     <string name="result_subFacility">Sub Facility</string>
     <string name="result_reservation">Reservation</string>
-    <string name="result_openingHours">Opening Hour</string>
+    <string name="result_openingHours">Open</string>
     <string name="result_cookMenu">Menu</string>
-    <string name="result_rest">Day Off</string>
+    <string name="result_rest">Rest</string>
     <string name="result_smoke">Smoking Place</string>
+    <string name="result_useTime">Usage Time</string>
+    <string name="result_spendtime">Take Time</string>
+    <string name="result_fee">Fee</string>
+    <string name="result_openPeriod">Open Period</string>
+    <string name="result_saleGoods">Sale Goods</string>
+    <string name="result_restRoom">Restroom</string>
 </resources>

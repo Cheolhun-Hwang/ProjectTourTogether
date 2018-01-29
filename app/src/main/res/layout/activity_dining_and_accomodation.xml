@@ -91,7 +91,7 @@
                 <ImageView
                     android:id="@+id/da_result_mainImage"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="220dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/noimage" />
                 <LinearLayout
@@ -113,7 +113,7 @@
                             android:text="@string/result_addr"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                         <TextView
                             android:gravity="center"
                             android:paddingLeft="10sp"
@@ -139,7 +139,7 @@
                             android:text="@string/result_homepage"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                         <TextView
                             android:gravity="center"
                             android:paddingLeft="10sp"
@@ -165,7 +165,7 @@
                             android:text="@string/result_tel"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                         <TextView
                             android:gravity="center"
                             android:paddingLeft="10sp"
@@ -181,7 +181,7 @@
                     <LinearLayout
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:id="@+id/da_result_directions_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -233,21 +233,17 @@
                 </LinearLayout>
                 <LinearLayout
                     android:background="@color/grey_300"
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
                     android:id="@+id/da_result_smallImageView_layout"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                         <android.support.v7.widget.RecyclerView
-                            android:paddingTop="7dp"
-                            android:paddingBottom="7dp"
                             android:background="@color/white"
                             android:id="@+id/da_result_smallImageView"
                             android:layout_width="match_parent"
-                            android:layout_height="120dp" />
+                            android:layout_height="match_parent" />
                 </LinearLayout>
                 <LinearLayout
                     android:paddingTop="7dp"
@@ -271,7 +267,7 @@
                             android:text="@string/result_chkIn"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                         <TextView
                             android:gravity="center"
                             android:paddingLeft="15sp"
@@ -297,7 +293,7 @@
                             android:text="@string/result_chkOut"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                         <TextView
                             android:gravity="center"
                             android:paddingLeft="15sp"
@@ -323,7 +319,7 @@
                             android:text="@string/result_roomType"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                         <TextView
                             android:gravity="center"
                             android:paddingLeft="15sp"
@@ -349,7 +345,7 @@
                             android:text="@string/result_parking"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                         <TextView
                             android:gravity="center"
                             android:paddingLeft="15sp"
@@ -375,7 +371,7 @@
                             android:text="@string/result_cooking"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                         <TextView
                             android:gravity="center"
                             android:paddingLeft="15sp"
@@ -401,7 +397,7 @@
                             android:text="@string/result_foodAndBeverage"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                         <TextView
                             android:gravity="center"
                             android:paddingLeft="15sp"
@@ -427,7 +423,7 @@
                             android:text="@string/result_subFacility"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                         <TextView
                             android:gravity="left"
                             android:paddingLeft="15sp"
@@ -453,9 +449,9 @@
                             android:text="@string/result_reservation"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                         <TextView
-                            android:gravity="left"
+                            android:gravity="center"
                             android:paddingLeft="15sp"
                             android:paddingRight="15sp"
                             android:id="@+id/da_result_a_reservation"
@@ -479,7 +475,7 @@
                             android:text="@string/result_contactus"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                         <TextView
                             android:gravity="center"
                             android:paddingLeft="15sp"
@@ -515,7 +511,7 @@
                             android:text="@string/result_parking"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                         <TextView
                             android:gravity="center"
                             android:paddingLeft="15sp"
@@ -543,7 +539,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
-                            android:gravity="left"
+                            android:gravity="center"
                             android:paddingLeft="15sp"
                             android:paddingRight="15sp"
                             android:id="@+id/da_result_d_openHour"
@@ -621,7 +617,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
-                            android:gravity="left"
+                            android:gravity="center"
                             android:paddingLeft="15sp"
                             android:paddingRight="15sp"
                             android:id="@+id/da_result_d_smoke"
@@ -666,9 +662,9 @@
                     android:paddingBottom="7dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp">
+                    android:layout_height="300dp">
                     <fragment
-                        android:id="@+id/result_map"
+                        android:id="@+id/da_result_map"
                         android:name="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />

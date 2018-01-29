@@ -2,11 +2,13 @@
 <LinearLayout
     android:gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 <ImageView
+    android:scaleType="centerCrop"
+    android:layout_margin="1dp"
     android:id="@+id/item_result_single_imageview"
     android:background="@color/alpha"
     android:src="@drawable/noimage"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    android:layout_width="190dp"
+    android:layout_height="120dp" />
 </LinearLayout>

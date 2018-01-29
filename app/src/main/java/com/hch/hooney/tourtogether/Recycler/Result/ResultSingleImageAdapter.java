@@ -9,7 +9,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.hch.hooney.tourtogether.R;
-import com.hch.hooney.tourtogether.Recycler.Main.mainPostHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class ResultSingleImageAdapter extends RecyclerView.Adapter{
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main_post,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_result_single_image,parent,false);
         ResultSingleImageHolder holder = new ResultSingleImageHolder(v);
         return holder;
     }
@@ -42,7 +41,9 @@ public class ResultSingleImageAdapter extends RecyclerView.Adapter{
         ResultSingleImageHolder hold = (ResultSingleImageHolder) holder;
         String item = list.get(position);
 
-        Picasso.with(mContext).load(item).into(hold.mainImaview);
+        if(!item.equals("")){
+            Picasso.with(mContext).load(item).into(hold.mainImaview);
+        }
 
         setAnimation(hold.itemView, position);
     }

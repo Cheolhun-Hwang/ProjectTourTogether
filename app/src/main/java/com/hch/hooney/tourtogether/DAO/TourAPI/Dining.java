@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class Dining {
     private String basic_addr1;
     private String basic_contentID;
+    private String basic_areaCode;
+    private String basic_sigungu;
     private String basic_contentTypeID;
     private String basic_directory;
     private String basic_firstImage;
@@ -49,15 +51,20 @@ public class Dining {
         this.intro_smoking = "";
         this.intro_reservation = "";
         this.smallImageList = null;
+        this.basic_areaCode = "";
+        this.basic_sigungu = "";
     }
 
     public Dining(String basic_addr1, String basic_contentID, String basic_contentTypeID, String basic_directory,
                   String basic_firstImage, String basic_homepage, double basic_mapX, double basic_mapY,
                   String basic_modifyDate, String basic_overView, String basic_tel, String basic_title,
                   String intro_menu, String intro_parking, String intro_openHour, String intro_dayOff,
-                  String intro_smoking, String intro_reservation, ArrayList<String> smallImageList) {
+                  String intro_smoking, String intro_reservation, ArrayList<String> smallImageList,
+                  String areacode, String sigungu) {
         this.basic_addr1 = basic_addr1;
         this.basic_contentID = basic_contentID;
+        this.basic_areaCode = areacode;
+        this.basic_sigungu = sigungu;
         this.basic_contentTypeID = basic_contentTypeID;
         this.basic_directory = basic_directory;
         this.basic_firstImage = basic_firstImage;
@@ -75,6 +82,22 @@ public class Dining {
         this.intro_smoking = intro_smoking;
         this.intro_reservation = intro_reservation;
         this.smallImageList = smallImageList;
+    }
+
+    public String getBasic_areaCode() {
+        return basic_areaCode;
+    }
+
+    public void setBasic_areaCode(String basic_areaCode) {
+        this.basic_areaCode = basic_areaCode;
+    }
+
+    public String getBasic_sigungu() {
+        return basic_sigungu;
+    }
+
+    public void setBasic_sigungu(String basic_sigungu) {
+        this.basic_sigungu = basic_sigungu;
     }
 
     public String getBasic_addr1() {

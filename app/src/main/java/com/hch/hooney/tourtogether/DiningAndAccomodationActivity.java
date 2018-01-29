@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -28,6 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.DAO.TourAPI.Accomodation;
 import com.hch.hooney.tourtogether.DAO.TourAPI.Dining;
+import com.hch.hooney.tourtogether.DAO.TourApiItem;
 import com.hch.hooney.tourtogether.Recycler.Result.ResultSingleImageAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -71,6 +74,7 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
     private MapFragment mapFragment;
     private SupportMapFragment supportMapFragment;
 
+    private boolean isBookmarking;
 
     //d
     private LinearLayout d_layout;
@@ -198,6 +202,12 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
         asyncDialog.setMessage(getResources().getString(R.string.notify_loading_data));
 
         back = (ImageButton) findViewById(R.id.da_result_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         Field = (TextView) findViewById(R.id.da_result_field);
         bookmaking = (ImageButton)findViewById(R.id.da_result_bookmarking);
         modifyDate = (TextView) findViewById(R.id.da_result_modify);
@@ -216,10 +226,10 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
         smallList.setHasFixedSize(true);
         smallList.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.result_map);
+        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.da_result_map);
         if (supportMapFragment == null) {
             supportMapFragment = SupportMapFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().replace(R.id.result_map, supportMapFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.da_result_map, supportMapFragment).commit();
         }
 
         if(ContentTypeID.equals("32")||ContentTypeID.equals("80")){
@@ -272,6 +282,42 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
 
             Field.setText(field);
 
+            isBookmarking = DAO.chkAddBookmarking(accomodation.getBasic_contentID());
+
+            if(isBookmarking){
+                bookmaking.setImageDrawable(getResources().getDrawable(R.drawable.bookmark_do));
+            }
+            bookmaking.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!isBookmarking){
+                        TourApiItem item = new TourApiItem();
+                        item.setAddr1(accomodation.getBasic_addr1());
+                        item.setAddr2("");
+                        item.setAreaCode(accomodation.getBasic_areaCode());
+                        item.setCat1("");
+                        item.setCat2("");
+                        item.setCat3("");
+                        item.setContentID(accomodation.getBasic_contentID());
+                        item.setContentTypeID(accomodation.getBasic_contentTypeID());
+                        item.setFirstImage(accomodation.getBasic_firstImage());
+                        item.setMapx(accomodation.getBasic_mapX());
+                        item.setMapy(accomodation.getBasic_mapY());
+                        item.setModifyDateTIme(accomodation.getBasic_modifyDate());
+                        item.setReadCount("");
+                        item.setSigunguCode(accomodation.getBasic_sigungu());
+                        item.setTitle(accomodation.getBasic_title());
+
+                        DAO.bookmarkSpotList.add(0, item);
+                        Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_add_bookmarking), Toast.LENGTH_LONG).show();
+                        bookmaking.setImageDrawable(getResources().getDrawable(R.drawable.bookmark_do));
+                        isBookmarking = true;
+                    }else{
+                        Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_already_add_bookmarking), Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
             if(!accomodation.getBasic_modifyDate().equals("")){
                 Date date = null;
                 try {
@@ -284,6 +330,8 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
 
             if(!accomodation.getBasic_firstImage().equals("")){
                 Picasso.with(getApplicationContext()).load(accomodation.getBasic_firstImage()).into(mainImage);
+            }else{
+                mainImage.setVisibility(View.GONE);
             }
 
             if(!accomodation.getBasic_title().equals("")){
@@ -296,75 +344,81 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
 
             if(!accomodation.getBasic_tel().equals("")){
                 tel.setText(accomodation.getBasic_tel());
+                Linkify.addLinks(tel, Linkify.PHONE_NUMBERS);
             }else{
                 telLayout.setVisibility(View.GONE);
             }
 
             if(!accomodation.getBasic_homepage().equals("")){
-                homepage.setText(accomodation.getBasic_homepage());
+                homepage.setText(Html.fromHtml(accomodation.getBasic_homepage().replaceAll("<br>", " ")));
+                Linkify.addLinks(homepage, Linkify.WEB_URLS);
             }else{
                 homepageLayout.setVisibility(View.GONE);
             }
 
             if(!accomodation.getBasic_directory().equals("")){
-                direction.setText(accomodation.getBasic_directory());
+                direction.setText(Html.fromHtml(accomodation.getBasic_directory()));
             }else{
-                direction.setVisibility(View.GONE);
+                directionlayout.setVisibility(View.GONE);
             }
 
             if(!accomodation.getBasic_overView().equals("")){
-                overview.setText(accomodation.getBasic_overView());
+                overview.setText(Html.fromHtml(accomodation.getBasic_overView()));
+            }else{
+                overview.setText("");
             }
 
             if(!accomodation.getIntro_checkInTime().equals("")){
-                a_check_in.setText(accomodation.getIntro_checkInTime());
+                a_check_in.setText(Html.fromHtml(accomodation.getIntro_checkInTime()));
             }else{
                 a_check_in_layout.setVisibility(View.GONE);
             }
 
             if(!accomodation.getIntro_checkOutTime().equals("")){
-                a_check_out.setText(accomodation.getIntro_checkOutTime());
+                a_check_out.setText(Html.fromHtml(accomodation.getIntro_checkOutTime()));
             }else{
                 a_check_out_layout.setVisibility(View.GONE);
             }
 
             if(!accomodation.getIntro_roomtype().equals("")){
-                a_roomtype.setText(accomodation.getIntro_roomtype());
+                a_roomtype.setText(Html.fromHtml(accomodation.getIntro_roomtype()));
             }else{
                 a_roomtype_layout.setVisibility(View.GONE);
             }
 
             if(!accomodation.getIntro_chkCooking().equals("")){
-                a_cooking.setText(accomodation.getIntro_chkCooking());
+                a_cooking.setText(Html.fromHtml(accomodation.getIntro_chkCooking()));
             }else{
                 a_cooking_layout.setVisibility(View.GONE);
             }
 
             if(!accomodation.getIntro_parking().equals("")){
-                a_parking.setText(accomodation.getIntro_parking());
+                a_parking.setText(Html.fromHtml(accomodation.getIntro_parking()));
             }else{
                 a_parking_layout.setVisibility(View.GONE);
             }
 
             if(!accomodation.getIntro_foodPlace().equals("")){
-                a_foodPlace.setText(accomodation.getIntro_foodPlace());
+                a_foodPlace.setText(Html.fromHtml(accomodation.getIntro_foodPlace()));
             }else{
                 a_foodPlace_layout.setVisibility(View.GONE);
             }
 
             if(!accomodation.getIntro_subFacility().equals("")){
-                a_subFacility.setText(accomodation.getIntro_subFacility());
+                a_subFacility.setText(Html.fromHtml(accomodation.getIntro_subFacility()));
             }else{
                 a_subFacility_layout.setVisibility(View.GONE);
             }
 
             if(!accomodation.getIntro_reservation().equals("")){
-                a_reservation.setText(accomodation.getIntro_reservation());
+                a_reservation.setText(Html.fromHtml(accomodation.getIntro_reservation()));
+                Linkify.addLinks(a_reservation, Linkify.ALL);
             }else{
                 a_reservation_layout.setVisibility(View.GONE);
             }
             if(!accomodation.getIntro_infoCenter().equals("")){
-                a_contactus.setText(accomodation.getIntro_infoCenter());
+                a_contactus.setText(Html.fromHtml(accomodation.getIntro_infoCenter()));
+                Linkify.addLinks(a_contactus, Linkify.ALL);
             }else{
                 a_contactus_layout.setVisibility(View.GONE);
             }
@@ -377,6 +431,42 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
         }else{
             Field.setText(field);
 
+            isBookmarking = DAO.chkAddBookmarking(dining.getBasic_contentID());
+
+            if(isBookmarking){
+                bookmaking.setImageDrawable(getResources().getDrawable(R.drawable.bookmark_do));
+            }
+            bookmaking.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!isBookmarking){
+                        TourApiItem item = new TourApiItem();
+                        item.setAddr1(dining.getBasic_addr1());
+                        item.setAddr2("");
+                        item.setAreaCode(dining.getBasic_areaCode());
+                        item.setCat1("");
+                        item.setCat2("");
+                        item.setCat3("");
+                        item.setContentID(dining.getBasic_contentID());
+                        item.setContentTypeID(dining.getBasic_contentTypeID());
+                        item.setFirstImage(dining.getBasic_firstImage());
+                        item.setMapx(dining.getBasic_mapX());
+                        item.setMapy(dining.getBasic_mapY());
+                        item.setModifyDateTIme(dining.getBasic_modifyDate());
+                        item.setReadCount("");
+                        item.setSigunguCode(dining.getBasic_sigungu());
+                        item.setTitle(dining.getBasic_title());
+
+                        DAO.bookmarkSpotList.add(0, item);
+                        Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_add_bookmarking), Toast.LENGTH_LONG).show();
+                        bookmaking.setImageDrawable(getResources().getDrawable(R.drawable.bookmark_do));
+                        isBookmarking = true;
+                    }else{
+                        Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_already_add_bookmarking), Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
             if(!dining.getBasic_modifyDate().equals("")){
                 Date date = null;
                 try {
@@ -388,7 +478,9 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
             }
 
             if(!dining.getBasic_firstImage().equals("")){
-                Picasso.with(getApplicationContext()).load(accomodation.getBasic_firstImage()).into(mainImage);
+                Picasso.with(getApplicationContext()).load(dining.getBasic_firstImage()).into(mainImage);
+            }else{
+                mainImage.setVisibility(View.GONE);
             }
 
             if(!dining.getBasic_title().equals("")){
@@ -401,58 +493,63 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
 
             if(!dining.getBasic_tel().equals("")){
                 tel.setText(dining.getBasic_tel());
+                Linkify.addLinks(tel, Linkify.PHONE_NUMBERS);
             }else{
                 telLayout.setVisibility(View.GONE);
             }
 
             if(!dining.getBasic_homepage().equals("")){
-                homepage.setText(dining.getBasic_homepage());
+                homepage.setText(Html.fromHtml(dining.getBasic_homepage().replaceAll("<br>", " ")) );
+                Linkify.addLinks(homepage, Linkify.WEB_URLS);
             }else{
                 homepageLayout.setVisibility(View.GONE);
             }
 
             if(!dining.getBasic_directory().equals("")){
-                direction.setText(dining.getBasic_directory());
+                direction.setText(Html.fromHtml(dining.getBasic_directory()));
             }else{
-                direction.setVisibility(View.GONE);
+                directionlayout.setVisibility(View.GONE);
             }
 
             if(!dining.getBasic_overView().equals("")){
-                overview.setText(dining.getBasic_overView());
+                overview.setText(Html.fromHtml(dining.getBasic_overView()));
+            }else{
+                overview.setText("");
             }
 
             if(!dining.getIntro_parking().equals("")){
-                d_parking.setText(dining.getIntro_parking());
+                d_parking.setText(Html.fromHtml(dining.getIntro_parking()));
             }else{
                 d_parking_layout.setVisibility(View.GONE);
             }
 
             if(!dining.getIntro_openHour().equals("")){
-                d_openHour.setText(dining.getIntro_openHour());
+                d_openHour.setText(Html.fromHtml(dining.getIntro_openHour()));
             }else{
                 d_openHour_layout.setVisibility(View.GONE);
             }
 
             if(!dining.getIntro_dayOff().equals("")){
-                d_dayoff.setText(dining.getIntro_dayOff());
+                d_dayoff.setText(Html.fromHtml(dining.getIntro_dayOff()));
             }else{
                 d_dayoff_layout.setVisibility(View.GONE);
             }
 
             if(!dining.getIntro_menu().equals("")){
-                d_menu.setText(dining.getIntro_menu());
+                d_menu.setText(Html.fromHtml(dining.getIntro_menu()));
             }else{
                 d_menu_layout.setVisibility(View.GONE);
             }
 
             if(!dining.getIntro_smoking().equals("")){
-                d_smoke.setText(dining.getIntro_parking());
+                d_smoke.setText(Html.fromHtml(dining.getIntro_parking()));
             }else{
                 d_smoke_layout.setVisibility(View.GONE);
             }
 
             if(!dining.getIntro_reservation().equals("")){
-                d_reservation.setText(dining.getIntro_reservation());
+                d_reservation.setText(Html.fromHtml(dining.getIntro_reservation()));
+                Linkify.addLinks(d_reservation, Linkify.ALL);
             }else{
                 d_reservation_layout.setVisibility(View.GONE);
             }
@@ -467,6 +564,7 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
 
     private void setMap(){
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onMapReady(GoogleMap gMap) {
                 googleMap = gMap;
@@ -475,7 +573,8 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
                 float bitmapDescriptorFactory = 0;
                 //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(guideItem.getGpsy(), guideItem.getGpsx()), 14));
                 if(ContentTypeID.equals("32")||ContentTypeID.equals("80")){
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(accomodation.getBasic_mapY(), accomodation.getBasic_mapX()), 15));
+                    Log.d(TAG, accomodation.getBasic_mapX()+" / " + accomodation.getBasic_mapY());
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(accomodation.getBasic_mapY(), accomodation.getBasic_mapX()), 16));
                     bitmapDescriptorFactory = BitmapDescriptorFactory.HUE_ROSE;
                     googleMap.addMarker(new MarkerOptions()
                             .position(new LatLng(accomodation.getBasic_mapY(), accomodation.getBasic_mapX()))
@@ -484,7 +583,8 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
                             .zIndex((float) 0)
                     );
                 }else{
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(dining.getBasic_mapY(), dining.getBasic_mapX()), 15));
+                    Log.d(TAG, dining.getBasic_mapX()+" / " + dining.getBasic_mapY());
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(dining.getBasic_mapY(), dining.getBasic_mapX()), 16));
                     bitmapDescriptorFactory = BitmapDescriptorFactory.HUE_ROSE;
                     googleMap.addMarker(new MarkerOptions()
                             .position(new LatLng(dining.getBasic_mapY(), dining.getBasic_mapX()))
@@ -537,8 +637,8 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
                     "&contentTypeId="+ContentTypeID+"&contentId="+ContentID+
                     "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&introYN=Y";
             url_images_info="http://api.visitkorea.or.kr/openapi/service/rest/"+service+
-                    "/detailInfo?ServiceKey="+DAO.ServiceKey+
-                    "&contentTypeId="+ContentTypeID+"&contentId="+ContentID+"&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&listYN=Y";
+                    "/detailImage?ServiceKey="+DAO.ServiceKey+
+                    "&contentTypeId="+ContentTypeID+"&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&contentId="+ContentID+"&imageYN=Y";
         }
     }
 
@@ -609,31 +709,67 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
 
                         if(tag.equals("checkintime")){
                             xpp.next();
-                            accomodation.setIntro_checkInTime(xpp.getText());
+                            if(xpp.getText() == null){
+                                accomodation.setIntro_checkInTime("");
+                            }else{
+                                accomodation.setIntro_checkInTime(xpp.getText());
+                            }
                         }else if(tag.equals("checkouttime")){
                             xpp.next();
-                            accomodation.setIntro_checkOutTime(xpp.getText());
+                            if(xpp.getText() == null){
+                                accomodation.setIntro_checkOutTime("");
+                            }else{
+                                accomodation.setIntro_checkOutTime(xpp.getText());
+                            }
                         }else if(tag.equals("chkcooking")){
                             xpp.next();
-                            accomodation.setIntro_chkCooking(xpp.getText());
+                            if(xpp.getText() == null){
+                                accomodation.setIntro_chkCooking("");
+                            }else{
+                                accomodation.setIntro_chkCooking(xpp.getText());
+                            }
                         }else if(tag.equals("foodplace")){
                             xpp.next();
-                            accomodation.setIntro_foodPlace(xpp.getText());
+                            if(xpp.getText()==null){
+                                accomodation.setIntro_foodPlace("");
+                            }else{
+                                accomodation.setIntro_foodPlace(xpp.getText());
+                            }
                         }else if(tag.equals("infocenterlodging")){
                             xpp.next();
-                            accomodation.setIntro_infoCenter(xpp.getText());
+                            if(xpp.getText()==null){
+                                accomodation.setIntro_infoCenter("");
+                            }else{
+                                accomodation.setIntro_infoCenter(xpp.getText());
+                            }
                         }else if(tag.equals("parkinglodging")){
                             xpp.next();
-                            accomodation.setIntro_parking(xpp.getText());
+                            if(xpp.getText()==null){
+                                accomodation.setIntro_parking("");
+                            }else{
+                                accomodation.setIntro_parking(xpp.getText());
+                            }
                         }else if(tag.equals("reservationlodging")){
                             xpp.next();
-                            accomodation.setIntro_reservation(xpp.getText());
+                            if(xpp.getText() == null){
+                                accomodation.setIntro_reservation("");
+                            }else{
+                                accomodation.setIntro_reservation(xpp.getText());
+                            }
                         }else if(tag.equals("roomtype")){
                             xpp.next();
-                            accomodation.setIntro_roomtype(xpp.getText());
+                            if(xpp.getText() == null){
+                                accomodation.setIntro_roomtype("");
+                            }else{
+                                accomodation.setIntro_roomtype(xpp.getText());
+                            }
                         }else if(tag.equals("subfacility")){
                             xpp.next();
-                            accomodation.setIntro_subFacility(xpp.getText());
+                            if(xpp.getText()==null){
+                                accomodation.setIntro_subFacility("");
+                            }else{
+                                accomodation.setIntro_subFacility(xpp.getText());
+                            }
                         }
                         break;
                     case XmlPullParser.TEXT:
@@ -678,11 +814,18 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
 
                         if(tag.equals("addr1")){
                             xpp.next();
-                            accomodation.setBasic_addr1(xpp.getText());
+                            if(xpp.getText() == null){
+                                accomodation.setBasic_addr1("");
+                            }else{
+                                accomodation.setBasic_addr1(xpp.getText());
+                            }
                         }else if(tag.equals("addr2")){
                             xpp.next();
-                            String temp = accomodation.getBasic_addr1();
-                            accomodation.setBasic_addr1(temp+" "+xpp.getText());
+                            if(xpp.getText() == null){
+                            }else{
+                                String temp = accomodation.getBasic_addr1();
+                                accomodation.setBasic_addr1(temp+" "+xpp.getText());
+                            }
                         }else if(tag.equals("contentid")){
                             xpp.next();
                             accomodation.setBasic_contentID(xpp.getText());
@@ -709,13 +852,23 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
                             accomodation.setBasic_modifyDate(xpp.getText());
                         }else if(tag.equals("overview")){
                             xpp.next();
-                            accomodation.setBasic_overView(xpp.getText());
+                            if(xpp.getText()==null){
+                                accomodation.setBasic_overView("");
+                            }else{
+                                accomodation.setBasic_overView(xpp.getText());
+                            }
                         }else if(tag.equals("tel")){
                             xpp.next();
                             accomodation.setBasic_tel(xpp.getText());
                         }else if(tag.equals("title")){
                             xpp.next();
                             accomodation.setBasic_title(xpp.getText());
+                        }else if(tag.equals("areacode")){
+                            xpp.next();
+                            accomodation.setBasic_areaCode(xpp.getText());
+                        }else if(tag.equals("sigungucode")){
+                            xpp.next();
+                            accomodation.setBasic_sigungu(xpp.getText());
                         }
                         break;
                     case XmlPullParser.TEXT:
@@ -770,7 +923,7 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
                 }
                 eventType= xpp.next();
             }
-            accomodation.setSmallImageList(tempList);
+            dining.setSmallImageList(tempList);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -803,22 +956,55 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
 
                         if(tag.equals("opentimefood")){
                             xpp.next();
-                            dining.setIntro_openHour(xpp.getText());
+                            if(xpp.getText()==null){
+                                dining.setIntro_openHour("");
+                            }else{
+                                dining.setIntro_openHour(xpp.getText());
+                            }
                         }else if(tag.equals("parkingfood")){
                             xpp.next();
-                            dining.setIntro_parking(xpp.getText());
+                            if(xpp.getText()==null){
+                                dining.setIntro_parking("");
+                            }else{
+                                dining.setIntro_parking(xpp.getText());
+                            }
                         }else if(tag.equals("reservationfood")){
                             xpp.next();
-                            dining.setIntro_reservation(xpp.getText());
+                            if(xpp.getText()==null){
+                                dining.setIntro_reservation("");
+                            }else{
+                                dining.setIntro_reservation(xpp.getText());
+                            }
                         }else if(tag.equals("restdatefood")){
                             xpp.next();
-                            dining.setIntro_dayOff(xpp.getText());
+                            if(xpp.getText()==null){
+                                dining.setIntro_dayOff("");
+                            }else{
+                                dining.setIntro_dayOff(xpp.getText());
+                            }
                         }else if(tag.equals("smoking")){
                             xpp.next();
-                            dining.setIntro_smoking(xpp.getText());
+                            if(xpp.getText()==null){
+                                dining.setIntro_smoking("");
+                            }else{
+                                dining.setIntro_smoking(xpp.getText());
+                            }
+                        }else if(tag.equals("firstmenu")){
+                            xpp.next();
+                            String tempString = dining.getIntro_menu();
+                            if(xpp.getText() == null){
+                                dining.setIntro_menu(tempString);
+                            }else{
+                                dining.setIntro_menu("Main Menu : " + xpp.getText()+"\n"+tempString);
+                            }
                         }else if(tag.equals("treatmenu")){
                             xpp.next();
-                            dining.setIntro_menu(xpp.getText());
+                            String tempString = dining.getIntro_menu();
+                            if(xpp.getText() == null){
+                                dining.setIntro_menu(tempString);
+                            }else{
+                                dining.setIntro_menu(tempString+"\n"+xpp.getText());
+                            }
                         }
                         break;
                     case XmlPullParser.TEXT:
@@ -863,44 +1049,54 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
 
                         if(tag.equals("addr1")){
                             xpp.next();
-                            accomodation.setBasic_addr1(xpp.getText());
+                            dining.setBasic_addr1(xpp.getText());
                         }else if(tag.equals("addr2")){
                             xpp.next();
-                            String temp = accomodation.getBasic_addr1();
-                            accomodation.setBasic_addr1(temp+" "+xpp.getText());
+                            String temp = dining.getBasic_addr1();
+                            dining.setBasic_addr1(temp+" "+xpp.getText());
                         }else if(tag.equals("contentid")){
                             xpp.next();
-                            accomodation.setBasic_contentID(xpp.getText());
+                            dining.setBasic_contentID(xpp.getText());
                         }else if(tag.equals("contenttypeid")){
                             xpp.next();
-                            accomodation.setBasic_contentTypeID(xpp.getText());
+                            dining.setBasic_contentTypeID(xpp.getText());
                         }else if(tag.equals("directions")){
                             xpp.next();
-                            accomodation.setBasic_directory(xpp.getText());
+                            dining.setBasic_directory(xpp.getText());
                         }else if(tag.equals("firstimage")){
                             xpp.next();
-                            accomodation.setBasic_firstImage(xpp.getText());
+                            dining.setBasic_firstImage(xpp.getText());
                         }else if(tag.equals("homepage")){
                             xpp.next();
-                            accomodation.setBasic_homepage(xpp.getText());
+                            dining.setBasic_homepage(xpp.getText());
                         }else if(tag.equals("mapx")){
                             xpp.next();
-                            accomodation.setBasic_mapX(Double.parseDouble(xpp.getText()));
+                            dining.setBasic_mapX(Double.parseDouble(xpp.getText()));
                         }else if(tag.equals("mapy")){
                             xpp.next();
-                            accomodation.setBasic_mapY(Double.parseDouble(xpp.getText()));
+                            dining.setBasic_mapY(Double.parseDouble(xpp.getText()));
                         }else if(tag.equals("modifiedtime")){
                             xpp.next();
-                            accomodation.setBasic_modifyDate(xpp.getText());
+                            dining.setBasic_modifyDate(xpp.getText());
                         }else if(tag.equals("overview")){
                             xpp.next();
-                            accomodation.setBasic_overView(xpp.getText());
+                            if(xpp.getText()==null){
+                                dining.setBasic_overView("");
+                            }else{
+                                dining.setBasic_overView(xpp.getText());
+                            }
                         }else if(tag.equals("tel")){
                             xpp.next();
-                            accomodation.setBasic_tel(xpp.getText());
+                            dining.setBasic_tel(xpp.getText());
                         }else if(tag.equals("title")){
                             xpp.next();
-                            accomodation.setBasic_title(xpp.getText());
+                            dining.setBasic_title(xpp.getText());
+                        }else if(tag.equals("areacode")){
+                            xpp.next();
+                            dining.setBasic_areaCode(xpp.getText());
+                        }else if(tag.equals("sigungucode")){
+                            xpp.next();
+                            dining.setBasic_sigungu(xpp.getText());
                         }
                         break;
                     case XmlPullParser.TEXT:

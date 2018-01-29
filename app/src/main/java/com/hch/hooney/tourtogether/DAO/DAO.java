@@ -172,4 +172,13 @@ public class DAO {
 
         Log.d("Set Country and Language", DAO.Country + " / " + DAO.Language);
     }
+
+    public static boolean chkAddBookmarking(String contentId){
+        for (TourApiItem item: DAO.bookmarkSpotList) {
+            if(item.getContentID().equals(contentId)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

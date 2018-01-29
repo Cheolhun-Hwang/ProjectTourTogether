@@ -53,7 +53,10 @@
         </activity>
         <activity android:name=".SearchActivity" />
         <activity android:name=".DiningAndAccomodationActivity" />
-        <activity android:name=".AnotherFieldActivity"></activity>
+        <activity android:name=".NatureActivity" />
+        <activity android:name=".FacilityActivity" />
+        <activity android:name=".LeisureActivity" />
+        <activity android:name=".ShoppingActivity"></activity>
     </application>
 
 </manifest>

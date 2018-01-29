@@ -46,9 +46,37 @@
     <string name="notify_get_gps"></string>
     <string name="notify_search_Fail">형식을 모두 채워주세요.</string>
     <string name="notify_loading_data">Loading.</string>
+    <string name="notify_add_bookmarking">북마크에 추가하였습니다.</string>
+    <string name="notify_already_add_bookmarking">북마크에 추가된 장소입니다.</string>
 
     <string name="error_location_set_areacode">잘못된 요청입니다.\nGPS를 다시 확인해주세요.</string>
     <string name="error_intent">요청에 실패하였습니다.\n다시 시도해주십시오.</string>
     <string name="error_gps_loading">GPS 신호 준비중입니다.\n다시 시도해주세요.</string>
     <string name="error_location_kr">현재 위치가 한국이 아닙니다.</string>
+
+    <string name="result_addr">주소</string>
+    <string name="result_homepage">홈페이지</string>
+    <string name="result_tel">전화</string>
+    <string name="result_direction">Directions</string>
+    <string name="result_overview">개요</string>
+    <string name="result_contactus">안내 및 문의</string>
+    <string name="result_parking">주차</string>
+    <string name="result_parkingFee">주차 요금</string>
+    <string name="result_cooking">요리가능여부</string>
+    <string name="result_chkIn">체크 인</string>
+    <string name="result_chkOut">체크 아웃</string>
+    <string name="result_roomType">룸 유형</string>
+    <string name="result_foodAndBeverage">식음료장</string>
+    <string name="result_subFacility">부대시설</string>
+    <string name="result_reservation">예약</string>
+    <string name="result_openingHours">영업시간</string>
+    <string name="result_cookMenu">메뉴</string>
+    <string name="result_rest">휴일</string>
+    <string name="result_smoke">흡연구역</string>
+    <string name="result_useTime">이용시간</string>
+    <string name="result_spendtime">소요시간</string>
+    <string name="result_fee">요금</string>
+    <string name="result_openPeriod">이용기간</string>
+    <string name="result_saleGoods">판매물품</string>
+    <string name="result_restRoom">화장실</string>
 </resources>

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class Accomodation {
     private String basic_addr1;
+    private String basic_areaCode;
+    private String basic_sigungu;
     private String basic_contentID;
     private String basic_contentTypeID;
     private String basic_directory;
@@ -55,6 +57,8 @@ public class Accomodation {
         this.intro_roomtype = "";
         this.intro_subFacility = "";
         this.smallImageList = null;
+        this.basic_areaCode = "";
+        this.basic_sigungu = "'";
     }
 
     public Accomodation(String basic_addr1, String basic_contentID, String basic_contentTypeID,
@@ -62,9 +66,12 @@ public class Accomodation {
                         double basic_mapX, double basic_mapY, String basic_modifyDate, String basic_overView,
                         String basic_tel, String basic_title, String intro_checkInTime, String intro_checkOutTime,
                         String intro_chkCooking, String intro_foodPlace, String intro_infoCenter, String intro_parking,
-                        String intro_reservation, String intro_roomtype, String intro_subFacility, ArrayList<String> smallImageList) {
+                        String intro_reservation, String intro_roomtype, String intro_subFacility, ArrayList<String> smallImageList,
+                        String areacode, String sigungu) {
         this.basic_addr1 = basic_addr1;
         this.basic_contentID = basic_contentID;
+        this.basic_areaCode = areacode;
+        this.basic_sigungu = sigungu;
         this.basic_contentTypeID = basic_contentTypeID;
         this.basic_directory = basic_directory;
         this.basic_firstImage = basic_firstImage;
@@ -261,5 +268,22 @@ public class Accomodation {
 
     public void setSmallImageList(ArrayList<String> smallImageList) {
         this.smallImageList = smallImageList;
+    }
+
+
+    public String getBasic_areaCode() {
+        return basic_areaCode;
+    }
+
+    public void setBasic_areaCode(String basic_areaCode) {
+        this.basic_areaCode = basic_areaCode;
+    }
+
+    public String getBasic_sigungu() {
+        return basic_sigungu;
+    }
+
+    public void setBasic_sigungu(String basic_sigungu) {
+        this.basic_sigungu = basic_sigungu;
     }
 }

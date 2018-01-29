@@ -3,17 +3,20 @@ package com.hch.hooney.tourtogether.Recycler.Search;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Toast;
 
-import com.hch.hooney.tourtogether.AnotherFieldActivity;
 import com.hch.hooney.tourtogether.DAO.TourApiItem;
 import com.hch.hooney.tourtogether.DiningAndAccomodationActivity;
+import com.hch.hooney.tourtogether.FacilityActivity;
+import com.hch.hooney.tourtogether.LeisureActivity;
+import com.hch.hooney.tourtogether.NatureActivity;
 import com.hch.hooney.tourtogether.R;
+import com.hch.hooney.tourtogether.ShoppingActivity;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -51,7 +54,12 @@ public class SearchResultAdapter extends RecyclerView.Adapter {
         SearchResultHolder hold = (SearchResultHolder) holder;
         final TourApiItem item = resultList.get(position);
 
-        Picasso.with(mContext).load(item.getFirstImage()).into(hold.sr_Image);
+        Log.d("Result Image", item.getFirstImage());
+
+        if(item.getFirstImage().equals("")){
+        }else{
+            Picasso.with(mContext).load(item.getFirstImage()).into(hold.sr_Image);
+        }
 
         Date date = null;
         try {
@@ -80,8 +88,36 @@ public class SearchResultAdapter extends RecyclerView.Adapter {
                     intent.putExtra("ContentID", item.getContentID());
                     intent.putExtra("field", field);
                     mContext.startActivity(intent);
+                }else if(item.getContentTypeID().equals("12")||item.getContentTypeID().equals("76")){
+                    Intent intent = new Intent(mContext, NatureActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("ContentTypeID", item.getContentTypeID());
+                    intent.putExtra("ContentID", item.getContentID());
+                    intent.putExtra("field", field);
+                    mContext.startActivity(intent);
+                }else if(item.getContentTypeID().equals("14")||item.getContentTypeID().equals("78")){
+                    Intent intent = new Intent(mContext, FacilityActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("ContentTypeID", item.getContentTypeID());
+                    intent.putExtra("ContentID", item.getContentID());
+                    intent.putExtra("field", field);
+                    mContext.startActivity(intent);
+                }else if(item.getContentTypeID().equals("28")||item.getContentTypeID().equals("75")){
+                    Intent intent = new Intent(mContext, LeisureActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("ContentTypeID", item.getContentTypeID());
+                    intent.putExtra("ContentID", item.getContentID());
+                    intent.putExtra("field", field);
+                    mContext.startActivity(intent);
+                }else if(item.getContentTypeID().equals("38")||item.getContentTypeID().equals("79")){
+                    Intent intent = new Intent(mContext, ShoppingActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("ContentTypeID", item.getContentTypeID());
+                    intent.putExtra("ContentID", item.getContentID());
+                    intent.putExtra("field", field);
+                    mContext.startActivity(intent);
                 }else{
-                    Intent intent = new Intent(mContext, AnotherFieldActivity.class);
+                    //Intent intent = new Intent(mContext, AnotherFieldActivity.class);
                 }
             }
         });
