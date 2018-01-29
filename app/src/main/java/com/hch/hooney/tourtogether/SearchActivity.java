@@ -39,6 +39,7 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayList<TourApiItem> searchResultList;
     private String filed_title;
     private String tourapi_URL;
+    private String Contenttype;
     private boolean isPopular;
 
     @Override
@@ -53,6 +54,7 @@ public class SearchActivity extends AppCompatActivity {
         }else{
             filed_title = (String) getIntent().getStringExtra("field");
             tourapi_URL = (String) getIntent().getStringExtra("url");
+            Contenttype = (String) getIntent().getStringExtra("contentTypeID");
 
             Log.d(TAG, filed_title+" / "+tourapi_URL);
 
@@ -72,6 +74,7 @@ public class SearchActivity extends AppCompatActivity {
         textFilterEdit = (EditText) findViewById(R.id.search_activity_search_edittext);
         textFilterBTN = (ImageButton) findViewById(R.id.search_activity_search_btn);
         filedText = (TextView) findViewById(R.id.search_activity_title_field_textview);
+        filedText.setText(filed_title);
         filterPop = (Button) findViewById(R.id.search_activity_filter_Popularity);
         filterReg = (Button) findViewById(R.id.search_activity_filter_Register);
 
@@ -119,12 +122,12 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void setUI(){
-        searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList));
+        searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList, filed_title));
     }
 
     private void filter_titleText(){
         if(textFilterEdit.getText().equals("")){
-            searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList));
+            searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList, filed_title));
             return;
         }else{
             ArrayList<TourApiItem> tempList = new ArrayList<TourApiItem>();
@@ -133,7 +136,7 @@ public class SearchActivity extends AppCompatActivity {
                     tempList.add(searchResultList.get(i));
                 }
             }
-            searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), tempList));
+            searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), tempList, filed_title));
         }
     }
 
@@ -183,7 +186,7 @@ public class SearchActivity extends AppCompatActivity {
         //searchlist end
 
         searchResultList = tempList;
-        searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList));
+        searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList, filed_title));
     }
 
     private void filterReg(){
@@ -227,7 +230,7 @@ public class SearchActivity extends AppCompatActivity {
         //searchlist end
 
         searchResultList = tempList;
-        searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList));
+        searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList, filed_title));
     }
 
     private void loadDataToTOURAPI(){

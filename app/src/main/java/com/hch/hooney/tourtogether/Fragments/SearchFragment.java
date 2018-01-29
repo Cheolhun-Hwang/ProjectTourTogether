@@ -365,6 +365,7 @@ public class SearchFragment extends Fragment {
                     Toast.makeText(getContext(), getResources().getText(R.string.notify_search_Fail), Toast.LENGTH_SHORT).show();
                 }else{
                     Intent intent = new Intent(getContext(), SearchActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("url", URL);
                     intent.putExtra("field", field);
                     intent.putExtra("contentTypeID", CONTETNTTYPEID);

@@ -28,13 +28,15 @@ import java.util.Date;
 public class SearchResultAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private ArrayList<TourApiItem> resultList;
+    private String field;
 
     // Allows to remember the last item shown on screen
     private int lastPosition = -1;
 
-    public SearchResultAdapter(Context mContext, ArrayList<TourApiItem> resultList) {
+    public SearchResultAdapter(Context mContext, ArrayList<TourApiItem> resultList, String field) {
         this.mContext = mContext;
         this.resultList = resultList;
+        this.field = field;
     }
 
     @Override
@@ -58,10 +60,10 @@ public class SearchResultAdapter extends RecyclerView.Adapter {
             e.printStackTrace();
         }
 
+        hold.sr_viewCount.setText("view : " + item.getReadCount());
+
         hold.sr_dateTime.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date));
 
-
-        hold.sr_viewCount.setText("view : " + item.getReadCount());
 
         hold.sr_location.setText(item.getAddr1()+" "+item.getAddr2());
 
@@ -73,8 +75,10 @@ public class SearchResultAdapter extends RecyclerView.Adapter {
                 if(item.getContentTypeID().equals("32")||item.getContentTypeID().equals("80")||
                         item.getContentTypeID().equals("39")||item.getContentTypeID().equals("82")){
                     Intent intent = new Intent(mContext, DiningAndAccomodationActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("ContentTypeID", item.getContentTypeID());
                     intent.putExtra("ContentID", item.getContentID());
+                    intent.putExtra("field", field);
                     mContext.startActivity(intent);
                 }else{
                     Intent intent = new Intent(mContext, AnotherFieldActivity.class);
