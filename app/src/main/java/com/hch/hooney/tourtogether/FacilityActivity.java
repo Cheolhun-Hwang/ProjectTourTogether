@@ -96,9 +96,6 @@ public class FacilityActivity extends AppCompatActivity {
     private String url_intro_info;
     private String url_repeate_info;
     private String url_images_info;
-
-    private String ContentID;
-    private String ContentTypeID;
     private String field;
 
     private boolean isBookmarking;
@@ -112,13 +109,13 @@ public class FacilityActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.error_intent), Toast.LENGTH_LONG).show();
             finish();
         }else{
-            ContentTypeID = getIntent().getStringExtra("ContentTypeID");
-            ContentID = getIntent().getStringExtra("ContentID");
+            TourApiItem item = (TourApiItem) getIntent().getSerializableExtra("basic");
+            facility = new Facility(item);
             field = getIntent().getStringExtra("field");
 
             init();
             setURLS();
-
+            asyncDialog.show();
             new Thread(new Runnable() {
                 @SuppressLint("LongLogTag")
                 @Override
@@ -148,12 +145,9 @@ public class FacilityActivity extends AppCompatActivity {
     }
 
     private void init(){
-        asyncDialog = new ProgressDialog(getApplicationContext());
+        asyncDialog = new ProgressDialog(this);
         asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         asyncDialog.setMessage(getResources().getString(R.string.notify_loading_data));
-
-        //variable
-        facility = new Facility();
 
         //layout
         back = (ImageButton) findViewById(R.id.fc_result_back);
@@ -210,7 +204,7 @@ public class FacilityActivity extends AppCompatActivity {
     private void setUI(){
         Field.setText(field);
 
-        isBookmarking = DAO.chkAddBookmarking(facility.getBasic_contentID());
+        isBookmarking = DAO.chkAddBookmarking(facility.getContentID());
 
         if(isBookmarking){
             bookmaking.setImageDrawable(getResources().getDrawable(R.drawable.bookmark_do));
@@ -220,58 +214,63 @@ public class FacilityActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!isBookmarking){
                     TourApiItem item = new TourApiItem();
-                    item.setAddr1(facility.getBasic_addr1());
-                    item.setAddr2("");
-                    item.setAreaCode(facility.getBasic_areaCode());
-                    item.setCat1("");
-                    item.setCat2("");
-                    item.setCat3("");
-                    item.setContentID(facility.getBasic_contentID());
-                    item.setContentTypeID(facility.getBasic_contentTypeID());
-                    item.setFirstImage(facility.getBasic_firstImage());
-                    item.setMapx(facility.getBasic_mapX());
-                    item.setMapy(facility.getBasic_mapY());
-                    item.setModifyDateTIme(facility.getBasic_modifyDate());
-                    item.setReadCount("");
-                    item.setSigunguCode(facility.getBasic_sigungu());
-                    item.setTitle(facility.getBasic_title());
+                    item.setAddr1(facility.getAddr1());
+                    item.setAddr2(facility.getAddr2());
+                    item.setAreaCode(facility.getAreaCode());
+                    item.setCat1(facility.getCat1());
+                    item.setCat2(facility.getCat2());
+                    item.setCat3(facility.getCat3());
+                    item.setContentID(facility.getContentID());
+                    item.setContentTypeID(facility.getContentTypeID());
+                    item.setFirstImage(facility.getFirstImage());
+                    item.setMapx(facility.getMapx());
+                    item.setMapy(facility.getMapy());
+                    item.setModifyDateTIme(facility.getModifyDateTIme());
+                    item.setReadCount(facility.getReadCount());
+                    item.setSigunguCode(facility.getSigunguCode());
+                    item.setTitle(facility.getTitle());
+                    item.setTel(facility.getTel());
+                    item.setDirections(facility.getDirections());
+                    item.setBasic_overView(facility.getBasic_overView());
 
-                    DAO.bookmarkSpotList.add(0, item);
-                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_add_bookmarking), Toast.LENGTH_LONG).show();
+                    DAO.handler.insert_spot(item);
+                    DAO.load_bookmarkSpot();
+
+                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_add_bookmarking), Toast.LENGTH_SHORT).show();
                     bookmaking.setImageDrawable(getResources().getDrawable(R.drawable.bookmark_do));
                     isBookmarking = true;
                 }else{
-                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_already_add_bookmarking), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_already_add_bookmarking), Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        if(!facility.getBasic_modifyDate().equals("")){
+        if(!facility.getModifyDateTIme().equals("")){
             Date date = null;
             try {
-                date = new SimpleDateFormat("yyyyMMddHHmmss").parse(facility.getBasic_modifyDate());
+                date = new SimpleDateFormat("yyyyMMddHHmmss").parse(facility.getModifyDateTIme());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             modifyDate.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date));
         }
 
-        if(!facility.getBasic_firstImage().equals("")){
-            Picasso.with(getApplicationContext()).load(facility.getBasic_firstImage()).into(mainImage);
+        if(!facility.getFirstImage().equals("")){
+            Picasso.with(getApplicationContext()).load(facility.getFirstImage()).into(mainImage);
         }else{
             mainImage.setVisibility(View.GONE);
         }
 
-        if(!facility.getBasic_title().equals("")){
-            title.setText(facility.getBasic_title());
+        if(!facility.getTitle().equals("")){
+            title.setText(facility.getTitle());
         }
 
-        if(!facility.getBasic_addr1().equals("")){
-            addr1.setText(facility.getBasic_addr1());
+        if(!facility.getAddr1().equals("")){
+            addr1.setText(facility.getAddr1() + " " + facility.getAddr2());
         }
 
-        if(!facility.getBasic_tel().equals("")){
-            tel.setText(facility.getBasic_tel());
+        if(!facility.getTel().equals("")){
+            tel.setText(facility.getTel());
             Linkify.addLinks(tel, Linkify.PHONE_NUMBERS);
         }else{
             telLayout.setVisibility(View.GONE);
@@ -284,8 +283,8 @@ public class FacilityActivity extends AppCompatActivity {
             homepageLayout.setVisibility(View.GONE);
         }
 
-        if(!facility.getBasic_directory().equals("")){
-            direction.setText(Html.fromHtml(facility.getBasic_directory()));
+        if(!facility.getDirections().equals("")){
+            direction.setText(Html.fromHtml(facility.getDirections()));
         }else{
             directionlayout.setVisibility(View.GONE);
         }
@@ -367,22 +366,22 @@ public class FacilityActivity extends AppCompatActivity {
 
                 float bitmapDescriptorFactory = 0;
                 //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(guideItem.getGpsy(), guideItem.getGpsx()), 14));
-                Log.d(TAG, facility.getBasic_mapX()+" / " + facility.getBasic_mapY());
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(facility.getBasic_mapY(), facility.getBasic_mapX()), 16));
+                Log.d(TAG, facility.getMapx()+" / " + facility.getMapy());
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(facility.getMapy(), facility.getMapx()), 16));
                 bitmapDescriptorFactory = BitmapDescriptorFactory.HUE_ROSE;
                 googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(facility.getBasic_mapY(), facility.getBasic_mapX()))
+                        .position(new LatLng(facility.getMapy(), facility.getMapx()))
                         .icon(BitmapDescriptorFactory.defaultMarker(bitmapDescriptorFactory))
-                        .title(facility.getBasic_title())
+                        .title(facility.getTitle())
                         .zIndex((float) 0)
                 );
 
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
-                        == PackageManager.PERMISSION_GRANTED) {
-                    googleMap.setMyLocationEnabled(true);
-                } else {
-                    Toast.makeText(getApplicationContext(), "GPS 권한을 확인해주세요.", Toast.LENGTH_SHORT).show();
-                }
+//                if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
+//                        == PackageManager.PERMISSION_GRANTED) {
+//                    googleMap.setMyLocationEnabled(true);
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "GPS 권한을 확인해주세요.", Toast.LENGTH_SHORT).show();
+//                }
 
             }
         });
@@ -398,20 +397,20 @@ public class FacilityActivity extends AppCompatActivity {
 
         url_basic_info = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+
                 "/detailCommon?ServiceKey="+ DAO.ServiceKey+
-                "&contentTypeId="+ContentTypeID+ "&contentId="+ContentID+
+                "&contentTypeId="+facility.getContentTypeID()+ "&contentId="+facility.getContentID()+
                 "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&transGuideYN=Y";
         url_intro_info = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+
                 "/detailIntro?ServiceKey="+DAO.ServiceKey+
-                "&contentTypeId="+ContentTypeID+ "&contentId="+ContentID+
+                "&contentTypeId="+facility.getContentTypeID()+ "&contentId="+facility.getContentID()+
                 "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&introYN=Y";
         url_repeate_info = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+
                 "/detailInfo?ServiceKey="+DAO.ServiceKey+
-                "&contentTypeId="+ContentTypeID+"&contentId="+ContentID+
+                "&contentTypeId="+facility.getContentTypeID()+"&contentId="+facility.getContentID()+
                 "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&listYN=Y";
         url_images_info="http://api.visitkorea.or.kr/openapi/service/rest/"+service+
                 "/detailImage?ServiceKey="+DAO.ServiceKey+
-                "&contentTypeId="+ContentTypeID+
-                "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&contentId="+ContentID+"&imageYN=Y";
+                "&contentTypeId="+facility.getContentTypeID()+
+                "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&contentId="+facility.getContentID()+"&imageYN=Y";
     }
 
     private void parse_xml_Nature_smallImages(){
@@ -621,37 +620,9 @@ public class FacilityActivity extends AppCompatActivity {
                     case XmlPullParser.START_TAG:
                         tag= xpp.getName();    //테그 이름 얻어오기
 
-                        if(tag.equals("addr1")){
-                            xpp.next();
-                            facility.setBasic_addr1(xpp.getText());
-                        }else if(tag.equals("addr2")){
-                            xpp.next();
-                            String temp = facility.getBasic_addr1();
-                            facility.setBasic_addr1(temp+" "+xpp.getText());
-                        }else if(tag.equals("contentid")){
-                            xpp.next();
-                            facility.setBasic_contentID(xpp.getText());
-                        }else if(tag.equals("contenttypeid")){
-                            xpp.next();
-                            facility.setBasic_contentTypeID(xpp.getText());
-                        }else if(tag.equals("directions")){
-                            xpp.next();
-                            facility.setBasic_directory(xpp.getText());
-                        }else if(tag.equals("firstimage")){
-                            xpp.next();
-                            facility.setBasic_firstImage(xpp.getText());
-                        }else if(tag.equals("homepage")){
+                        if(tag.equals("homepage")){
                             xpp.next();
                             facility.setBasic_homepage(xpp.getText());
-                        }else if(tag.equals("mapx")){
-                            xpp.next();
-                            facility.setBasic_mapX(Double.parseDouble(xpp.getText()));
-                        }else if(tag.equals("mapy")){
-                            xpp.next();
-                            facility.setBasic_mapY(Double.parseDouble(xpp.getText()));
-                        }else if(tag.equals("modifiedtime")){
-                            xpp.next();
-                            facility.setBasic_modifyDate(xpp.getText());
                         }else if(tag.equals("overview")){
                             xpp.next();
                             if(xpp.getText()==null){
@@ -659,18 +630,6 @@ public class FacilityActivity extends AppCompatActivity {
                             }else{
                                 facility.setBasic_overView(xpp.getText());
                             }
-                        }else if(tag.equals("tel")){
-                            xpp.next();
-                            facility.setBasic_tel(xpp.getText());
-                        }else if(tag.equals("title")){
-                            xpp.next();
-                            facility.setBasic_title(xpp.getText());
-                        }else if(tag.equals("areacode")){
-                            xpp.next();
-                            facility.setBasic_areaCode(xpp.getText());
-                        }else if(tag.equals("sigungucode")){
-                            xpp.next();
-                            facility.setBasic_sigungu(xpp.getText());
                         }
                         break;
                     case XmlPullParser.TEXT:

@@ -84,36 +84,31 @@ public class SearchResultAdapter extends RecyclerView.Adapter {
                         item.getContentTypeID().equals("39")||item.getContentTypeID().equals("82")){
                     Intent intent = new Intent(mContext, DiningAndAccomodationActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("ContentTypeID", item.getContentTypeID());
-                    intent.putExtra("ContentID", item.getContentID());
+                    intent.putExtra("basic", item);
                     intent.putExtra("field", field);
                     mContext.startActivity(intent);
                 }else if(item.getContentTypeID().equals("12")||item.getContentTypeID().equals("76")){
                     Intent intent = new Intent(mContext, NatureActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("ContentTypeID", item.getContentTypeID());
-                    intent.putExtra("ContentID", item.getContentID());
+                    intent.putExtra("basic", item);
                     intent.putExtra("field", field);
                     mContext.startActivity(intent);
                 }else if(item.getContentTypeID().equals("14")||item.getContentTypeID().equals("78")){
                     Intent intent = new Intent(mContext, FacilityActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("ContentTypeID", item.getContentTypeID());
-                    intent.putExtra("ContentID", item.getContentID());
+                    intent.putExtra("basic", item);
                     intent.putExtra("field", field);
                     mContext.startActivity(intent);
                 }else if(item.getContentTypeID().equals("28")||item.getContentTypeID().equals("75")){
                     Intent intent = new Intent(mContext, LeisureActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("ContentTypeID", item.getContentTypeID());
-                    intent.putExtra("ContentID", item.getContentID());
+                    intent.putExtra("basic", item);
                     intent.putExtra("field", field);
                     mContext.startActivity(intent);
                 }else if(item.getContentTypeID().equals("38")||item.getContentTypeID().equals("79")){
                     Intent intent = new Intent(mContext, ShoppingActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("ContentTypeID", item.getContentTypeID());
-                    intent.putExtra("ContentID", item.getContentID());
+                    intent.putExtra("basic", item);
                     intent.putExtra("field", field);
                     mContext.startActivity(intent);
                 }else{

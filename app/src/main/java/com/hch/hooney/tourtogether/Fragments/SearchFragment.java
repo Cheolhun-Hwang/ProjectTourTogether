@@ -1,6 +1,7 @@
 package com.hch.hooney.tourtogether.Fragments;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.nfc.Tag;
@@ -33,7 +34,8 @@ import com.hch.hooney.tourtogether.Service.GPS;
  */
 public class SearchFragment extends Fragment {
     private final String TAG = "SearchFragment";
-
+    private final int SIGNAL_PERMISSON = 8001;
+    private ProgressDialog asyncDialog;
     //Layout Resource
     private Button searchArea;
     private Button searchRadius;
@@ -96,6 +98,10 @@ public class SearchFragment extends Fragment {
     }
 
     private void init(){
+        asyncDialog = new ProgressDialog(getActivity());
+        asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        asyncDialog.setMessage(getResources().getString(R.string.notify_loading_data));
+
         //variable
         isSearchArea = true;
         selectField = 0;
@@ -105,57 +111,6 @@ public class SearchFragment extends Fragment {
                 switch (msg.what){
                     case 1001:
                         checkDangerousPermissions();
-                        GPS gps_A = new GPS(getContext());
-                        if(gps_A.isGetLocation()){
-                            lat = gps_A.getLat();
-                            lon = gps_A.getLon();
-                            if(lat == 0.0 && lon == 0.0 ){
-                                Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_LONG).show();
-                            }else{
-                                Location location = new Location(getContext(), lat, lon);
-                                String areaResult = location.searchLocation();
-
-                                searchAreaShowLocation.setText(areaResult);
-                                if(DAO.Language == "en"){
-                                    Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_LONG).show();
-                                }
-                                ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
-                                convertAreaCode.filteringToAuto(areaResult);
-                                AREACODE = convertAreaCode.getAreaCode();
-                                SIGUNGU = convertAreaCode.getSigunguCode();
-
-                            }
-                            gps_A.stopUsingGPS();
-                        }else{
-                            gps_A.showSettingAlert();
-                        }
-                        break;
-                    case 1002:
-                        checkDangerousPermissions();
-                        GPS gps_R = new GPS(getContext());
-                        if(gps_R.isGetLocation()){
-                            lat = gps_R.getLat();
-                            lon = gps_R.getLon();
-                            if(lat == 0.0 && lon == 0.0 ){
-                                Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_LONG).show();
-                            }else{
-                                Location location = new Location(getContext(), lat, lon);
-                                String areaResult = location.searchLocation();
-
-                                searchRadiusShowLocation.setText(areaResult);
-                                if(DAO.Language == "en"){
-                                    Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_LONG).show();
-                                }
-                                ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
-                                convertAreaCode.filteringToAuto(areaResult);
-                                AREACODE = convertAreaCode.getAreaCode();
-                                SIGUNGU = convertAreaCode.getSigunguCode();
-
-                            }
-                            gps_R.stopUsingGPS();
-                        }else{
-                            gps_R.showSettingAlert();
-                        }
                         break;
                     default:
                         break;
@@ -334,7 +289,7 @@ public class SearchFragment extends Fragment {
                     @Override
                     public void run() {
                         Message msg_getLocation = Message.obtain();
-                        msg_getLocation.what=1002;
+                        msg_getLocation.what=1001;
                         handler.sendMessage(msg_getLocation);
                     }
                 }).start();
@@ -347,6 +302,8 @@ public class SearchFragment extends Fragment {
                 if(DAO.Language.equals("ko")){
                     service="KorService";
                 }else if(DAO.Language.equals("en")){
+                    service="EngService";
+                }else{
                     service="EngService";
                 }
                 Log.d(TAG, "Sevice : " + service);
@@ -479,26 +436,29 @@ public class SearchFragment extends Fragment {
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "권한있음");
+            runGPS();
         } else {
             Log.d(TAG, "권한없음");
 
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permissions[0])) {
-                Log.d(TAG, "권한설명란");
-            } else {
-                ActivityCompat.requestPermissions(getActivity(), permissions, 1);
-            }
+            ActivityCompat.requestPermissions(this.getActivity(), permissions, SIGNAL_PERMISSON);
         }
     }//end of checkDangerousPermissions
+
+
 
     // 사용자의 권한 확인 후 사용자의 권한에 대한 응답 결과를 확인하는 콜백 메소드
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
-        if (requestCode == 1) {
-            for (int i = 0; i < permissions.length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+        Log.d(TAG, "권한 : " + requestCode +" / " + SIGNAL_PERMISSON);
+        if (requestCode == SIGNAL_PERMISSON) {
+            Log.d(TAG, "권한 : " + grantResults.length +" / " + grantResults[0]);
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Log.d(TAG, "권한 : " + grantResults[0]);
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //Toast.makeText(getApplicationContext(), permissions[i] + " 권한이 승인됨.", Toast.LENGTH_LONG).show();
                     Log.d(TAG, "권한 승인");
+                    runGPS();
                 } else {
                     //Toast.makeText(getApplicationContext(), permissions[i] + " 권한이 승인되지 않음.", Toast.LENGTH_LONG).show();
                     Log.d(TAG, "권한 승인되지 않음.");
@@ -506,4 +466,38 @@ public class SearchFragment extends Fragment {
             }
         }
     }//end of onRequestPermissionsResult
+
+    private void runGPS(){
+        asyncDialog.show();
+        GPS gps = new GPS(getContext());
+        if(gps.isGetLocation()){
+            lat = gps.getLat();
+            lon = gps.getLon();
+            if(lat == 0.0 && lon == 0.0 ){
+                Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_LONG).show();
+            }else{
+                Location location = new Location(getContext(), lat, lon);
+                String areaResult = location.searchLocation();
+
+                if(isSearchArea){
+                    searchAreaShowLocation.setText(areaResult);
+                }else{
+                    searchRadiusShowLocation.setText(areaResult);
+                }
+                if(DAO.Language == "en"){
+                    Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_LONG).show();
+                }
+                ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
+                convertAreaCode.filteringToAuto(areaResult);
+                AREACODE = convertAreaCode.getAreaCode();
+                SIGUNGU = convertAreaCode.getSigunguCode();
+
+            }
+            asyncDialog.dismiss();
+            gps.stopUsingGPS();
+        }else{
+            asyncDialog.dismiss();
+            gps.showSettingAlert();
+        }
+    }
 }

@@ -32,6 +32,7 @@
 
     <string name="search_activity_Registered">등록순</string>
     <string name="search_activity_Popularity">인기순</string>
+    <string name="search_activity_NoneList">검색 결과가 없습니다.\n많은 서비스를 제공하도록 노력하겠습니다.</string>
 
     <string name="bookmark_add">나만의 코스에 추가하였습니다.</string>
     <string name="mycourse_info">나만의 코스를 만들어보세요.</string>

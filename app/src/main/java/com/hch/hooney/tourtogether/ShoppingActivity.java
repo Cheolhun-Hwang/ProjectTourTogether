@@ -94,9 +94,6 @@ public class ShoppingActivity extends AppCompatActivity {
     private String url_intro_info;
     private String url_repeate_info;
     private String url_images_info;
-
-    private String ContentID;
-    private String ContentTypeID;
     private String field;
 
     private boolean isBookmarking;
@@ -110,13 +107,13 @@ public class ShoppingActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.error_intent), Toast.LENGTH_LONG).show();
             finish();
         }else{
-            ContentTypeID = getIntent().getStringExtra("ContentTypeID");
-            ContentID = getIntent().getStringExtra("ContentID");
+            TourApiItem item = (TourApiItem) getIntent().getSerializableExtra("basic");
+            shopping = new Shopping(item);
             field = getIntent().getStringExtra("field");
 
             init();
             setURLS();
-
+            asyncDialog.show();
             new Thread(new Runnable() {
                 @SuppressLint("LongLogTag")
                 @Override
@@ -146,12 +143,9 @@ public class ShoppingActivity extends AppCompatActivity {
     }
 
     private void init(){
-        asyncDialog = new ProgressDialog(getApplicationContext());
+        asyncDialog = new ProgressDialog(this);
         asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         asyncDialog.setMessage(getResources().getString(R.string.notify_loading_data));
-
-        //variable
-        shopping = new Shopping();
 
         //layout
         back = (ImageButton) findViewById(R.id.sp_result_back);
@@ -206,7 +200,7 @@ public class ShoppingActivity extends AppCompatActivity {
     private void setUI(){
         Field.setText(field);
 
-        isBookmarking = DAO.chkAddBookmarking(shopping.getBasic_contentID());
+        isBookmarking = DAO.chkAddBookmarking(shopping.getContentID());
 
         if(isBookmarking){
             bookmaking.setImageDrawable(getResources().getDrawable(R.drawable.bookmark_do));
@@ -216,59 +210,63 @@ public class ShoppingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!isBookmarking){
                     TourApiItem item = new TourApiItem();
-                    item.setAddr1(shopping.getBasic_addr1());
-                    item.setAddr2("");
-                    item.setAreaCode(shopping.getBasic_areaCode());
-                    item.setCat1("");
-                    item.setCat2("");
-                    item.setCat3("");
-                    item.setContentID(shopping.getBasic_contentID());
-                    item.setContentTypeID(shopping.getBasic_contentTypeID());
-                    item.setFirstImage(shopping.getBasic_firstImage());
-                    item.setMapx(shopping.getBasic_mapX());
-                    item.setMapy(shopping.getBasic_mapY());
-                    item.setModifyDateTIme(shopping.getBasic_modifyDate());
-                    item.setReadCount("");
-                    item.setSigunguCode(shopping.getBasic_sigungu());
-                    item.setTitle(shopping.getBasic_title());
+                    item.setAddr1(shopping.getAddr1());
+                    item.setAddr2(shopping.getAddr2());
+                    item.setAreaCode(shopping.getAreaCode());
+                    item.setCat1(shopping.getCat1());
+                    item.setCat2(shopping.getCat2());
+                    item.setCat3(shopping.getCat3());
+                    item.setContentID(shopping.getContentID());
+                    item.setContentTypeID(shopping.getContentTypeID());
+                    item.setFirstImage(shopping.getFirstImage());
+                    item.setMapx(shopping.getMapx());
+                    item.setMapy(shopping.getMapy());
+                    item.setModifyDateTIme(shopping.getModifyDateTIme());
+                    item.setReadCount(shopping.getReadCount());
+                    item.setSigunguCode(shopping.getSigunguCode());
+                    item.setTitle(shopping.getTitle());
+                    item.setTel(shopping.getTel());
+                    item.setDirections(shopping.getDirections());
+                    item.setBasic_overView(shopping.getBasic_overView());
 
-                    DAO.bookmarkSpotList.add(0, item);
+                    DAO.handler.insert_spot(item);
+                    DAO.load_bookmarkSpot();
 
-                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_add_bookmarking), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_add_bookmarking), Toast.LENGTH_SHORT).show();
                     bookmaking.setImageDrawable(getResources().getDrawable(R.drawable.bookmark_do));
                     isBookmarking = true;
                 }else{
-                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_already_add_bookmarking), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_already_add_bookmarking), Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        if(!shopping.getBasic_modifyDate().equals("")){
+        if(!shopping.getModifyDateTIme().equals("")){
             Date date = null;
             try {
-                date = new SimpleDateFormat("yyyyMMddHHmmss").parse(shopping.getBasic_modifyDate());
+                date = new SimpleDateFormat("yyyyMMddHHmmss").parse(shopping.getModifyDateTIme());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             modifyDate.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date));
         }
 
-        if(!shopping.getBasic_firstImage().equals("")){
-            Picasso.with(getApplicationContext()).load(shopping.getBasic_firstImage()).into(mainImage);
+        if(!shopping.getFirstImage().equals("")){
+            Picasso.with(getApplicationContext()).load(shopping.getFirstImage()).into(mainImage);
         }else{
             mainImage.setVisibility(View.GONE);
         }
 
-        if(!shopping.getBasic_title().equals("")){
-            title.setText(shopping.getBasic_title());
+        if(!shopping.getTitle().equals("")){
+            title.setText(shopping.getTitle());
         }
 
-        if(!shopping.getBasic_addr1().equals("")){
-            addr1.setText(shopping.getBasic_addr1());
+        if(!shopping.getAddr1().equals("")){
+            addr1.setText(shopping.getAddr1() + " " + shopping.getAddr2());
         }
 
-        if(!shopping.getBasic_tel().equals("")){
-            tel.setText(shopping.getBasic_tel());
+        if(!shopping.getTel().equals("")){
+            tel.setText(shopping.getTel());
             Linkify.addLinks(tel, Linkify.PHONE_NUMBERS);
         }else{
             telLayout.setVisibility(View.GONE);
@@ -281,8 +279,8 @@ public class ShoppingActivity extends AppCompatActivity {
             homepageLayout.setVisibility(View.GONE);
         }
 
-        if(!shopping.getBasic_directory().equals("")){
-            direction.setText(Html.fromHtml(shopping.getBasic_directory()));
+        if(!shopping.getDirections().equals("")){
+            direction.setText(Html.fromHtml(shopping.getDirections()));
         }else{
             directionlayout.setVisibility(View.GONE);
         }
@@ -357,22 +355,22 @@ public class ShoppingActivity extends AppCompatActivity {
 
                 float bitmapDescriptorFactory = 0;
                 //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(guideItem.getGpsy(), guideItem.getGpsx()), 14));
-                Log.d(TAG, shopping.getBasic_mapX()+" / " + shopping.getBasic_mapY());
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(shopping.getBasic_mapY(), shopping.getBasic_mapX()), 16));
+                Log.d(TAG, shopping.getMapx()+" / " + shopping.getMapy());
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(shopping.getMapy(), shopping.getMapx()), 16));
                 bitmapDescriptorFactory = BitmapDescriptorFactory.HUE_ROSE;
                 googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(shopping.getBasic_mapY(), shopping.getBasic_mapX()))
+                        .position(new LatLng(shopping.getMapy(), shopping.getMapx()))
                         .icon(BitmapDescriptorFactory.defaultMarker(bitmapDescriptorFactory))
-                        .title(shopping.getBasic_title())
+                        .title(shopping.getTitle())
                         .zIndex((float) 0)
                 );
 
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
-                        == PackageManager.PERMISSION_GRANTED) {
-                    googleMap.setMyLocationEnabled(true);
-                } else {
-                    Toast.makeText(getApplicationContext(), "GPS 권한을 확인해주세요.", Toast.LENGTH_SHORT).show();
-                }
+//                if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
+//                        == PackageManager.PERMISSION_GRANTED) {
+//                    googleMap.setMyLocationEnabled(true);
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "GPS 권한을 확인해주세요.", Toast.LENGTH_SHORT).show();
+//                }
 
             }
         });
@@ -388,20 +386,20 @@ public class ShoppingActivity extends AppCompatActivity {
 
         url_basic_info = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+
                 "/detailCommon?ServiceKey="+ DAO.ServiceKey+
-                "&contentTypeId="+ContentTypeID+ "&contentId="+ContentID+
+                "&contentTypeId="+shopping.getContentTypeID()+ "&contentId="+shopping.getContentID()+
                 "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&transGuideYN=Y";
         url_intro_info = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+
                 "/detailIntro?ServiceKey="+DAO.ServiceKey+
-                "&contentTypeId="+ContentTypeID+ "&contentId="+ContentID+
+                "&contentTypeId="+shopping.getContentTypeID()+ "&contentId="+shopping.getContentID()+
                 "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&introYN=Y";
         url_repeate_info = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+
                 "/detailInfo?ServiceKey="+DAO.ServiceKey+
-                "&contentTypeId="+ContentTypeID+"&contentId="+ContentID+
+                "&contentTypeId="+shopping.getContentTypeID()+"&contentId="+shopping.getContentID()+
                 "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&listYN=Y";
         url_images_info="http://api.visitkorea.or.kr/openapi/service/rest/"+service+
                 "/detailImage?ServiceKey="+DAO.ServiceKey+
-                "&contentTypeId="+ContentTypeID+
-                "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&contentId="+ContentID+"&imageYN=Y";
+                "&contentTypeId="+shopping.getContentTypeID()+
+                "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&contentId="+shopping.getContentID()+"&imageYN=Y";
     }
 
     private void parse_xml_smallImages(){
@@ -603,37 +601,9 @@ public class ShoppingActivity extends AppCompatActivity {
                     case XmlPullParser.START_TAG:
                         tag= xpp.getName();    //테그 이름 얻어오기
 
-                        if(tag.equals("addr1")){
-                            xpp.next();
-                            shopping.setBasic_addr1(xpp.getText());
-                        }else if(tag.equals("addr2")){
-                            xpp.next();
-                            String temp = shopping.getBasic_addr1();
-                            shopping.setBasic_addr1(temp+" "+xpp.getText());
-                        }else if(tag.equals("contentid")){
-                            xpp.next();
-                            shopping.setBasic_contentID(xpp.getText());
-                        }else if(tag.equals("contenttypeid")){
-                            xpp.next();
-                            shopping.setBasic_contentTypeID(xpp.getText());
-                        }else if(tag.equals("directions")){
-                            xpp.next();
-                            shopping.setBasic_directory(xpp.getText());
-                        }else if(tag.equals("firstimage")){
-                            xpp.next();
-                            shopping.setBasic_firstImage(xpp.getText());
-                        }else if(tag.equals("homepage")){
+                        if(tag.equals("homepage")){
                             xpp.next();
                             shopping.setBasic_homepage(xpp.getText());
-                        }else if(tag.equals("mapx")){
-                            xpp.next();
-                            shopping.setBasic_mapX(Double.parseDouble(xpp.getText()));
-                        }else if(tag.equals("mapy")){
-                            xpp.next();
-                            shopping.setBasic_mapY(Double.parseDouble(xpp.getText()));
-                        }else if(tag.equals("modifiedtime")){
-                            xpp.next();
-                            shopping.setBasic_modifyDate(xpp.getText());
                         }else if(tag.equals("overview")){
                             xpp.next();
                             if(xpp.getText()==null){
@@ -641,18 +611,6 @@ public class ShoppingActivity extends AppCompatActivity {
                             }else{
                                 shopping.setBasic_overView(xpp.getText());
                             }
-                        }else if(tag.equals("tel")){
-                            xpp.next();
-                            shopping.setBasic_tel(xpp.getText());
-                        }else if(tag.equals("title")){
-                            xpp.next();
-                            shopping.setBasic_title(xpp.getText());
-                        }else if(tag.equals("areacode")){
-                            xpp.next();
-                            shopping.setBasic_areaCode(xpp.getText());
-                        }else if(tag.equals("sigungucode")){
-                            xpp.next();
-                            shopping.setBasic_sigungu(xpp.getText());
                         }
                         break;
                     case XmlPullParser.TEXT:

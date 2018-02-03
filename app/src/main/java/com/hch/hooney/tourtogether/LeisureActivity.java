@@ -98,9 +98,6 @@ public class LeisureActivity extends AppCompatActivity {
     private String url_intro_info;
     private String url_repeate_info;
     private String url_images_info;
-
-    private String ContentID;
-    private String ContentTypeID;
     private String field;
 
     private boolean isBookmarking;
@@ -114,13 +111,14 @@ public class LeisureActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.error_intent), Toast.LENGTH_LONG).show();
             finish();
         }else{
-            ContentTypeID = getIntent().getStringExtra("ContentTypeID");
-            ContentID = getIntent().getStringExtra("ContentID");
+            TourApiItem item = (TourApiItem) getIntent().getSerializableExtra("basic");
+            leisure = new Leisure(item);
             field = getIntent().getStringExtra("field");
 
             init();
             setURLS();
 
+            asyncDialog.show();
             new Thread(new Runnable() {
                 @SuppressLint("LongLogTag")
                 @Override
@@ -150,12 +148,9 @@ public class LeisureActivity extends AppCompatActivity {
     }
 
     private void init(){
-        asyncDialog = new ProgressDialog(getApplicationContext());
+        asyncDialog = new ProgressDialog(this);
         asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         asyncDialog.setMessage(getResources().getString(R.string.notify_loading_data));
-
-        //variable
-        leisure = new Leisure();
 
         //layout
         back = (ImageButton) findViewById(R.id.ls_result_back);
@@ -214,7 +209,7 @@ public class LeisureActivity extends AppCompatActivity {
     private void setUI(){
         Field.setText(field);
 
-        isBookmarking = DAO.chkAddBookmarking(leisure.getBasic_contentID());
+        isBookmarking = DAO.chkAddBookmarking(leisure.getContentID());
 
         if(isBookmarking){
             bookmaking.setImageDrawable(getResources().getDrawable(R.drawable.bookmark_do));
@@ -224,58 +219,62 @@ public class LeisureActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!isBookmarking){
                     TourApiItem item = new TourApiItem();
-                    item.setAddr1(leisure.getBasic_addr1());
-                    item.setAddr2("");
-                    item.setAreaCode(leisure.getBasic_areaCode());
-                    item.setCat1("");
-                    item.setCat2("");
-                    item.setCat3("");
-                    item.setContentID(leisure.getBasic_contentID());
-                    item.setContentTypeID(leisure.getBasic_contentTypeID());
-                    item.setFirstImage(leisure.getBasic_firstImage());
-                    item.setMapx(leisure.getBasic_mapX());
-                    item.setMapy(leisure.getBasic_mapY());
-                    item.setModifyDateTIme(leisure.getBasic_modifyDate());
-                    item.setReadCount("");
-                    item.setSigunguCode(leisure.getBasic_sigungu());
-                    item.setTitle(leisure.getBasic_title());
+                    item.setAddr1(leisure.getAddr1());
+                    item.setAddr2(leisure.getAddr2());
+                    item.setAreaCode(leisure.getAreaCode());
+                    item.setCat1(leisure.getCat1());
+                    item.setCat2(leisure.getCat2());
+                    item.setCat3(leisure.getCat3());
+                    item.setContentID(leisure.getContentID());
+                    item.setContentTypeID(leisure.getContentTypeID());
+                    item.setFirstImage(leisure.getFirstImage());
+                    item.setMapx(leisure.getMapx());
+                    item.setMapy(leisure.getMapy());
+                    item.setModifyDateTIme(leisure.getModifyDateTIme());
+                    item.setReadCount(leisure.getReadCount());
+                    item.setSigunguCode(leisure.getSigunguCode());
+                    item.setTitle(leisure.getTitle());
+                    item.setTel(leisure.getTel());
+                    item.setDirections(leisure.getDirections());
+                    item.setBasic_overView(leisure.getBasic_overView());
 
-                    DAO.bookmarkSpotList.add(0, item);
-                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_add_bookmarking), Toast.LENGTH_LONG).show();
+                    DAO.handler.insert_spot(item);
+                    DAO.load_bookmarkSpot();
+                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_add_bookmarking), Toast.LENGTH_SHORT).show();
                     bookmaking.setImageDrawable(getResources().getDrawable(R.drawable.bookmark_do));
                     isBookmarking = true;
                 }else{
-                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_already_add_bookmarking), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.notify_already_add_bookmarking), Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        if(!leisure.getBasic_modifyDate().equals("")){
+        if(!leisure.getModifyDateTIme().equals("")){
             Date date = null;
             try {
-                date = new SimpleDateFormat("yyyyMMddHHmmss").parse(leisure.getBasic_modifyDate());
+                date = new SimpleDateFormat("yyyyMMddHHmmss").parse(leisure.getModifyDateTIme());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             modifyDate.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date));
         }
 
-        if(!leisure.getBasic_firstImage().equals("")){
-            Picasso.with(getApplicationContext()).load(leisure.getBasic_firstImage()).into(mainImage);
+        if(!leisure.getFirstImage().equals("")){
+            Picasso.with(getApplicationContext()).load(leisure.getFirstImage()).into(mainImage);
         }else{
             mainImage.setVisibility(View.GONE);
         }
 
-        if(!leisure.getBasic_title().equals("")){
-            title.setText(leisure.getBasic_title());
+        if(!leisure.getTitle().equals("")){
+            title.setText(leisure.getTitle());
         }
 
-        if(!leisure.getBasic_addr1().equals("")){
-            addr1.setText(leisure.getBasic_addr1());
+        if(!leisure.getAddr1().equals("")){
+            addr1.setText(leisure.getAddr1() + " " + leisure.getAddr2());
         }
 
-        if(!leisure.getBasic_tel().equals("")){
-            tel.setText(leisure.getBasic_tel());
+        if(!leisure.getTel().equals("")){
+            tel.setText(leisure.getTel());
             Linkify.addLinks(tel, Linkify.PHONE_NUMBERS);
         }else{
             telLayout.setVisibility(View.GONE);
@@ -288,8 +287,8 @@ public class LeisureActivity extends AppCompatActivity {
             homepageLayout.setVisibility(View.GONE);
         }
 
-        if(!leisure.getBasic_directory().equals("")){
-            direction.setText(Html.fromHtml(leisure.getBasic_directory()));
+        if(!leisure.getDirections().equals("")){
+            direction.setText(Html.fromHtml(leisure.getDirections()));
         }else{
             directionlayout.setVisibility(View.GONE);
         }
@@ -377,22 +376,22 @@ public class LeisureActivity extends AppCompatActivity {
 
                 float bitmapDescriptorFactory = 0;
                 //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(guideItem.getGpsy(), guideItem.getGpsx()), 14));
-                Log.d(TAG, leisure.getBasic_mapX()+" / " + leisure.getBasic_mapY());
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(leisure.getBasic_mapY(), leisure.getBasic_mapX()), 16));
+                Log.d(TAG, leisure.getMapx()+" / " + leisure.getMapy());
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(leisure.getMapy(), leisure.getMapx()), 16));
                 bitmapDescriptorFactory = BitmapDescriptorFactory.HUE_ROSE;
                 googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(leisure.getBasic_mapY(), leisure.getBasic_mapX()))
+                        .position(new LatLng(leisure.getMapy(), leisure.getMapx()))
                         .icon(BitmapDescriptorFactory.defaultMarker(bitmapDescriptorFactory))
-                        .title(leisure.getBasic_title())
+                        .title(leisure.getTitle())
                         .zIndex((float) 0)
                 );
 
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
-                        == PackageManager.PERMISSION_GRANTED) {
-                    googleMap.setMyLocationEnabled(true);
-                } else {
-                    Toast.makeText(getApplicationContext(), "GPS 권한을 확인해주세요.", Toast.LENGTH_SHORT).show();
-                }
+//                if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
+//                        == PackageManager.PERMISSION_GRANTED) {
+//                    googleMap.setMyLocationEnabled(true);
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "GPS 권한을 확인해주세요.", Toast.LENGTH_SHORT).show();
+//                }
 
             }
         });
@@ -408,20 +407,20 @@ public class LeisureActivity extends AppCompatActivity {
 
         url_basic_info = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+
                 "/detailCommon?ServiceKey="+ DAO.ServiceKey+
-                "&contentTypeId="+ContentTypeID+ "&contentId="+ContentID+
+                "&contentTypeId="+leisure.getContentTypeID()+ "&contentId="+leisure.getContentID()+
                 "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&transGuideYN=Y";
         url_intro_info = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+
                 "/detailIntro?ServiceKey="+DAO.ServiceKey+
-                "&contentTypeId="+ContentTypeID+ "&contentId="+ContentID+
+                "&contentTypeId="+leisure.getContentTypeID()+ "&contentId="+leisure.getContentID()+
                 "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&introYN=Y";
         url_repeate_info = "http://api.visitkorea.or.kr/openapi/service/rest/"+service+
                 "/detailInfo?ServiceKey="+DAO.ServiceKey+
-                "&contentTypeId="+ContentTypeID+"&contentId="+ContentID+
+                "&contentTypeId="+leisure.getContentTypeID()+"&contentId="+leisure.getContentID()+
                 "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&listYN=Y";
         url_images_info="http://api.visitkorea.or.kr/openapi/service/rest/"+service+
                 "/detailImage?ServiceKey="+DAO.ServiceKey+
-                "&contentTypeId="+ContentTypeID+
-                "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&contentId="+ContentID+"&imageYN=Y";
+                "&contentTypeId="+leisure.getContentTypeID()+
+                "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&contentId="+leisure.getContentID()+"&imageYN=Y";
     }
 
     private void parse_xml_smallImages(){
@@ -638,37 +637,9 @@ public class LeisureActivity extends AppCompatActivity {
                     case XmlPullParser.START_TAG:
                         tag= xpp.getName();    //테그 이름 얻어오기
 
-                        if(tag.equals("addr1")){
-                            xpp.next();
-                            leisure.setBasic_addr1(xpp.getText());
-                        }else if(tag.equals("addr2")){
-                            xpp.next();
-                            String temp = leisure.getBasic_addr1();
-                            leisure.setBasic_addr1(temp+" "+xpp.getText());
-                        }else if(tag.equals("contentid")){
-                            xpp.next();
-                            leisure.setBasic_contentID(xpp.getText());
-                        }else if(tag.equals("contenttypeid")){
-                            xpp.next();
-                            leisure.setBasic_contentTypeID(xpp.getText());
-                        }else if(tag.equals("directions")){
-                            xpp.next();
-                            leisure.setBasic_directory(xpp.getText());
-                        }else if(tag.equals("firstimage")){
-                            xpp.next();
-                            leisure.setBasic_firstImage(xpp.getText());
-                        }else if(tag.equals("homepage")){
+                        if(tag.equals("homepage")){
                             xpp.next();
                             leisure.setBasic_homepage(xpp.getText());
-                        }else if(tag.equals("mapx")){
-                            xpp.next();
-                            leisure.setBasic_mapX(Double.parseDouble(xpp.getText()));
-                        }else if(tag.equals("mapy")){
-                            xpp.next();
-                            leisure.setBasic_mapY(Double.parseDouble(xpp.getText()));
-                        }else if(tag.equals("modifiedtime")){
-                            xpp.next();
-                            leisure.setBasic_modifyDate(xpp.getText());
                         }else if(tag.equals("overview")){
                             xpp.next();
                             if(xpp.getText()==null){
@@ -676,18 +647,6 @@ public class LeisureActivity extends AppCompatActivity {
                             }else{
                                 leisure.setBasic_overView(xpp.getText());
                             }
-                        }else if(tag.equals("tel")){
-                            xpp.next();
-                            leisure.setBasic_tel(xpp.getText());
-                        }else if(tag.equals("title")){
-                            xpp.next();
-                            leisure.setBasic_title(xpp.getText());
-                        }else if(tag.equals("areacode")){
-                            xpp.next();
-                            leisure.setBasic_areaCode(xpp.getText());
-                        }else if(tag.equals("sigungucode")){
-                            xpp.next();
-                            leisure.setBasic_sigungu(xpp.getText());
                         }
                         break;
                     case XmlPullParser.TEXT:

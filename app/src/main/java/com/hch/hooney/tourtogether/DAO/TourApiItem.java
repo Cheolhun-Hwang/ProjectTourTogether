@@ -1,25 +1,30 @@
 package com.hch.hooney.tourtogether.DAO;
 
+import java.io.Serializable;
+
 /**
  * Created by qewqs on 2018-01-24.
  */
 
-public class TourApiItem {
-    private String addr1;
-    private String addr2;
-    private String areaCode;
-    private String cat1;
-    private String cat2;
-    private String cat3;
-    private String contentID;
-    private String contentTypeID;
-    private String firstImage;
-    private double mapx;
-    private double mapy;
-    private String modifyDateTIme;
-    private String readCount;
-    private String sigunguCode;
-    private String title;
+public class TourApiItem implements Serializable {
+    protected String addr1;
+    protected String addr2;
+    protected String areaCode;
+    protected String cat1;
+    protected String cat2;
+    protected String cat3;
+    protected String contentID;
+    protected String contentTypeID;
+    protected String firstImage;
+    protected double mapx;
+    protected double mapy;
+    protected String modifyDateTIme;
+    protected String readCount;
+    protected String sigunguCode;
+    protected String title;
+    protected String tel;
+    protected String directions;
+    private String basic_overView;
 
     public TourApiItem() {
         this.addr1 = "";
@@ -37,27 +42,30 @@ public class TourApiItem {
         this.readCount = "";
         this.sigunguCode = "";
         this.title = "";
+        this.tel="";
+        this.directions = "";
+        this.basic_overView = "";
     }
 
-    public TourApiItem(String addr1, String addr2, String areaCode, String cat1,
-                       String cat2, String cat3, String contentID, String contentTypeID,
-                       String firstImage, double mapx, double mapy, String modifyDateTIme,
-                       String readCount, String sigunguCode, String title) {
-        this.addr1 = addr1;
-        this.addr2 = addr2;
-        this.areaCode = areaCode;
-        this.cat1 = cat1;
-        this.cat2 = cat2;
-        this.cat3 = cat3;
-        this.contentID = contentID;
-        this.contentTypeID = contentTypeID;
-        this.firstImage = firstImage;
-        this.mapx = mapx;
-        this.mapy = mapy;
-        this.modifyDateTIme = modifyDateTIme;
-        this.readCount = readCount;
-        this.sigunguCode = sigunguCode;
-        this.title = title;
+    public TourApiItem(TourApiItem item){
+        this.addr1 = item.getAddr1();
+        this.addr2 = item.getAddr2();
+        this.areaCode = item.getAreaCode();
+        this.cat1 = item.getCat1();
+        this.cat2 = item.getCat2();
+        this.cat3 = item.getCat3();
+        this.contentID = item.getContentID();
+        this.contentTypeID = item.getContentTypeID();
+        this.firstImage = item.getFirstImage();
+        this.mapx = item.getMapx();
+        this.mapy = item.getMapy();
+        this.modifyDateTIme = item.getModifyDateTIme();
+        this.readCount = item.getReadCount();
+        this.sigunguCode = item.getSigunguCode();
+        this.title = item.getTitle();
+        this.tel=item.getTel();
+        this.directions = item.getDirections();
+        this.basic_overView = item.getBasic_overView();
     }
 
     public String getAddr1() {
@@ -178,5 +186,29 @@ public class TourApiItem {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getDirections() {
+        return directions;
+    }
+
+    public void setDirections(String directions) {
+        this.directions = directions;
+    }
+
+    public String getBasic_overView() {
+        return basic_overView;
+    }
+
+    public void setBasic_overView(String basic_overView) {
+        this.basic_overView = basic_overView;
     }
 }

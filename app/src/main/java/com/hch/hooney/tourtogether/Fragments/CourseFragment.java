@@ -1,6 +1,8 @@
 package com.hch.hooney.tourtogether.Fragments;
 
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hch.hooney.tourtogether.CourseActivity;
 import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.R;
 import com.hch.hooney.tourtogether.ResourceCTRL.ConvertAreaCode;
@@ -30,7 +33,8 @@ import com.hch.hooney.tourtogether.Service.GPS;
  */
 public class CourseFragment extends Fragment {
     private final String TAG = "CourseeFragment";
-
+    private final int SIGNAL_PERMISSON = 8001;
+    private ProgressDialog asyncDialog;
     //Layout Resource
     private Button searchArea;
     private Button searchRadius;
@@ -53,13 +57,14 @@ public class CourseFragment extends Fragment {
     private Button fieldTab6;
 
     private Button searchBTN;
+    private LinearLayout setFieldLayout;
     //variable
     private View view;
     private Handler handler;
 
     private boolean isSearchArea;  //true : Search Area false : Search Radius
     private int selectField; //0: None 1: Family 2: alone 3: healing 4: walking 5: camping 6:taste
-    private String radius;
+    private String radius_toString;
     private double lat;
     private double lon;
 
@@ -90,9 +95,14 @@ public class CourseFragment extends Fragment {
     }
 
     private void init(){
+        asyncDialog = new ProgressDialog(getActivity());
+        asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        asyncDialog.setMessage(getResources().getString(R.string.notify_loading_data));
         //variable
         isSearchArea = true;
         selectField = 0;
+        CAT1="C01";
+        CONTETNTTYPEID="25";
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
@@ -119,8 +129,10 @@ public class CourseFragment extends Fragment {
                                 SIGUNGU = convertAreaCode.getSigunguCode();
 
                             }
+                            asyncDialog.dismiss();
                             gps_A.stopUsingGPS();
                         }else{
+                            asyncDialog.dismiss();
                             gps_A.showSettingAlert();
                         }
                         break;
@@ -146,8 +158,10 @@ public class CourseFragment extends Fragment {
                                 SIGUNGU = convertAreaCode.getSigunguCode();
 
                             }
+                            asyncDialog.dismiss();
                             gps_R.stopUsingGPS();
                         }else{
+                            asyncDialog.dismiss();
                             gps_R.showSettingAlert();
                         }
                         break;
@@ -176,6 +190,7 @@ public class CourseFragment extends Fragment {
         fieldTab5 = (Button) view.findViewById(R.id.course_field_tab5);
         fieldTab6 = (Button) view.findViewById(R.id.course_field_tab6);
         searchBTN = (Button) view.findViewById(R.id.course_search_btn);
+        setFieldLayout = (LinearLayout) view.findViewById(R.id.course_fragment_setFieldLayout);
     }
 
     private void event(){
@@ -184,6 +199,7 @@ public class CourseFragment extends Fragment {
             public void onClick(View v) {
                 if(!isSearchArea){
                     isSearchArea = true;
+                    setFieldLayout.setVisibility(View.VISIBLE);
                     clearLocationFiledButton();
                     selectLocationFiledButton();
                 }
@@ -194,6 +210,7 @@ public class CourseFragment extends Fragment {
             public void onClick(View v) {
                 if(isSearchArea){
                     isSearchArea = false;
+                    setFieldLayout.setVisibility(View.GONE);
                     clearLocationFiledButton();
                     selectLocationFiledButton();
                 }
@@ -203,6 +220,8 @@ public class CourseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=1;
+                CAT2="C0112";
+                CAT3="C01120001";
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -211,6 +230,8 @@ public class CourseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=2;
+                CAT2="C0113";
+                CAT3="C01130001";
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -219,6 +240,8 @@ public class CourseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=3;
+                CAT2="C0114";
+                CAT3="C01140001";
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -227,6 +250,8 @@ public class CourseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=4;
+                CAT2="C0115";
+                CAT3="C01150001";
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -235,6 +260,8 @@ public class CourseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=5;
+                CAT2="C0116";
+                CAT3="C01160001";
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -243,6 +270,8 @@ public class CourseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectField=6;
+                CAT2="C0117";
+                CAT3="C01170001";
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -250,12 +279,73 @@ public class CourseFragment extends Fragment {
         searchBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Radius : " + searchRadiusSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                String service="";
+                if(DAO.Language.equals("ko")){
+                    service="KorService";
+                }else if(DAO.Language.equals("en")){
+                    //service="EngService";
+                    service="KorService";
+                }else{
+                    //service="EngService";
+                    service="KorService";
+                }
+
+                if(isSearchArea){
+                    URL = " http://api.visitkorea.or.kr/openapi/service/rest/"+service+
+                            "/areaBasedList?ServiceKey="+DAO.ServiceKey+
+                            "&contentTypeId="+CONTETNTTYPEID+
+                            "&areaCode="+AREACODE+
+                            "&sigunguCode="+SIGUNGU+
+                            "&cat1="+CAT1+
+                            "&cat2="+CAT2+
+                            "&cat3="+CAT3+
+                            "&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=P&numOfRows=200&pageNo=1 ";
+                }else{
+                    String tempRadius = searchRadiusSpinner.getSelectedItem().toString()
+                            .replaceAll("km", "")
+                            .replaceAll(" ", "");
+                    radius_toString = tempRadius+"000";
+
+                    URL = " http://api.visitkorea.or.kr/openapi/service/rest/"+service+
+                            "/locationBasedList?ServiceKey="+DAO.ServiceKey+
+                            "&contentTypeId="+CONTETNTTYPEID+
+                            "&mapX="+lon+
+                            "&mapY="+lat+
+                            "&radius="+radius_toString+
+                            "&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=P&numOfRows=200&pageNo=1";
+                }
+
+
+                if(isSearchArea){
+                    if(CAT1 ==null || CAT2==null||CAT3==null||AREACODE==null||SIGUNGU==null){
+                        Toast.makeText(getContext(), getResources().getText(R.string.notify_search_Fail), Toast.LENGTH_SHORT).show();
+                    }else{
+                        Intent intent = new Intent(getContext(), CourseActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("url", URL);
+                        intent.putExtra("field", field);
+                        intent.putExtra("contentTypeID", CONTETNTTYPEID);
+                        startActivity(intent);
+                    }
+                }else{
+                    if(AREACODE==null||SIGUNGU==null){
+                        Toast.makeText(getContext(), getResources().getText(R.string.notify_search_Fail), Toast.LENGTH_SHORT).show();
+                    }else{
+                        Intent intent = new Intent(getContext(), CourseActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("url", URL);
+                        intent.putExtra("field", field);
+                        intent.putExtra("contentTypeID", CONTETNTTYPEID);
+                        startActivity(intent);
+                    }
+                }
+
             }
         });
         searchAreaAutoFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                asyncDialog.show();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -269,6 +359,7 @@ public class CourseFragment extends Fragment {
         searchRadiusAutoFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                asyncDialog.show();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -277,12 +368,6 @@ public class CourseFragment extends Fragment {
                         handler.sendMessage(msg_getLocation);
                     }
                 }).start();
-            }
-        });
-        searchBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Radius : " + searchRadiusSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

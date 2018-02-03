@@ -1,5 +1,6 @@
 package com.hch.hooney.tourtogether;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,7 +31,7 @@ import java.util.Date;
 
 public class SearchActivity extends AppCompatActivity {
     private final String TAG = "SearchActivity";
-
+    private ProgressDialog asyncDialog;
     //layout
     private RecyclerView searchResultListView;
     private EditText textFilterEdit;
@@ -39,6 +40,7 @@ public class SearchActivity extends AppCompatActivity {
     private ImageButton back;
     private Button filterPop;
     private Button filterReg;
+    private TextView NoListText;
 
     //variable
     private ArrayList<TourApiItem> searchResultList;
@@ -70,6 +72,10 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void init(){
+        asyncDialog = new ProgressDialog(this);
+        asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        asyncDialog.setMessage(getResources().getString(R.string.notify_loading_data));
+
         //res
         back = (ImageButton) findViewById(R.id.search_activity_back_btn);
         searchResultListView = (RecyclerView) findViewById(R.id.search_activity_recyclerview);
@@ -81,6 +87,7 @@ public class SearchActivity extends AppCompatActivity {
         filedText.setText(filed_title);
         filterPop = (Button) findViewById(R.id.search_activity_filter_Popularity);
         filterReg = (Button) findViewById(R.id.search_activity_filter_Register);
+        NoListText = (TextView) findViewById(R.id.search_activity_noneList_text);
 
 
         //variable
@@ -126,10 +133,15 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void setUI(){
-        for (TourApiItem item : searchResultList) {
-            Log.d(TAG, item.getFirstImage());
+        if(searchResultList.size() <= 0){
+            NoListText.setVisibility(View.VISIBLE);
+            searchResultListView.setVisibility(View.GONE);
+        }else{
+            NoListText.setVisibility(View.GONE);
+            searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList, filed_title));
         }
-        searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList, filed_title));
+
+        asyncDialog.dismiss();
     }
 
     private void filter_titleText(){
@@ -165,85 +177,89 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void filterPop(){
-        ArrayList<TourApiItem> tempList = null;
+        if(searchResultList.size() > 0){
+            ArrayList<TourApiItem> tempList = null;
 
-        for(int i =0 ; i<searchResultList.size();i++){
-            if( tempList == null){
-                tempList = new ArrayList<TourApiItem>();
-                tempList.add(searchResultList.get(i));
-            }else{
-                int tour_readCount = Integer.parseInt(searchResultList.get(i).getReadCount());
+            for(int i =0 ; i<searchResultList.size();i++){
+                if( tempList == null){
+                    tempList = new ArrayList<TourApiItem>();
+                    tempList.add(searchResultList.get(i));
+                }else{
+                    int tour_readCount = Integer.parseInt(searchResultList.get(i).getReadCount());
 
-                for(int j = 0 ; j<tempList.size() ; j++){
-                    int temp_readCount = Integer.parseInt(tempList.get(j).getReadCount());
+                    for(int j = 0 ; j<tempList.size() ; j++){
+                        int temp_readCount = Integer.parseInt(tempList.get(j).getReadCount());
 
-                    if(tour_readCount >= temp_readCount){
-                        tempList.add(j, searchResultList.get(i));
-                        break;
-                    }else if(tour_readCount < temp_readCount){
-                        if(j == tempList.size()-1){
-                            tempList.add(searchResultList.get(i));
+                        if(tour_readCount >= temp_readCount){
+                            tempList.add(j, searchResultList.get(i));
                             break;
+                        }else if(tour_readCount < temp_readCount){
+                            if(j == tempList.size()-1){
+                                tempList.add(searchResultList.get(i));
+                                break;
+                            }
                         }
                     }
+                    //templist and
                 }
-                //templist and
             }
-        }
-        //searchlist end
+            //searchlist end
 
-        searchResultList = tempList;
-        searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList, filed_title));
+            searchResultList = tempList;
+            searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList, filed_title));
+        }
     }
 
     private void filterReg(){
-        ArrayList<TourApiItem> tempList = null;
+       if(searchResultList.size() > 0){
+           ArrayList<TourApiItem> tempList = null;
 
-        for(int i =0 ; i<searchResultList.size();i++){
-            if( tempList == null){
-                tempList = new ArrayList<TourApiItem>();
-                tempList.add(searchResultList.get(i));
-            }else{
-                Date tour_date = null;
-                try {
-                    tour_date =  new SimpleDateFormat("yyyyMMddHHmmss").parse(searchResultList.get(i).getModifyDateTIme());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+           for(int i =0 ; i<searchResultList.size();i++){
+               if( tempList == null){
+                   tempList = new ArrayList<TourApiItem>();
+                   tempList.add(searchResultList.get(i));
+               }else{
+                   Date tour_date = null;
+                   try {
+                       tour_date =  new SimpleDateFormat("yyyyMMddHHmmss").parse(searchResultList.get(i).getModifyDateTIme());
+                   } catch (ParseException e) {
+                       e.printStackTrace();
+                   }
 
 
-                for(int j = 0 ; j<tempList.size() ; j++){
-                    Date compare_date = null;
-                    try {
-                        compare_date = new SimpleDateFormat("yyyyMMddHHmmss").parse(tempList.get(j).getModifyDateTIme());
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                   for(int j = 0 ; j<tempList.size() ; j++){
+                       Date compare_date = null;
+                       try {
+                           compare_date = new SimpleDateFormat("yyyyMMddHHmmss").parse(tempList.get(j).getModifyDateTIme());
+                       } catch (ParseException e) {
+                           e.printStackTrace();
+                       }
 
-                    int compare = tour_date.compareTo(compare_date);
-                    if(compare >= 0){
-                        tempList.add(j, searchResultList.get(i));
-                        break;
-                    }else if(compare < 0){
-                        if(j == tempList.size()-1){
-                            tempList.add(searchResultList.get(i));
-                            break;
-                        }
-                    }
-                }
-                //templist and
-            }
-        }
-        //searchlist end
+                       int compare = tour_date.compareTo(compare_date);
+                       if(compare >= 0){
+                           tempList.add(j, searchResultList.get(i));
+                           break;
+                       }else if(compare < 0){
+                           if(j == tempList.size()-1){
+                               tempList.add(searchResultList.get(i));
+                               break;
+                           }
+                       }
+                   }
+                   //templist and
+               }
+           }
+           //searchlist end
 
-        searchResultList = tempList;
-        searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList, filed_title));
+           searchResultList = tempList;
+           searchResultListView.setAdapter(new SearchResultAdapter(getApplicationContext(), searchResultList, filed_title));
+       }
     }
 
     private void loadDataToTOURAPI(){
         searchResultList = new ArrayList<TourApiItem>();
 
-
+        asyncDialog.show();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -330,6 +346,9 @@ public class SearchActivity extends AppCompatActivity {
                         }else if(tag.equals("title")){
                             xpp.next();
                             item.setTitle(xpp.getText());
+                        }else if(tag.equals("tel")){
+                            xpp.next();
+                            item.setTel(xpp.getText());
                         }
                         break;
                     case XmlPullParser.TEXT:

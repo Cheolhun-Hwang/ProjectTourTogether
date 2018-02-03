@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Thread loadDateToServer;
     private Handler handler;
+    private int selectTab;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -40,16 +41,28 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    switchFragment(new HomeFragment());
+                    if(selectTab!=1){
+                        selectTab=1;
+                        switchFragment(new HomeFragment());
+                    }
                     return true;
                 case R.id.navigation_search:
-                    switchFragment(new SearchFragment());
+                    if(selectTab!=2) {
+                        selectTab = 2;
+                        switchFragment(new SearchFragment());
+                    }
                     return true;
                 case R.id.navigation_course:
-                    switchFragment(new CourseFragment());
+                    if(selectTab!=3) {
+                        selectTab = 3;
+                        switchFragment(new CourseFragment());
+                    }
                     return true;
                 case R.id.navigation_account:
-                    switchFragment(new AccountFragment());
+                    if(selectTab!=4) {
+                        selectTab = 4;
+                        switchFragment(new AccountFragment());
+                    }
                     return true;
             }
             return false;
@@ -84,21 +97,6 @@ public class MainActivity extends AppCompatActivity {
         loadDateToServer = new Thread(new Runnable() {
             @Override
             public void run() {
-                USER user = new USER();
-                user.setUID("0000");
-                user.setUNAME("Honney");
-                user.setUCOUNTRY("KR");
-                user.setUPROFILEIMAGE("https://yt3.ggpht.com/-iLYgyUzcTzQ/AAAAAAAAAAI/AAAAAAAAAAA/_N59TIbtHlI/s108-c-k-no-mo-rj-c0xffffff/photo.jpg");
-                user.setUUID("qewqsa");
-                DAO.setUser(user);
-
-                DAO.setCountryAndLanguage(getApplicationContext());
-                DAO.init_mainPostList();
-                DAO.init_bookmarkSpot();
-                DAO.init_bookmarkRoute();
-                DAO.init_myCourse();
-                DAO.loadData_mainPostList();
-
                 Message msg = handler.obtainMessage();
                 msg.what = 1001;
                 handler.sendMessage(msg);
@@ -114,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
             //variable
             manager = this.getSupportFragmentManager();
-
+            selectTab=-1;
             return true;
         }catch (Exception e) {
             e.printStackTrace();

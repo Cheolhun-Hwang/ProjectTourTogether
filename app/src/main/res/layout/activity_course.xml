@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hch.hooney.tourtogether.CourseActivity">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@drawable/toplayout_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+        <ImageButton
+            android:id="@+id/course_activity_back_btn"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_chevron_left"
+            android:background="@color/alpha"
+            android:layout_width="48dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/course_activity_title_field_textview"
+            android:textStyle="bold"
+            android:textColor="@color/MainColor"
+            android:textSize="15sp"
+            android:text="Field"
+            android:paddingLeft="15dp"
+            android:gravity="left|center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:gravity="right|center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/course_activity_filter_Popularity"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:text="@string/search_activity_Popularity"
+                android:background="@color/MainColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/course_activity_filter_Register"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="@color/grey_400"
+                android:text="@string/search_activity_Registered"
+                android:background="@color/grey_200"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/course_activity_search_edittext"
+            android:layout_weight="1"
+            android:drawableTint="@color/orange_500"
+            android:backgroundTint="@color/dark_purple_500"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageButton
+            android:id="@+id/course_activity_search_btn"
+            android:src="@drawable/ic_search_white"
+            android:background="@drawable/basic_btn"
+            android:layout_weight="4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/course_activity_noneList_text"
+            android:text="@string/search_activity_NoneList"
+            android:padding="7dp"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:textStyle="bold|italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:paddingTop="5dp"
+            android:id="@+id/course_activity_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

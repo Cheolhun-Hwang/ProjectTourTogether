@@ -179,13 +179,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TableLayout
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:padding="1dp"
                     android:background="@color/grey_400"
                     android:layout_width="match_parent"
                     android:layout_height="120dp">
                     <TableRow
+                        android:minHeight="80dp"
                         android:layout_weight="1">
                         <Button
                             android:id="@+id/search_field_tab1"
@@ -196,6 +197,7 @@
                             android:layout_margin="1dp"
                             android:background="@color/white"
                             android:layout_weight="1"
+                            android:minHeight="60dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                         <Button
@@ -207,6 +209,7 @@
                             android:layout_margin="1dp"
                             android:background="@color/white"
                             android:layout_weight="1"
+                            android:minHeight="60dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                         <Button
@@ -218,10 +221,12 @@
                             android:layout_margin="1dp"
                             android:background="@color/white"
                             android:layout_weight="1"
+                            android:minHeight="60dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                     </TableRow>
                     <TableRow
+                        android:minHeight="80dp"
                         android:layout_weight="1" >
                         <Button
                             android:id="@+id/search_field_tab4"
@@ -232,6 +237,7 @@
                             android:layout_margin="1dp"
                             android:background="@color/white"
                             android:layout_weight="1"
+                            android:minHeight="60dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                         <Button

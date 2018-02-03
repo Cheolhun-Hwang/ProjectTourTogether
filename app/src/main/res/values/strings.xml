@@ -31,7 +31,7 @@
 
     <string name="search_activity_Registered">Registered</string>
     <string name="search_activity_Popularity">Popularity</string>
-
+    <string name="search_activity_NoneList">Search result does not exist.\nWe will try to provide many services.</string>
     <string name="bookmark_add">Complete Adding to My Route.</string>
     <string name="mycourse_info">Record your own travel route.</string>
 
