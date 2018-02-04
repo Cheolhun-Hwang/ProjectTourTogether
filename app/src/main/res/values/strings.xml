@@ -78,4 +78,7 @@
     <string name="result_openPeriod">Open Period</string>
     <string name="result_saleGoods">Sale Goods</string>
     <string name="result_restRoom">Restroom</string>
+    
+    <string name="course_total_distance">Total distance</string>
+    <string name="course_time">Time</string>
 </resources>

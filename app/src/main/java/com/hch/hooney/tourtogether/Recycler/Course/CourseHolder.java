@@ -2,6 +2,7 @@ package com.hch.hooney.tourtogether.Recycler.Course;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ public class CourseHolder extends RecyclerView.ViewHolder{
     public TextView ch_title;
     public ImageView ch_imageview;
     public TextView ch_viewCount;
+    public ImageButton ch_close;
 
     public CourseHolder(View itemView) {
         super(itemView);
@@ -23,5 +25,6 @@ public class CourseHolder extends RecyclerView.ViewHolder{
         ch_title = (TextView) itemView.findViewById(R.id.bookmark_route_title);
         ch_imageview = (ImageView) itemView.findViewById(R.id.bookmark_route_imageview);
         ch_viewCount = (TextView) itemView.findViewById(R.id.bookmark_route_viewcount);
+        ch_close = (ImageButton) itemView.findViewById(R.id.bookmark_course_closeImageView);
     }
 }

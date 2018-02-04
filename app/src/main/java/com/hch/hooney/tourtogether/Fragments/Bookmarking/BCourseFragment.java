@@ -46,6 +46,6 @@ public class BCourseFragment extends Fragment {
     }
 
     private void setUI(){
-        bookmarkRouteList.setAdapter(new bRouteAdapter(getContext()));
+        bookmarkRouteList.setAdapter(new bRouteAdapter(getContext(), bookmarkRouteList));
     }
 }

@@ -17,7 +17,7 @@ public class bSpotHolder extends RecyclerView.ViewHolder{
     public ImageView bs_imageView;
     public TextView bs_title;
     public ImageButton bs_close;
-    public Button bs_addMyCourse;
+    public TextView bs_cat;
 
     public bSpotHolder(View itemView) {
         super(itemView);
@@ -25,6 +25,6 @@ public class bSpotHolder extends RecyclerView.ViewHolder{
         bs_imageView = (ImageView) itemView.findViewById(R.id.bookmark_spot_imageview);
         bs_title = (TextView) itemView.findViewById(R.id.bookmark_spot_title);
         bs_close = (ImageButton) itemView.findViewById(R.id.bookmark_spot_closeImageView);
-        bs_addMyCourse = (Button) itemView.findViewById(R.id.bookmark_spot_addMyCourseBTN);
+        bs_cat = (TextView) itemView.findViewById(R.id.bookmark_spot_cat);
     }
 }

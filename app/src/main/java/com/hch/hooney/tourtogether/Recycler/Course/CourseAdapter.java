@@ -57,6 +57,8 @@ public class CourseAdapter extends RecyclerView.Adapter {
 
         hold.ch_title.setText(item.getTitle());
 
+        hold.ch_close.setVisibility(View.GONE);
+
         if(!item.getFirstImage().equals("")){
             Picasso.with(mContext).load(item.getFirstImage()).into(hold.ch_imageview);
         }else{

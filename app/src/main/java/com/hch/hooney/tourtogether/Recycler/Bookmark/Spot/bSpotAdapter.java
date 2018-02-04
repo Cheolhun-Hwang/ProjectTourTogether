@@ -1,6 +1,7 @@
 package com.hch.hooney.tourtogether.Recycler.Bookmark.Spot;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,12 @@ import android.widget.Toast;
 
 import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.DAO.TourApiItem;
+import com.hch.hooney.tourtogether.DiningAndAccomodationActivity;
+import com.hch.hooney.tourtogether.FacilityActivity;
+import com.hch.hooney.tourtogether.LeisureActivity;
+import com.hch.hooney.tourtogether.NatureActivity;
 import com.hch.hooney.tourtogether.R;
+import com.hch.hooney.tourtogether.ShoppingActivity;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -22,17 +28,21 @@ public class bSpotAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private RecyclerView bookmark_spot;
 
+    private Intent intent = null;
+    private String feild = "";
+
+
+    // Allows to remember the last item shown on screen
+    private int lastPosition = -1;
+
     public bSpotAdapter(Context mContext, RecyclerView viewlist) {
         this.mContext = mContext;
         this.bookmark_spot = viewlist;
     }
 
-    // Allows to remember the last item shown on screen
-    private int lastPosition = -1;
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bookmark_spot,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bookmark_spot_for_list,parent,false);
         bSpotHolder holder = new bSpotHolder(v);
         return holder;
     }
@@ -48,23 +58,48 @@ public class bSpotAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, mContext.getResources().getText(R.string.bookmark_remove), Toast.LENGTH_SHORT).show();
-                DAO.bookmarkSpotList.remove(position);
+                DAO.handler.delete_spot(item.getContentID());
+                DAO.load_bookmarkSpot();
                 bookmark_spot.getAdapter().notifyDataSetChanged();
             }
         });
 
-        hold.bs_addMyCourse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DAO.myCourseList.add(item);
-                Toast.makeText(mContext, mContext.getResources().getText(R.string.bookmark_add), Toast.LENGTH_SHORT).show();
-            }
-        });
+
+        if(item.getContentTypeID().equals("32")||item.getContentTypeID().equals("80")){
+            intent = new Intent(mContext, DiningAndAccomodationActivity.class);
+            feild = mContext.getResources().getText(R.string.search_tab6).toString();
+            hold.bs_cat.setText(feild.replace("\n", " "));
+        }else if(item.getContentTypeID().equals("12")||item.getContentTypeID().equals("76")){
+            intent = new Intent(mContext, NatureActivity.class);
+            feild = mContext.getResources().getText(R.string.search_tab1).toString();
+            hold.bs_cat.setText(feild.replace("\n", " "));
+        }else if(item.getContentTypeID().equals("14")||item.getContentTypeID().equals("78")){
+            intent = new Intent(mContext, FacilityActivity.class);
+            feild = mContext.getResources().getText(R.string.search_tab2).toString();
+            hold.bs_cat.setText(feild.replace("\n", " "));
+        }else if(item.getContentTypeID().equals("28")||item.getContentTypeID().equals("75")){
+            intent = new Intent(mContext, LeisureActivity.class);
+            feild = mContext.getResources().getText(R.string.search_tab3).toString();
+            hold.bs_cat.setText(feild.replace("\n", " "));
+        }else if(item.getContentTypeID().equals("38")||item.getContentTypeID().equals("79")){
+            intent = new Intent(mContext, ShoppingActivity.class);
+            feild = mContext.getResources().getText(R.string.search_tab4).toString();
+            hold.bs_cat.setText(feild.replace("\n", " "));
+        }else if(item.getContentTypeID().equals("39")||item.getContentTypeID().equals("82")){
+            intent = new Intent(mContext, DiningAndAccomodationActivity.class);
+            feild = mContext.getResources().getText(R.string.search_tab5).toString();
+            hold.bs_cat.setText(feild.replace("\n", " "));
+        }else{
+            //Intent intent = new Intent(mContext, AnotherFieldActivity.class);
+        }
 
         hold.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Detail Info...", Toast.LENGTH_SHORT).show();
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("basic", item);
+                intent.putExtra("field", feild);
+                mContext.startActivity(intent);
             }
         });
 

@@ -15,16 +15,34 @@
             android:scaleType="centerCrop"
             android:layout_width="120dp"
             android:layout_height="96dp" />
-        <TextView
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:id="@+id/bookmark_spot_title"
+        <LinearLayout
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="spotTitle"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <TextView
+                android:paddingTop="4dp"
+                android:paddingLeft="17dp"
+                android:layout_weight="2"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="@color/grey_700"
+                android:id="@+id/bookmark_spot_cat"
+                android:gravity="left|center"
+                android:text="spot category"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:id="@+id/bookmark_spot_title"
+                android:gravity="center"
+                android:text="spotTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
         <LinearLayout
             android:padding="5dp"
             android:orientation="vertical"

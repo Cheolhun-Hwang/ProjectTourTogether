@@ -24,9 +24,11 @@ import java.util.Date;
 
 public class bRouteAdapter  extends RecyclerView.Adapter {
     private Context mContext;
+    private RecyclerView bookCourse;
 
-    public bRouteAdapter(Context mContext) {
+    public bRouteAdapter(Context mContext, RecyclerView recyclerView) {
         this.mContext = mContext;
+        this.bookCourse = recyclerView;
     }
 
     // Allows to remember the last item shown on screen
@@ -42,7 +44,7 @@ public class bRouteAdapter  extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         bRouteHolder hold = (bRouteHolder)holder;
-        TourApiItem item = DAO.bookmarkRouteList.get(position);
+        final TourApiItem item = DAO.bookmarkRouteList.get(position);
 
         Date date = null;
         try {
@@ -58,6 +60,16 @@ public class bRouteAdapter  extends RecyclerView.Adapter {
         Picasso.with(mContext).load(item.getFirstImage()).into(hold.br_imageview);
 
         hold.br_viewCount.setText("view : " + item.getReadCount());
+
+        hold.br_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, mContext.getResources().getText(R.string.bookmark_remove), Toast.LENGTH_SHORT).show();
+                DAO.handler.delete_course(item.getContentID());
+                DAO.load_bookmarkCourse();
+                bookCourse.getAdapter().notifyDataSetChanged();
+            }
+        });
 
         hold.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

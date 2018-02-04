@@ -222,6 +222,7 @@ public class CourseFragment extends Fragment {
                 selectField=1;
                 CAT2="C0112";
                 CAT3="C01120001";
+                field=getResources().getString(R.string.recommend_tab1);
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -232,6 +233,7 @@ public class CourseFragment extends Fragment {
                 selectField=2;
                 CAT2="C0113";
                 CAT3="C01130001";
+                field=getResources().getString(R.string.recommend_tab2);
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -242,6 +244,7 @@ public class CourseFragment extends Fragment {
                 selectField=3;
                 CAT2="C0114";
                 CAT3="C01140001";
+                field=getResources().getString(R.string.recommend_tab3);
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -252,6 +255,7 @@ public class CourseFragment extends Fragment {
                 selectField=4;
                 CAT2="C0115";
                 CAT3="C01150001";
+                field=getResources().getString(R.string.recommend_tab4);
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -262,6 +266,7 @@ public class CourseFragment extends Fragment {
                 selectField=5;
                 CAT2="C0116";
                 CAT3="C01160001";
+                field=getResources().getString(R.string.recommend_tab5);
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -272,6 +277,7 @@ public class CourseFragment extends Fragment {
                 selectField=6;
                 CAT2="C0117";
                 CAT3="C01170001";
+                field=getResources().getString(R.string.recommend_tab6);
                 clearFieldButton();
                 selectFieldButton();
             }
@@ -331,6 +337,8 @@ public class CourseFragment extends Fragment {
                     if(AREACODE==null||SIGUNGU==null){
                         Toast.makeText(getContext(), getResources().getText(R.string.notify_search_Fail), Toast.LENGTH_SHORT).show();
                     }else{
+                        field = radius_toString.replace("0", "") +" km";
+
                         Intent intent = new Intent(getContext(), CourseActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("url", URL);
