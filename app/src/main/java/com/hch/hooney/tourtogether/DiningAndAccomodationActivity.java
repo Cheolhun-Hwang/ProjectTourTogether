@@ -581,6 +581,8 @@ public class DiningAndAccomodationActivity extends AppCompatActivity {
             public void onMapReady(GoogleMap gMap) {
                 googleMap = gMap;
                 googleMap.getUiSettings().setScrollGesturesEnabled(false);
+                googleMap.getUiSettings().setZoomGesturesEnabled(false);
+                googleMap.getUiSettings().setZoomControlsEnabled(true);
 
                 float bitmapDescriptorFactory = 0;
                 //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(guideItem.getGpsy(), guideItem.getGpsx()), 14));

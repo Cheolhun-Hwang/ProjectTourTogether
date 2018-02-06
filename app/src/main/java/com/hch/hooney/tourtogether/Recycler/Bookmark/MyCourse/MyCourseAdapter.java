@@ -14,6 +14,8 @@ import com.hch.hooney.tourtogether.DAO.TourApiItem;
 import com.hch.hooney.tourtogether.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 /**
  * Created by qewqs on 2018-01-24.
  */
@@ -21,13 +23,16 @@ import com.squareup.picasso.Picasso;
 public class MyCourseAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private RecyclerView mycourseList;
+    private ArrayList<TourApiItem> list;
 
     // Allows to remember the last item shown on screen
     private int lastPosition = -1;
 
-    public MyCourseAdapter(Context mContext, RecyclerView mycourseList) {
+    public MyCourseAdapter(Context mContext, RecyclerView mycourseList,
+                           ArrayList<TourApiItem> list) {
         this.mContext = mContext;
         this.mycourseList = mycourseList;
+        this.list = list;
     }
 
     @Override
@@ -40,10 +45,13 @@ public class MyCourseAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         MyCourseHolder hold = (MyCourseHolder) holder;
-        final TourApiItem item = DAO.myCourseList.get(position);
+        final TourApiItem item = list.get(position);
 
         hold.mc_num.setText((position+1)+"");
-        Picasso.with(mContext).load(item.getFirstImage()).into(hold.mc_imageView);
+
+        if(!item.getFirstImage().equals("")){
+            Picasso.with(mContext).load(item.getFirstImage()).into(hold.mc_imageView);
+        }
         hold.mc_title.setText(item.getTitle());
         hold.mc_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,8 +60,9 @@ public class MyCourseAdapter extends RecyclerView.Adapter {
                 if(num<0){
                     num = 0;
                 }
-                DAO.myCourseList.remove(position);
-                DAO.myCourseList.add(num, item);
+
+                list.remove(position);
+                list.add(num, item);
 
                 mycourseList.getAdapter().notifyDataSetChanged();
             }
@@ -61,7 +70,7 @@ public class MyCourseAdapter extends RecyclerView.Adapter {
         hold.mc_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DAO.myCourseList.remove(position);
+                list.remove(position);
                 Toast.makeText(mContext, mContext.getResources().getText(R.string.mycourse_remove), Toast.LENGTH_SHORT).show();
 
                 mycourseList.getAdapter().notifyDataSetChanged();
@@ -71,19 +80,13 @@ public class MyCourseAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 int num = position+1;
-                if(num>=DAO.myCourseList.size()){
+                if(num>=list.size()){
                     num = position;
                 }
-                DAO.myCourseList.remove(position);
-                DAO.myCourseList.add(num, item);
+                list.remove(position);
+                list.add(num, item);
 
                 mycourseList.getAdapter().notifyDataSetChanged();
-            }
-        });
-        hold.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "Detail Info...", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -92,7 +95,7 @@ public class MyCourseAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return DAO.myCourseList.size();
+        return list.size();
     }
 
     private void setAnimation(View viewToAnimate, int position) {

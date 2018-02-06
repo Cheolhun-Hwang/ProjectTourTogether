@@ -187,8 +187,10 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                    <!--android:minHeight="600dp"-->
                     <android.support.v7.widget.RecyclerView
-                        android:background="@color/white"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
                         android:id="@+id/result_course_spots_list"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
@@ -200,7 +202,7 @@
                     android:paddingBottom="7dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp">
+                    android:layout_height="500dp">
                     <fragment
                         android:id="@+id/result_course_map"
                         android:name="com.google.android.gms.maps.SupportMapFragment"

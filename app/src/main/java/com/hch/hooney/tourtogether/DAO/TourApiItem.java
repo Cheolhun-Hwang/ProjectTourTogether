@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 
 public class TourApiItem implements Serializable {
+    protected boolean isPost;
     protected String addr1;
     protected String addr2;
     protected String areaCode;
@@ -27,6 +28,7 @@ public class TourApiItem implements Serializable {
     private String basic_overView;
 
     public TourApiItem() {
+        this.isPost = false;
         this.addr1 = "";
         this.addr2 = "";
         this.areaCode = "";
@@ -48,6 +50,7 @@ public class TourApiItem implements Serializable {
     }
 
     public TourApiItem(TourApiItem item){
+        this.isPost = false;
         this.addr1 = item.getAddr1();
         this.addr2 = item.getAddr2();
         this.areaCode = item.getAreaCode();
@@ -66,6 +69,14 @@ public class TourApiItem implements Serializable {
         this.tel=item.getTel();
         this.directions = item.getDirections();
         this.basic_overView = item.getBasic_overView();
+    }
+
+    public boolean isPost() {
+        return isPost;
+    }
+
+    public void setPost(boolean post) {
+        isPost = post;
     }
 
     public String getAddr1() {

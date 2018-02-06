@@ -1,6 +1,7 @@
 package com.hch.hooney.tourtogether.Fragments;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -26,6 +27,7 @@ import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.R;
 import com.hch.hooney.tourtogether.ResourceCTRL.ConvertAreaCode;
 import com.hch.hooney.tourtogether.ResourceCTRL.Location;
+import com.hch.hooney.tourtogether.SelectMapActivity;
 import com.hch.hooney.tourtogether.Service.GPS;
 
 /**
@@ -34,6 +36,7 @@ import com.hch.hooney.tourtogether.Service.GPS;
 public class CourseFragment extends Fragment {
     private final String TAG = "CourseeFragment";
     private final int SIGNAL_PERMISSON = 8001;
+    private final int SIGNAL_SELECTMAP = 9008;
     private ProgressDialog asyncDialog;
     //Layout Resource
     private Button searchArea;
@@ -202,6 +205,9 @@ public class CourseFragment extends Fragment {
                     setFieldLayout.setVisibility(View.VISIBLE);
                     clearLocationFiledButton();
                     selectLocationFiledButton();
+                    AREACODE = null;
+                    SIGUNGU = null;
+                    searchAreaShowLocation.setText("now...");
                 }
             }
         });
@@ -213,6 +219,9 @@ public class CourseFragment extends Fragment {
                     setFieldLayout.setVisibility(View.GONE);
                     clearLocationFiledButton();
                     selectLocationFiledButton();
+                    AREACODE = null;
+                    SIGUNGU = null;
+                    searchRadiusShowLocation.setText("now...");
                 }
             }
         });
@@ -337,7 +346,7 @@ public class CourseFragment extends Fragment {
                     if(AREACODE==null||SIGUNGU==null){
                         Toast.makeText(getContext(), getResources().getText(R.string.notify_search_Fail), Toast.LENGTH_SHORT).show();
                     }else{
-                        field = radius_toString.replace("0", "") +" km";
+                        field = searchRadiusSpinner.getSelectedItem().toString();
 
                         Intent intent = new Intent(getContext(), CourseActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -348,6 +357,14 @@ public class CourseFragment extends Fragment {
                     }
                 }
 
+            }
+        });
+        searchAreaSelectFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SelectMapActivity.class);
+                intent.putExtra("who", "course");
+                startActivityForResult(intent, SIGNAL_SELECTMAP);
             }
         });
         searchAreaAutoFind.setOnClickListener(new View.OnClickListener() {
@@ -447,6 +464,37 @@ public class CourseFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == SIGNAL_SELECTMAP){
+            if(resultCode == Activity.RESULT_OK){
+                lat = data.getDoubleExtra("mapy", 0.0);
+                lon = data.getDoubleExtra("mapx", 0.0);
+                if(lat == 0.0 && lon == 0.0 ){
+                    Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_SHORT).show();
+                }else{
+                    Location location = new Location(getContext(), lat, lon);
+                    String areaResult = location.searchLocation();
+
+                    if(isSearchArea){
+                        searchAreaShowLocation.setText(areaResult);
+                    }else{
+                        searchRadiusShowLocation.setText(areaResult);
+                    }
+                    if(DAO.Language == "en"){
+                        Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_SHORT).show();
+                    }
+                    ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
+                    convertAreaCode.filteringToAuto(areaResult);
+                    AREACODE = convertAreaCode.getAreaCode();
+                    SIGUNGU = convertAreaCode.getSigunguCode();
+                }
+            }
+        }
+    }
+
     /* 사용자 권한 확인 메서드
        - import android.Manifest; 를 시킬 것
      */
@@ -468,14 +516,11 @@ public class CourseFragment extends Fragment {
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "권한있음");
+            runGPS();
         } else {
             Log.d(TAG, "권한없음");
 
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permissions[0])) {
-                Log.d(TAG, "권한설명란");
-            } else {
-                ActivityCompat.requestPermissions(getActivity(), permissions, 1);
-            }
+            ActivityCompat.requestPermissions(this.getActivity(), permissions, SIGNAL_PERMISSON);
         }
     }//end of checkDangerousPermissions
 
@@ -483,11 +528,14 @@ public class CourseFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
-        if (requestCode == 1) {
-            for (int i = 0; i < permissions.length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == SIGNAL_PERMISSON) {
+            Log.d(TAG, "권한 : " + grantResults.length +" / " + grantResults[0]);
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Log.d(TAG, "권한 : " + grantResults[0]);
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //Toast.makeText(getApplicationContext(), permissions[i] + " 권한이 승인됨.", Toast.LENGTH_LONG).show();
                     Log.d(TAG, "권한 승인");
+                    runGPS();
                 } else {
                     //Toast.makeText(getApplicationContext(), permissions[i] + " 권한이 승인되지 않음.", Toast.LENGTH_LONG).show();
                     Log.d(TAG, "권한 승인되지 않음.");
@@ -495,5 +543,39 @@ public class CourseFragment extends Fragment {
             }
         }
     }//end of onRequestPermissionsResult
+
+    private void runGPS(){
+        asyncDialog.show();
+        GPS gps = new GPS(getContext());
+        if(gps.isGetLocation()){
+            lat = gps.getLat();
+            lon = gps.getLon();
+            if(lat == 0.0 && lon == 0.0 ){
+                Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_LONG).show();
+            }else{
+                Location location = new Location(getContext(), lat, lon);
+                String areaResult = location.searchLocation();
+
+                if(isSearchArea){
+                    searchAreaShowLocation.setText(areaResult);
+                }else{
+                    searchRadiusShowLocation.setText(areaResult);
+                }
+                if(DAO.Language == "en"){
+                    Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_LONG).show();
+                }
+                ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
+                convertAreaCode.filteringToAuto(areaResult);
+                AREACODE = convertAreaCode.getAreaCode();
+                SIGUNGU = convertAreaCode.getSigunguCode();
+
+            }
+            asyncDialog.dismiss();
+            gps.stopUsingGPS();
+        }else{
+            asyncDialog.dismiss();
+            gps.showSettingAlert();
+        }
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.hch.hooney.tourtogether.Fragments;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,6 +28,7 @@ import com.hch.hooney.tourtogether.R;
 import com.hch.hooney.tourtogether.ResourceCTRL.ConvertAreaCode;
 import com.hch.hooney.tourtogether.ResourceCTRL.Location;
 import com.hch.hooney.tourtogether.SearchActivity;
+import com.hch.hooney.tourtogether.SelectMapActivity;
 import com.hch.hooney.tourtogether.Service.GPS;
 
 /**
@@ -35,6 +37,7 @@ import com.hch.hooney.tourtogether.Service.GPS;
 public class SearchFragment extends Fragment {
     private final String TAG = "SearchFragment";
     private final int SIGNAL_PERMISSON = 8001;
+    private final int SIGNAL_SELECTMAP = 9009;
     private ProgressDialog asyncDialog;
     //Layout Resource
     private Button searchArea;
@@ -147,6 +150,9 @@ public class SearchFragment extends Fragment {
                     isSearchArea = true;
                     clearLocationFiledButton();
                     selectLocationFiledButton();
+                    AREACODE = null;
+                    SIGUNGU = null;
+                    searchAreaShowLocation.setText("now...");
                 }
             }
         });
@@ -157,6 +163,9 @@ public class SearchFragment extends Fragment {
                     isSearchArea = false;
                     clearLocationFiledButton();
                     selectLocationFiledButton();
+                    AREACODE = null;
+                    SIGUNGU = null;
+                    searchRadiusShowLocation.setText("now...");
                 }
             }
         });
@@ -267,6 +276,14 @@ public class SearchFragment extends Fragment {
                 field = getString(R.string.search_tab6);
                 clearFieldButton();
                 selectFieldButton();
+            }
+        });
+        searchAreaSelectFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SelectMapActivity.class);
+                intent.putExtra("who", "search");
+                startActivityForResult(intent, SIGNAL_SELECTMAP);
             }
         });
         searchAreaAutoFind.setOnClickListener(new View.OnClickListener() {
@@ -414,10 +431,40 @@ public class SearchFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == SIGNAL_SELECTMAP){
+            if(resultCode == Activity.RESULT_OK){
+                lat = data.getDoubleExtra("mapy", 0.0);
+                lon = data.getDoubleExtra("mapx", 0.0);
+                if(lat == 0.0 && lon == 0.0 ){
+                    Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_SHORT).show();
+                }else{
+                    Location location = new Location(getContext(), lat, lon);
+                    String areaResult = location.searchLocation();
+
+                    if(isSearchArea){
+                        searchAreaShowLocation.setText(areaResult);
+                    }else{
+                        searchRadiusShowLocation.setText(areaResult);
+                    }
+                    if(DAO.Language == "en"){
+                        Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_SHORT).show();
+                    }
+                    ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
+                    convertAreaCode.filteringToAuto(areaResult);
+                    AREACODE = convertAreaCode.getAreaCode();
+                    SIGUNGU = convertAreaCode.getSigunguCode();
+                }
+            }
+        }
+    }
 
     /* 사용자 권한 확인 메서드
-       - import android.Manifest; 를 시킬 것
-     */
+           - import android.Manifest; 를 시킬 것
+         */
     private void checkDangerousPermissions() {
         String[] permissions = {//import android.Manifest;
                 android.Manifest.permission.ACCESS_FINE_LOCATION,   //GPS 이용권한
@@ -474,7 +521,7 @@ public class SearchFragment extends Fragment {
             lat = gps.getLat();
             lon = gps.getLon();
             if(lat == 0.0 && lon == 0.0 ){
-                Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_SHORT).show();
             }else{
                 Location location = new Location(getContext(), lat, lon);
                 String areaResult = location.searchLocation();
@@ -485,7 +532,7 @@ public class SearchFragment extends Fragment {
                     searchRadiusShowLocation.setText(areaResult);
                 }
                 if(DAO.Language == "en"){
-                    Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_SHORT).show();
                 }
                 ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
                 convertAreaCode.filteringToAuto(areaResult);

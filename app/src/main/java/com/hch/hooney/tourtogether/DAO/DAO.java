@@ -23,10 +23,12 @@ public class DAO {
     public static Setting setting;
 
     public static MySQLiteHandler handler;
+
     public static ArrayList<mainPostItem> mainPostList;
     public static ArrayList<TourApiItem> bookmarkSpotList;
     public static ArrayList<TourApiItem> bookmarkRouteList;
-    public static ArrayList<TourApiItem> myCourseList;
+
+    public static ArrayList<MyCourse> myCoursesList;
 
     public static void setUser(USER user){
         DAO.user = user;
@@ -125,27 +127,13 @@ public class DAO {
     }
 
     public static void init_myCourse(){
-        DAO.myCourseList = new ArrayList<TourApiItem>();
+        DAO.myCoursesList = new ArrayList<MyCourse>();
 
-        //temp
-        TourApiItem tourApiItem = new TourApiItem();
-        tourApiItem.setAddr1("161, Sajik-ro, Jongno-gu, Seoul");
-        tourApiItem.setAddr2("");
-        tourApiItem.setAreaCode("1");
-        tourApiItem.setCat1("A02");
-        tourApiItem.setCat2("A0201");
-        tourApiItem.setCat3("A02010100");
-        tourApiItem.setContentID("126508");
-        tourApiItem.setContentTypeID("12");
-        tourApiItem.setFirstImage("http://tong.visitkorea.or.kr/cms/resource/40/1568040_image2_1.jpg");
-        tourApiItem.setMapx(126.9767235747);
-        tourApiItem.setMapy(37.5801859611);
-        tourApiItem.setModifyDateTIme("20171111153343");
-        tourApiItem.setReadCount("107744");
-        tourApiItem.setSigunguCode("23");
-        tourApiItem.setTitle("Gyeongbokgung Palace (경복궁) 2");
-
-        DAO.myCourseList.add(tourApiItem);
+        MyCourse myCourse = new MyCourse();
+        myCourse.setMc_Date("2018-00-00 00:00");
+        myCourse.setMc_Title("임시 제작");
+        myCourse.setMc_routeList(new ArrayList<TourApiItem>());
+        DAO.myCoursesList.add(myCourse);
     }
     public static void loadData_mainPostList(){
         //temp

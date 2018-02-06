@@ -48,6 +48,7 @@ public class MySQLiteHandler {
         vales.put("tel", item.getTel());
         vales.put("directions", item.getDirections());
         vales.put("overview", item.getBasic_overView());
+        vales.put("ispost", item.isPost());
         db.insert("b_spot", null, vales);
     }
 
@@ -72,6 +73,7 @@ public class MySQLiteHandler {
         vales.put("tel", item.getTel());
         vales.put("directions", item.getDirections());
         vales.put("overview", item.getBasic_overView());
+        vales.put("ispost", item.isPost());
         db.insert("b_course", null, vales);
     }
 
@@ -95,6 +97,7 @@ public class MySQLiteHandler {
         vales.put("tel", item.getTel());
         vales.put("directions", item.getDirections());
         vales.put("overview", item.getBasic_overView());
+        vales.put("ispost", item.isPost());
         db.update("b_spot", vales, "contentid = ?", new String[]{item.getContentID()});
     }
 
@@ -118,6 +121,7 @@ public class MySQLiteHandler {
         vales.put("tel", item.getTel());
         vales.put("directions", item.getDirections());
         vales.put("overview", item.getBasic_overView());
+        vales.put("ispost", item.isPost());
         db.update("b_course", vales, "contentid = ?", new String[]{item.getContentID()});
     }
 

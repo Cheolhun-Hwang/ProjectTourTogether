@@ -52,7 +52,19 @@ public class bSpotAdapter extends RecyclerView.Adapter {
         bSpotHolder hold = (bSpotHolder) holder;
         final TourApiItem item = DAO.bookmarkSpotList.get(position);
 
-        Picasso.with(mContext).load(item.getFirstImage()).into(hold.bs_imageView);
+        if(item.isPost()){
+            //post
+            hold.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.red_50));
+        }else{
+            //api
+            hold.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+        }
+        if(item.getFirstImage().equals("")){
+
+        }else{
+            Picasso.with(mContext).load(item.getFirstImage()).into(hold.bs_imageView);
+        }
+
         hold.bs_title.setText(item.getTitle());
         hold.bs_close.setOnClickListener(new View.OnClickListener() {
             @Override

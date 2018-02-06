@@ -140,7 +140,7 @@ public class CourseActivity extends AppCompatActivity {
             searchResultListView.setVisibility(View.GONE);
         }else{
             NoListText.setVisibility(View.GONE);
-            searchResultListView.setAdapter(new CourseAdapter(getApplicationContext(), searchResultList));
+            searchResultListView.setAdapter(new CourseAdapter(getApplicationContext(), searchResultList, filed_title));
         }
 
         asyncDialog.dismiss();
@@ -148,7 +148,7 @@ public class CourseActivity extends AppCompatActivity {
 
     private void filter_titleText(){
         if(textFilterEdit.getText().equals("")){
-            searchResultListView.setAdapter(new CourseAdapter(getApplicationContext(), searchResultList));
+            searchResultListView.setAdapter(new CourseAdapter(getApplicationContext(), searchResultList, filed_title));
             return;
         }else{
             ArrayList<TourApiItem> tempList = new ArrayList<TourApiItem>();
@@ -157,7 +157,7 @@ public class CourseActivity extends AppCompatActivity {
                     tempList.add(searchResultList.get(i));
                 }
             }
-            searchResultListView.setAdapter(new CourseAdapter(getApplicationContext(), tempList));
+            searchResultListView.setAdapter(new CourseAdapter(getApplicationContext(), tempList, filed_title));
         }
     }
 
@@ -208,7 +208,7 @@ public class CourseActivity extends AppCompatActivity {
             //searchlist end
 
             searchResultList = tempList;
-            searchResultListView.setAdapter(new CourseAdapter(getApplicationContext(), searchResultList));
+            searchResultListView.setAdapter(new CourseAdapter(getApplicationContext(), searchResultList, filed_title));
         }
     }
 
@@ -254,7 +254,7 @@ public class CourseActivity extends AppCompatActivity {
             //searchlist end
 
             searchResultList = tempList;
-            searchResultListView.setAdapter(new CourseAdapter(getApplicationContext(), searchResultList));
+            searchResultListView.setAdapter(new CourseAdapter(getApplicationContext(), searchResultList, filed_title));
         }
     }
 

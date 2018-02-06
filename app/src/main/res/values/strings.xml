@@ -3,7 +3,7 @@
 
     <string name="nav_home">Home</string>
     <string name="nav_search">Search</string>
-    <string name="nav_course">Route</string>
+    <string name="nav_course">Course</string>
     <string name="nav_account">Account</string>
 
     <string name="search_q1">1. Set Location</string>
@@ -26,14 +26,14 @@
     <string name="recommend_tab6">Taste</string>
 
     <string name="account_tab1">Bookmark\nSpot</string>
-    <string name="account_tab2">Bookmark\nRoute</string>
-    <string name="account_tab3">My Travel\nRoute</string>
+    <string name="account_tab2">Bookmark\nCourse</string>
+    <string name="account_tab3">My Travel\nCourse</string>
 
     <string name="search_activity_Registered">Registered</string>
     <string name="search_activity_Popularity">Popularity</string>
     <string name="search_activity_NoneList">Search result does not exist.\nWe will try to provide many services.</string>
     <string name="bookmark_add">Complete Adding to My Route.</string>
-    <string name="mycourse_info">Record your own travel route.</string>
+    <string name="mycourse_info">Create your own course\nthrough bookmarked places.</string>
 
     <string name="bookmark_remove">Complete Removing from Bookmark.</string>
     <string name="mycourse_remove">Complete Removing from My Route.</string>
@@ -51,7 +51,7 @@
     <string name="error_location_set_areacode">Invalid request.\nPlease check your GPS again.</string>
     <string name="error_intent">Error. Please try again.</string>
     <string name="error_gps_loading">GPS signal is in preparation.\nplease try again.</string>
-    <string name="error_location_kr">Your current location is not in Korea.</string>
+    <string name="error_location">Your current location is not in Korea.</string>
 
     <string name="result_addr">Address</string>
     <string name="result_homepage">Homepage</string>
@@ -78,7 +78,16 @@
     <string name="result_openPeriod">Open Period</string>
     <string name="result_saleGoods">Sale Goods</string>
     <string name="result_restRoom">Restroom</string>
-    
+
     <string name="course_total_distance">Total distance</string>
     <string name="course_time">Time</string>
+
+    <string name="map_select_gps">Selected</string>
+    <string name="map_select_title">Please choose a place.</string>
+    <string name="map_select_check_edittext">Please check input address.</string>
+
+    <string name="create_mycourse_title">Create My Course</string>
+    <string name="create_mycourse_finish">Complete</string>
+    <string name="create_mycourse_form_title">Title : </string>
+    <string name="create_mycourse_form_course">Course : </string>
 </resources>

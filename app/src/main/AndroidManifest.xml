@@ -75,7 +75,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ResultCourseActivity"></activity>
+        <activity android:name=".ResultCourseActivity" />
+        <activity android:name=".SelectMapActivity" />
+        <activity android:name=".AddMyCourseActivity"></activity>
     </application>
 
 </manifest>

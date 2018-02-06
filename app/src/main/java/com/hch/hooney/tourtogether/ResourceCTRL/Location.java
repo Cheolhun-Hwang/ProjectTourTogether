@@ -3,8 +3,10 @@ package com.hch.hooney.tourtogether.ResourceCTRL;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.R;
 
 import java.io.IOException;
@@ -32,9 +34,16 @@ public class Location {
         List<Address> addressList = null;
 
         try{
-            Geocoder gc = new Geocoder(mContext, Locale.KOREA);
+            Geocoder gc = null;
+            //여기 번역되는지 확인해보기
+            if(DAO.Language.equals("ko")){
+                gc = new Geocoder(mContext, Locale.KOREA);
+            }else{
+                gc = new Geocoder(mContext, Locale.ENGLISH);
+            }
+
             if(gc ==null){
-                Toast.makeText(mContext, mContext.getText(R.string.error_location_kr), Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, mContext.getText(R.string.error_location), Toast.LENGTH_SHORT).show();
             }else{
                 addressList = gc.getFromLocation(mapX, mapY, 1);
                 if(addressList !=null){
@@ -48,6 +57,7 @@ public class Location {
                         }
                         result_addr = outAddrStr.toString();
                     }
+                    Log.d("Location", "Now : "+result_addr);
                     return result_addr;
                 }
             }

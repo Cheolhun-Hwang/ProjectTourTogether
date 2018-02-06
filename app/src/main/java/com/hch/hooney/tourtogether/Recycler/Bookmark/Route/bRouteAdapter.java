@@ -1,6 +1,7 @@
 package com.hch.hooney.tourtogether.Recycler.Bookmark.Route;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,13 @@ import android.widget.Toast;
 
 import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.DAO.TourApiItem;
+import com.hch.hooney.tourtogether.DiningAndAccomodationActivity;
+import com.hch.hooney.tourtogether.FacilityActivity;
+import com.hch.hooney.tourtogether.LeisureActivity;
+import com.hch.hooney.tourtogether.NatureActivity;
 import com.hch.hooney.tourtogether.R;
+import com.hch.hooney.tourtogether.ResultCourseActivity;
+import com.hch.hooney.tourtogether.ShoppingActivity;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -25,6 +32,7 @@ import java.util.Date;
 public class bRouteAdapter  extends RecyclerView.Adapter {
     private Context mContext;
     private RecyclerView bookCourse;
+    private String feild;
 
     public bRouteAdapter(Context mContext, RecyclerView recyclerView) {
         this.mContext = mContext;
@@ -74,7 +82,28 @@ public class bRouteAdapter  extends RecyclerView.Adapter {
         hold.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Show Route...", Toast.LENGTH_SHORT).show();
+                feild = "";
+                if(item.getCat2().equals("C0112")){
+                    feild = mContext.getResources().getText(R.string.recommend_tab1).toString();
+                }else if(item.getCat2().equals("C0113")){
+                    feild = mContext.getResources().getText(R.string.recommend_tab2).toString();
+                }else if(item.getCat2().equals("C0114")){
+                    feild = mContext.getResources().getText(R.string.recommend_tab3).toString();
+                }else if(item.getCat2().equals("C0115")){
+                    feild = mContext.getResources().getText(R.string.recommend_tab4).toString();
+                }else if(item.getCat2().equals("C0116")){
+                    feild = mContext.getResources().getText(R.string.recommend_tab5).toString();
+                }else if(item.getCat2().equals("C0117")){
+                    feild = mContext.getResources().getText(R.string.recommend_tab6).toString();
+                }else{
+                    //Intent intent = new Intent(mContext, AnotherFieldActivity.class);
+                }
+
+                Intent intent = new Intent(mContext, ResultCourseActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("basic", item);
+                intent.putExtra("field", feild);
+                mContext.startActivity(intent);
             }
         });
 

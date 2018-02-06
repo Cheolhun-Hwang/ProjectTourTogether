@@ -342,8 +342,8 @@ public class FacilityActivity extends AppCompatActivity {
             StringBuffer buffer = new StringBuffer();
 
             for (RepeatInfo repeatInfo:facility.getRepeateList()) {
-                buffer.append(repeatInfo.getInfoName()+" :\n");
-                buffer.append("\t\t\t"+repeatInfo.getInfoText()+"\n\n");
+                buffer.append(repeatInfo.getInfoName()+" :<br>");
+                buffer.append(repeatInfo.getInfoText()+"<br><br>");
             }
 
             fc_result_add.setText(Html.fromHtml(buffer.toString()));
@@ -363,6 +363,8 @@ public class FacilityActivity extends AppCompatActivity {
             public void onMapReady(GoogleMap gMap) {
                 googleMap = gMap;
                 googleMap.getUiSettings().setScrollGesturesEnabled(false);
+                googleMap.getUiSettings().setZoomGesturesEnabled(false);
+                googleMap.getUiSettings().setZoomControlsEnabled(true);
 
                 float bitmapDescriptorFactory = 0;
                 //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(guideItem.getGpsy(), guideItem.getGpsx()), 14));
