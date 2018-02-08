@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -15,6 +16,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.DAO.mainPostItem;
 import com.hch.hooney.tourtogether.R;
@@ -27,11 +30,19 @@ import com.squareup.picasso.Picasso;
 public class mainPostAdapter extends RecyclerView.Adapter {
     private Context mContext;
 
+    private DatabaseReference rootRef;
+    private DatabaseReference mainPostRef;
+    private DatabaseReference myPostRef;
+
     // Allows to remember the last item shown on screen
     private int lastPosition = -1;
 
     public mainPostAdapter(Context mContext) {
         this.mContext = mContext;
+        //firebase;
+        rootRef = FirebaseDatabase.getInstance().getReference();
+        mainPostRef = rootRef.child("mainPost");
+        myPostRef = rootRef.child("myPost").child(DAO.user.getUID());
     }
 
     @Override
@@ -44,27 +55,35 @@ public class mainPostAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         mainPostHolder hold = (mainPostHolder) holder;
-        mainPostItem item = DAO.mainPostList.get(position);
+        final mainPostItem item = DAO.mainPostList.get(position);
 
         //User
         hold.userName.setText(item.getUNAME());
         Picasso.with(mContext).load(item.getUPROFILEIMAGE()).into(hold.userProfile);
         hold.userProfile.setBackground(new ShapeDrawable(new OvalShape()));
         hold.userProfile.setClipToOutline(true);
-        hold.postMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "Menu !!", Toast.LENGTH_SHORT).show();
-            }
-        });
+
+        //menu
+//        hold.postMenu.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(mContext, "Menu !!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+        hold.postMenu.setVisibility(View.GONE);
 
         //Post
-        Picasso.with(mContext).load(item.getPostImage()).into(hold.postImage);
-        hold.postContext.setText(item.getPostContext());
+        if(item.getFirstImage().equals("")){
+            hold.postImage.setVisibility(View.GONE);
+        }else{
+            Picasso.with(mContext).load(item.getFirstImage()).into(hold.postImage);
+        }
+        hold.postContext.setText(item.getBasic_overView());
 
         //위치 밑줄처리
-        SpannableString locationString = new SpannableString(item.getLocation());
-        locationString.setSpan(new UnderlineSpan(), 0, item.getLocation().length(), 0);
+        SpannableString locationString = new SpannableString(item.getAddr1());
+        locationString.setSpan(new UnderlineSpan(), 0, item.getAddr1().length(), 0);
         hold.postLocation.setText(locationString);
 
         hold.postLocation.setOnClickListener(new View.OnClickListener() {
@@ -74,19 +93,22 @@ public class mainPostAdapter extends RecyclerView.Adapter {
             }
         });
 
-        //Like and Comment
-        if(item.isPushLike()){
-            hold.postLikeImage.setImageResource(R.drawable.ic_star);
+        //BookMarking
+        if(DAO.chkAddBookmarking(item.getContentID())){
+            hold.postBookMarginImage.setImageResource(R.drawable.bookmark_do);
         }else{
-            hold.postLikeImage.setImageResource(R.drawable.ic_star_border);
+            hold.postBookMarginImage.setImageResource(R.drawable.bookmark_undo);
         }
-        hold.postLikeText.setText(item.getLikeCount());
+        hold.postBookMarginText.setText(item.getReadCount());
+
+        //Comment
         hold.postCommentText.setText(item.getCommentCount());
 
-        hold.postLikeRL.setOnClickListener(new View.OnClickListener() {
+        hold.postBookMarginRL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Like !!", Toast.LENGTH_SHORT).show();
+                DAO.handler.insert_spot(item.getSuper());
+                DAO.load_bookmarkSpot();
             }
         });
 

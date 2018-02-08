@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:minWidth="200dp"
+    android:padding="5dp"
+    android:gravity="center"
+    android:id="@+id/balloon_main_layout">
+
+    <ImageView
+        android:id="@+id/ballon_img"
+        android:scaleType="centerCrop"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:src="@drawable/noimage" />
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:id="@+id/balloon_inner_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/balloon_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="title"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="11dp" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/balloon_item_snippet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/grey_600"
+            android:text="category"
+            android:textSize="8dp" >
+
+        </TextView>
+    </LinearLayout>
+</LinearLayout>

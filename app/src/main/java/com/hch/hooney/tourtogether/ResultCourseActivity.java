@@ -2,6 +2,7 @@ package com.hch.hooney.tourtogether;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
@@ -55,6 +56,7 @@ public class ResultCourseActivity extends AppCompatActivity {
     private ImageButton back;
     private TextView Field;
     private ImageButton bookmaking;
+    private ImageButton detailMap;
 
     private TextView modifyDate;
     private TextView title;
@@ -66,11 +68,6 @@ public class ResultCourseActivity extends AppCompatActivity {
 
     private RecyclerView spotsListView;
     private RecyclerView.LayoutManager layoutManager;
-
-    private SupportMapFragment supportMapFragment;
-
-    //variable
-    private GoogleMap googleMap;
 
     private Course course;
 
@@ -118,7 +115,6 @@ public class ResultCourseActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             setUI();
-                            setMap();
                             asyncDialog.dismiss();
                         }
                     });
@@ -148,24 +144,19 @@ public class ResultCourseActivity extends AppCompatActivity {
         time = (TextView) findViewById(R.id.result_course_time);
         overview = (TextView) findViewById(R.id.result_course_overview);
         mainImage = (ImageView) findViewById(R.id.result_course_mainImage);
+        detailMap = (ImageButton) findViewById(R.id.result_course_detail_map);
 
         spotsListView = (RecyclerView) findViewById(R.id.result_course_spots_list);
         spotsListView.setHasFixedSize(true);
         layoutManager = new CustomLinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         spotsListView.setLayoutManager(layoutManager);
-
-        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.result_course_map);
-        if (supportMapFragment == null) {
-            supportMapFragment = SupportMapFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().replace(R.id.result_course_map, supportMapFragment).commit();
-        }
     }
 
 
     private void setUI(){
         Field.setText(field);
 
-        isBookmarking = DAO.chkAddBookmarking(course.getContentID());
+        isBookmarking = DAO.chkAddBookmarking_course(course.getContentID());
 
         if(isBookmarking){
             bookmaking.setImageDrawable(getResources().getDrawable(R.drawable.bookmark_do));
@@ -246,72 +237,21 @@ public class ResultCourseActivity extends AppCompatActivity {
         }else{
             spotsListView.setAdapter(new ResultCourseRouteAdapter(getApplicationContext(), course.getSpotlist()));
         }
-    }
 
-    private void setMap(){
-        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-            @SuppressLint("LongLogTag")
+        detailMap.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onMapReady(GoogleMap gMap) {
-                googleMap = gMap;
-                googleMap.getUiSettings().setScrollGesturesEnabled(true);
-                googleMap.getUiSettings().setZoomGesturesEnabled(false);
-                googleMap.getUiSettings().setZoomControlsEnabled(true);
+            public void onClick(View v) {
+                ArrayList<TourApiItem> templist = new ArrayList<TourApiItem>();
 
-                float bitmapDescriptorFactory = 0;
-                //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(guideItem.getGpsy(), guideItem.getGpsx()), 14));
-
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(course.getMapy(), course.getMapx()), 12));
-                bitmapDescriptorFactory = BitmapDescriptorFactory.HUE_ROSE;
-                googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(course.getMapy(), course.getMapx()))
-                        .icon(BitmapDescriptorFactory.defaultMarker(bitmapDescriptorFactory))
-                        .title(course.getTitle())
-                        .zIndex((float) 0)
-                );
-
-                for(int j = 0;j<course.getSpotlist().size();j++){
-                    googleMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(course.getSpotlist().get(j).getMapy(), course.getSpotlist().get(j).getMapx()))
-                            .icon(BitmapDescriptorFactory.defaultMarker(bitmapDescriptorFactory))
-                            .title(course.getSpotlist().get(j).getTitle())
-                            .zIndex((float) (j+1))
-                    );
+                templist.add(course.getSuper());
+                for(int i=0;i<course.getSpotlist().size();i++){
+                    templist.add(course.getSpotlist().get(i));
                 }
 
-                PolylineOptions polygonOptions = new PolylineOptions();
-                ArrayList<LatLng> points = new ArrayList<LatLng>();
-
-
-                points.add(new LatLng(course.getMapy(), course.getMapx()));
-
-                for(int i = 0; i<course.getSpotlist().size();i++){
-                    LatLng position = new LatLng(course.getSpotlist().get(i).getMapy(), course.getSpotlist().get(i).getMapx());
-                    points.add(position);
-                }
-                polygonOptions.addAll(points);
-                polygonOptions.width(10);
-                polygonOptions.color(Color.RED);
-
-                if(polygonOptions != null){
-                    googleMap.addPolyline(polygonOptions);
-                }
-
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
-                        == PackageManager.PERMISSION_GRANTED) {
-                    googleMap.setMyLocationEnabled(true);
-                    googleMap.getUiSettings().setCompassEnabled(true);
-                } else {
-                    Toast.makeText(getApplicationContext(), "GPS 권한을 확인해주세요.", Toast.LENGTH_SHORT).show();
-                }
-
-                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(LatLng latLng) {
-                        Toast.makeText(getApplicationContext(), "맵페이지", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                Intent intent = new Intent(getApplicationContext(), JustShowMapActivity.class);
+                intent.putExtra("func", "book");
+                intent.putExtra("list", templist);
+                startActivity(intent);
             }
         });
     }

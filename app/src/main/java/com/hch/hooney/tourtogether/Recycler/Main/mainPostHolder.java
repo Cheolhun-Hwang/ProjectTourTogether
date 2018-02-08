@@ -21,9 +21,9 @@ public class mainPostHolder extends RecyclerView.ViewHolder {
     public TextView postContext;
     public TextView postLocation;
 
-    public RelativeLayout postLikeRL;
-    public ImageView postLikeImage;
-    public TextView postLikeText;
+    public RelativeLayout postBookMarginRL;
+    public ImageView postBookMarginImage;
+    public TextView postBookMarginText;
 
     public RelativeLayout postCommentRL;
     public TextView postCommentText;
@@ -37,10 +37,10 @@ public class mainPostHolder extends RecyclerView.ViewHolder {
         postImage = (ImageView) itemView.findViewById(R.id.postImage);
         postContext = (TextView) itemView.findViewById(R.id.postContext);
         postLocation = (TextView) itemView.findViewById(R.id.postLocation);
-        postLikeRL = (RelativeLayout) itemView.findViewById(R.id.LikeLayout);
-        postLikeImage = (ImageView) itemView.findViewById(R.id.likeImage);
-        postLikeText = (TextView) itemView.findViewById(R.id.likeText);
-        postCommentRL = (RelativeLayout) itemView.findViewById(R.id.CommentLayout);
-        postCommentText = (TextView) itemView.findViewById(R.id.commentText);
+        postBookMarginRL = (RelativeLayout) itemView.findViewById(R.id.postBookMarkingLayout);
+        postBookMarginImage = (ImageView) itemView.findViewById(R.id.postBookMarking);
+        postBookMarginText = (TextView) itemView.findViewById(R.id.postBookMarkingCount);
+        postCommentRL = (RelativeLayout) itemView.findViewById(R.id.postCommentLayout);
+        postCommentText = (TextView) itemView.findViewById(R.id.postCommentText);
     }
 }

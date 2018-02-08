@@ -1,62 +1,103 @@
 package com.hch.hooney.tourtogether.DAO;
 
+import java.io.Serializable;
+
 /**
  * Created by qewqs on 2018-01-23.
  */
 
-public class mainPostItem {
-    private String postID;
+public class mainPostItem extends TourApiItem implements Serializable{
+    /*
+    key : ContentID
+    분야 : ContentTypeId
+    작성날짜 : ModifyDate
+    postImage : FirstImage
+    postContext : Overview
+    mapx : mapx
+    mapy : mapy
+    location : addr1
+    readCount : bookMarking Count
+    title : title ==> 작성자에게 정확한 포인트를 찝어 작성하도록 만들기
 
+    !!must : ispost = true;
+     */
+
+    private String UId;
     private String UPROFILEIMAGE;
     private String UNAME;
+    private String UCountry;
+    private String uLanguage;
 
-    private String PostImage;
-    private String PostContext;
-
-    private double mapy;
-    private double mapx;
-    private String Location;
-
-    private boolean isPushLike;
-    private String likeCount;
     private String commentCount;
 
     public mainPostItem() {
-        this.postID = "";
+        super();
+        super.isPost = true;
+        this.UId = "";
         this.UPROFILEIMAGE = "";
         this.UNAME = "";
-        this.PostImage = "";
-        this.PostContext = "";
-        this.mapy = 0.0;
-        this.mapx = 0.0;
-        this.Location = "";
-        this.isPushLike = false;
-        this.likeCount = "";
+        this.UCountry = "";
+        this.uLanguage = "";
         this.commentCount = "";
     }
 
-    public mainPostItem(String postID, String UPROFILEIMAGE, String UNAME, String postImage,
-                        String postContext, double mapy, double mapx, String laction,
-                        boolean isPushLike, String likeCount, String commentCount) {
-        this.postID = postID;
+    public mainPostItem(String UId, String UPROFILEIMAGE, String UNAME, String UCountry,
+                        String uLanguage, String commentCount) {
+        super();
+        super.isPost = true;
+        this.UId = UId;
         this.UPROFILEIMAGE = UPROFILEIMAGE;
         this.UNAME = UNAME;
-        this.PostImage = postImage;
-        this.PostContext = postContext;
-        this.mapy = mapy;
-        this.mapx = mapx;
-        this.Location = laction;
-        this.isPushLike = isPushLike;
-        this.likeCount = likeCount;
+        this.UCountry = UCountry;
+        this.uLanguage = uLanguage;
         this.commentCount = commentCount;
     }
 
-    public String getPostID() {
-        return postID;
+    public mainPostItem(boolean isPost, String addr1, String addr2, String areaCode, String cat1,
+                        String cat2, String cat3, String contentID, String contentTypeID,
+                        String firstImage, double mapx, double mapy, String modifyDateTIme,
+                        String readCount, String sigunguCode, String title, String tel,
+                        String directions, String basic_overView, String UId, String UPROFILEIMAGE,
+                        String UNAME, String UCountry, String uLanguage, String commentCount) {
+        super(isPost, addr1, addr2, areaCode, cat1, cat2, cat3, contentID, contentTypeID,
+                firstImage, mapx, mapy, modifyDateTIme, readCount, sigunguCode, title, tel,
+                directions, basic_overView);
+        super.isPost = true;
+        this.UId = UId;
+        this.UPROFILEIMAGE = UPROFILEIMAGE;
+        this.UNAME = UNAME;
+        this.UCountry = UCountry;
+        this.uLanguage = uLanguage;
+        this.commentCount = commentCount;
     }
 
-    public void setPostID(String postID) {
-        this.postID = postID;
+    public mainPostItem(TourApiItem item, String UId, String UPROFILEIMAGE, String UNAME,
+                        String UCountry, String uLanguage, String commentCount) {
+        super(item);
+        super.isPost = true;
+        this.UId = UId;
+        this.UPROFILEIMAGE = UPROFILEIMAGE;
+        this.UNAME = UNAME;
+        this.UCountry = UCountry;
+        this.uLanguage = uLanguage;
+        this.commentCount = commentCount;
+    }
+
+    public TourApiItem getSuper(){
+        return new TourApiItem(
+                super.isPost, super.addr1, super.addr2, super.areaCode, super.cat1,
+                super.cat2, super.cat3, super.contentID, super.contentTypeID, super.firstImage,
+                super.mapx, super.mapy, super.modifyDateTIme, super.readCount, super.sigunguCode,
+                super.title, super.tel, super.directions, super.basic_overView
+        );
+    }
+
+    public String getUId() {
+        return UId;
+    }
+
+    public void setUId(String UId) {
+        this.UId = UId;
     }
 
     public String getUPROFILEIMAGE() {
@@ -75,60 +116,20 @@ public class mainPostItem {
         this.UNAME = UNAME;
     }
 
-    public String getPostImage() {
-        return PostImage;
+    public String getUCountry() {
+        return UCountry;
     }
 
-    public void setPostImage(String postImage) {
-        PostImage = postImage;
+    public void setUCountry(String UCountry) {
+        this.UCountry = UCountry;
     }
 
-    public String getPostContext() {
-        return PostContext;
+    public String getuLanguage() {
+        return uLanguage;
     }
 
-    public void setPostContext(String postContext) {
-        PostContext = postContext;
-    }
-
-    public double getMapy() {
-        return mapy;
-    }
-
-    public void setMapy(double mapy) {
-        this.mapy = mapy;
-    }
-
-    public double getMapx() {
-        return mapx;
-    }
-
-    public void setMapx(double mapx) {
-        this.mapx = mapx;
-    }
-
-    public String getLocation() {
-        return Location;
-    }
-
-    public void setLocation(String laction) {
-        this.Location = laction;
-    }
-
-    public boolean isPushLike() {
-        return isPushLike;
-    }
-
-    public void setPushLike(boolean pushLike) {
-        isPushLike = pushLike;
-    }
-
-    public String getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(String likeCount) {
-        this.likeCount = likeCount;
+    public void setuLanguage(String uLanguage) {
+        this.uLanguage = uLanguage;
     }
 
     public String getCommentCount() {

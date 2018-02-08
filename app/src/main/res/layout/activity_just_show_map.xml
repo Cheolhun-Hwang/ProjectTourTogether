@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hch.hooney.tourtogether.JustShowMapActivity">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@drawable/toplayout_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+        <ImageButton
+            android:id="@+id/jsm_back"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_chevron_left"
+            android:background="@color/alpha"
+            android:layout_width="48dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/jsm_title"
+            android:textStyle="bold"
+            android:textColor="@color/MainColor"
+            android:textSize="15sp"
+            android:text="Map"
+            android:paddingLeft="15dp"
+            android:gravity="left|center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/jsm_map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

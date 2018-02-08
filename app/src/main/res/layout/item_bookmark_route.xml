@@ -3,10 +3,11 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:layout_margin="5dp"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
-        android:padding="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -28,8 +29,8 @@
 
             <ImageButton
                 android:id="@+id/bookmark_course_closeImageView"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:background="@color/alpha"

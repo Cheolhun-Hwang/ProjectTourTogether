@@ -41,16 +41,18 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <ImageView
+                <ImageButton
+                    android:background="@color/alpha"
                     android:id="@+id/Main_Map_BTN"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
+                    android:scaleType="fitCenter"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/map_icon" />
+                    android:src="@drawable/map_icon" />
             </LinearLayout>
 
         </RelativeLayout>

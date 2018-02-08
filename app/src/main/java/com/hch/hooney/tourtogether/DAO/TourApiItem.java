@@ -25,7 +25,7 @@ public class TourApiItem implements Serializable {
     protected String title;
     protected String tel;
     protected String directions;
-    private String basic_overView;
+    protected String basic_overView;
 
     public TourApiItem() {
         this.isPost = false;
@@ -47,6 +47,28 @@ public class TourApiItem implements Serializable {
         this.tel="";
         this.directions = "";
         this.basic_overView = "";
+    }
+
+    public TourApiItem(boolean isPost, String addr1, String addr2, String areaCode, String cat1, String cat2, String cat3, String contentID, String contentTypeID, String firstImage, double mapx, double mapy, String modifyDateTIme, String readCount, String sigunguCode, String title, String tel, String directions, String basic_overView) {
+        this.isPost = isPost;
+        this.addr1 = addr1;
+        this.addr2 = addr2;
+        this.areaCode = areaCode;
+        this.cat1 = cat1;
+        this.cat2 = cat2;
+        this.cat3 = cat3;
+        this.contentID = contentID;
+        this.contentTypeID = contentTypeID;
+        this.firstImage = firstImage;
+        this.mapx = mapx;
+        this.mapy = mapy;
+        this.modifyDateTIme = modifyDateTIme;
+        this.readCount = readCount;
+        this.sigunguCode = sigunguCode;
+        this.title = title;
+        this.tel = tel;
+        this.directions = directions;
+        this.basic_overView = basic_overView;
     }
 
     public TourApiItem(TourApiItem item){

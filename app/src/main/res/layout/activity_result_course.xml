@@ -29,9 +29,20 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <LinearLayout
+            android:orientation="horizontal"
             android:gravity="right"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <ImageButton
+                android:padding="10dp"
+                android:background="@color/alpha"
+                android:id="@+id/result_course_detail_map"
+                android:scaleType="fitCenter"
+                android:src="@drawable/corse_icon"
+                android:layout_width="50dp"
+                android:layout_height="match_parent" />
+
             <ImageButton
                 android:background="@color/alpha"
                 android:id="@+id/result_course_bookmarking"
@@ -192,20 +203,6 @@
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:id="@+id/result_course_spots_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginTop="7dp"
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp">
-                    <fragment
-                        android:id="@+id/result_course_map"
-                        android:name="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>

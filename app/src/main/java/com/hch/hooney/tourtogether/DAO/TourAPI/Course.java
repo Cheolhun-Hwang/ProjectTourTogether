@@ -33,6 +33,15 @@ public class Course extends TourApiItem {
         this.spotlist = spotlist;
     }
 
+    public TourApiItem getSuper(){
+        return new TourApiItem(
+        super.isPost, super.addr1, super.addr2, super.areaCode, super.cat1,
+                super.cat2, super.cat3, super.contentID, super.contentTypeID, super.firstImage,
+                super.mapx, super.mapy, super.modifyDateTIme, super.readCount, super.sigunguCode,
+                super.title, super.tel, super.directions, super.basic_overView
+        );
+    }
+
     public String getTotalDistance() {
         return totalDistance;
     }

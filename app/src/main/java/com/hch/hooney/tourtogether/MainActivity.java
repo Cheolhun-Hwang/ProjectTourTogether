@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.hch.hooney.tourtogether.DAO.DAO;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     //Layout Resource
     private TextView mTextMessage;
     private BottomNavigationView navigation;
+    private ImageButton post_on_Map;
 
     //variable
     private FragmentManager manager;
@@ -44,24 +47,28 @@ public class MainActivity extends AppCompatActivity {
                     if(selectTab!=1){
                         selectTab=1;
                         switchFragment(new HomeFragment());
+                        post_on_Map.setVisibility(View.VISIBLE);
                     }
                     return true;
                 case R.id.navigation_search:
                     if(selectTab!=2) {
                         selectTab = 2;
                         switchFragment(new SearchFragment());
+                        post_on_Map.setVisibility(View.GONE);
                     }
                     return true;
                 case R.id.navigation_course:
                     if(selectTab!=3) {
                         selectTab = 3;
                         switchFragment(new CourseFragment());
+                        post_on_Map.setVisibility(View.GONE);
                     }
                     return true;
                 case R.id.navigation_account:
                     if(selectTab!=4) {
                         selectTab = 4;
                         switchFragment(new AccountFragment());
+                        post_on_Map.setVisibility(View.GONE);
                     }
                     return true;
             }
@@ -109,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         try{
             //resource init.
             navigation = (BottomNavigationView) findViewById(R.id.navigation);
+            post_on_Map = (ImageButton) findViewById(R.id.Main_Map_BTN);
 
             //variable
             manager = this.getSupportFragmentManager();
@@ -128,6 +136,13 @@ public class MainActivity extends AppCompatActivity {
             BottomNavigationViewHelper.removeShiftMode(navigation);
             //navigation set select 'home'.
             navigation.setSelectedItemId(R.id.navigation_home);
+
+            post_on_Map.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
 
             return true;
         }catch (Exception e) {

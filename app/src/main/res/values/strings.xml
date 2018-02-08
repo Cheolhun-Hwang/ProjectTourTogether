@@ -90,4 +90,7 @@
     <string name="create_mycourse_finish">Complete</string>
     <string name="create_mycourse_form_title">Title : </string>
     <string name="create_mycourse_form_course">Course : </string>
+
+    <string name="add_course_add_Error">When registering your own course,\nyou must specify at least one place.</string>
+    <string name="add_course_add_Error_title">When you register your course,\nyou need the title of the course.</string>
 </resources>

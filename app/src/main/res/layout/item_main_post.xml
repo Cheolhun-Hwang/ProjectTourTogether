@@ -33,10 +33,12 @@
                 android:textSize="19sp"
                 android:textStyle="bold" />
 
-            <ImageView
+            <ImageButton
+                android:background="@color/alpha"
                 android:id="@+id/postMenuBTN"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
+                android:scaleType="fitCenter"
                 android:layout_alignParentEnd="true"
                 android:layout_alignTop="@+id/userNameTextview"
                 android:src="@drawable/ic_more_vert" />
@@ -95,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RelativeLayout
-                android:id="@+id/LikeLayout"
+                android:id="@+id/postBookMarkingLayout"
                 android:padding="10dp"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -103,24 +105,24 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/likeImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/postBookMarking"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginEnd="5dp"
-                    android:layout_toStartOf="@+id/likeText"
-                    android:src="@drawable/ic_star_border" />
+                    android:layout_toStartOf="@+id/postBookMarkingCount"
+                    android:src="@drawable/bookmark_undo" />
                 <TextView
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="15sp"
-                    android:text="Like 0"
+                    android:text="0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/likeText" />
+                    android:id="@+id/postBookMarkingCount" />
             </RelativeLayout>
             <RelativeLayout
-                android:id="@+id/CommentLayout"
+                android:id="@+id/postCommentLayout"
                 android:padding="10dp"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -132,7 +134,7 @@
                     android:layout_height="24dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginEnd="5dp"
-                    android:layout_toStartOf="@+id/commentText"
+                    android:layout_toStartOf="@+id/postCommentText"
                     android:src="@drawable/commnet_icon" />
                 <TextView
                     android:textStyle="bold"
@@ -141,7 +143,7 @@
                     android:text="Comment 0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/commentText" />
+                    android:id="@+id/postCommentText" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

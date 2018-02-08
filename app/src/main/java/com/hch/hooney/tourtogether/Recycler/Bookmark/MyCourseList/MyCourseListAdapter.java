@@ -1,6 +1,7 @@
 package com.hch.hooney.tourtogether.Recycler.Bookmark.MyCourseList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,16 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.DAO.MyCourse;
+import com.hch.hooney.tourtogether.DAO.TourApiItem;
+import com.hch.hooney.tourtogether.JustShowMapActivity;
 import com.hch.hooney.tourtogether.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by hch on 2018-02-04.
@@ -19,14 +27,20 @@ import com.hch.hooney.tourtogether.R;
 
 public class MyCourseListAdapter extends RecyclerView.Adapter {
     private Context mContext;
-    private RecyclerView recyclerView;
+    private ArrayList<MyCourse> list;
 
     // Allows to remember the last item shown on screen
     private int lastPosition = -1;
+    private DatabaseReference rootRef;
+    private DatabaseReference mycourseRef;
 
-    public MyCourseListAdapter(Context mContext, RecyclerView recyclerView) {
+    public MyCourseListAdapter(Context mContext, ArrayList<MyCourse> list) {
         this.mContext = mContext;
-        this.recyclerView = recyclerView;
+        this.list = list;
+
+        //firebase;
+        rootRef = FirebaseDatabase.getInstance().getReference();
+        mycourseRef = rootRef.child("MyCourse").child(DAO.user.getUID());
     }
 
     @Override
@@ -40,7 +54,7 @@ public class MyCourseListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         MyCourseListHolder hold = (MyCourseListHolder) holder;
 
-        MyCourse item = DAO.myCoursesList.get(position);
+        final MyCourse item = list.get(position);
 
         hold.mc_date.setText(item.getMc_Date());
 
@@ -50,25 +64,27 @@ public class MyCourseListAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, mContext.getResources().getText(R.string.mycourse_remove), Toast.LENGTH_SHORT).show();
-
-                DAO.myCoursesList.remove(position);
-                //DAO.handler.delete_spot(item.getContentID());
-                //DAO.load_bookmarkSpot();
-                recyclerView.getAdapter().notifyDataSetChanged();
+                mycourseRef.child(item.getMc_key()).removeValue();
             }
         });
 
         hold.mc_showmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(mContext, JustShowMapActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("func", "course");
+                intent.putExtra("list", item.getMc_routeList());
+                mContext.startActivity(intent);
             }
         });
+
+        setAnimation(hold.itemView, position);
     }
 
     @Override
     public int getItemCount() {
-        return DAO.myCoursesList.size();
+        return list.size();
     }
 
     private void setAnimation(View viewToAnimate, int position) {
