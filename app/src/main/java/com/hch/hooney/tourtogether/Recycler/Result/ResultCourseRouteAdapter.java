@@ -56,11 +56,7 @@ public class ResultCourseRouteAdapter extends RecyclerView.Adapter {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if(date == null){
-            hold.rcr_date.setText("");
-        }else{
-            hold.rcr_date.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date));
-        }
+
 
 
         if(item.getContentTypeID().equals("32")||item.getContentTypeID().equals("80")){
@@ -87,10 +83,6 @@ public class ResultCourseRouteAdapter extends RecyclerView.Adapter {
 
         hold.rcr_title.setText(item.getTitle());
 
-
-        if(position == (list.size()-1)){
-            hold.rcr_downArrow.setVisibility(View.GONE);
-        }
 
         setAnimation(hold.itemView, position);
     }

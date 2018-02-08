@@ -151,7 +151,7 @@ public class ResultCourseActivity extends AppCompatActivity {
 
         spotsListView = (RecyclerView) findViewById(R.id.result_course_spots_list);
         spotsListView.setHasFixedSize(true);
-        layoutManager = new CustomLinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        layoutManager = new CustomLinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         spotsListView.setLayoutManager(layoutManager);
 
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.result_course_map);
@@ -304,6 +304,13 @@ public class ResultCourseActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "GPS 권한을 확인해주세요.", Toast.LENGTH_SHORT).show();
                 }
+
+                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(LatLng latLng) {
+                        Toast.makeText(getApplicationContext(), "맵페이지", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
         });

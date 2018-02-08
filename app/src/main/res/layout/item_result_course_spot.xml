@@ -1,68 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
+    android:orientation="horizontal"
     android:layout_height="wrap_content">
     <LinearLayout
+        android:padding="15dp"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="@color/white"
-        android:layout_marginBottom="2dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+        <TextView
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/grey_700"
+            android:id="@+id/item_result_course_spot_cat"
+            android:text="spot category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="14sp"
+            android:paddingBottom="5dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:id="@+id/item_result_course_title"
+            android:gravity="center"
+            android:text="spotTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <ImageView
             android:id="@+id/item_result_course_imageview"
             android:src="@drawable/noimage"
             android:scaleType="centerCrop"
-            android:layout_width="120dp"
-            android:layout_height="96dp" />
-        <LinearLayout
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:paddingTop="4dp"
-                android:paddingRight="17dp"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:textColor="@color/grey_700"
-                android:id="@+id/item_result_course_modifydate"
-                android:gravity="right|center"
-                android:text="0000-00-00 00:00"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:paddingTop="4dp"
-                android:paddingLeft="17dp"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:textColor="@color/grey_700"
-                android:id="@+id/item_result_course_spot_cat"
-                android:gravity="left|center"
-                android:text="spot category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_weight="1"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:id="@+id/item_result_course_title"
-                android:gravity="center"
-                android:text="spotTitle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+            android:layout_width="160dp"
+            android:layout_height="120dp" />
     </LinearLayout>
-    <ImageView
-        android:id="@+id/item_result_course_downArrow"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/arrow_down"
-        android:layout_width="match_parent"
-        android:layout_height="40dp" />
 </LinearLayout>

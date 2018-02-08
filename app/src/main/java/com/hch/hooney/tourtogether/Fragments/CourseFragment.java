@@ -112,61 +112,6 @@ public class CourseFragment extends Fragment {
                 switch (msg.what){
                     case 1001:
                         checkDangerousPermissions();
-                        GPS gps_A = new GPS(getContext());
-                        if(gps_A.isGetLocation()){
-                            lat = gps_A.getLat();
-                            lon = gps_A.getLon();
-                            if(lat == 0.0 && lon == 0.0 ){
-                                Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_LONG).show();
-                            }else{
-                                Location location = new Location(getContext(), lat, lon);
-                                String areaResult = location.searchLocation();
-
-                                searchAreaShowLocation.setText(areaResult);
-                                if(DAO.Language == "en"){
-                                    Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_LONG).show();
-                                }
-                                ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
-                                convertAreaCode.filteringToAuto(areaResult);
-                                AREACODE = convertAreaCode.getAreaCode();
-                                SIGUNGU = convertAreaCode.getSigunguCode();
-
-                            }
-                            asyncDialog.dismiss();
-                            gps_A.stopUsingGPS();
-                        }else{
-                            asyncDialog.dismiss();
-                            gps_A.showSettingAlert();
-                        }
-                        break;
-                    case 1002:
-                        checkDangerousPermissions();
-                        GPS gps_R = new GPS(getContext());
-                        if(gps_R.isGetLocation()){
-                            lat = gps_R.getLat();
-                            lon = gps_R.getLon();
-                            if(lat == 0.0 && lon == 0.0 ){
-                                Toast.makeText(getContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_LONG).show();
-                            }else{
-                                Location location = new Location(getContext(), lat, lon);
-                                String areaResult = location.searchLocation();
-
-                                searchRadiusShowLocation.setText(areaResult);
-                                if(DAO.Language == "en"){
-                                    Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_LONG).show();
-                                }
-                                ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
-                                convertAreaCode.filteringToAuto(areaResult);
-                                AREACODE = convertAreaCode.getAreaCode();
-                                SIGUNGU = convertAreaCode.getSigunguCode();
-
-                            }
-                            asyncDialog.dismiss();
-                            gps_R.stopUsingGPS();
-                        }else{
-                            asyncDialog.dismiss();
-                            gps_R.showSettingAlert();
-                        }
                         break;
                     default:
                         break;
@@ -370,7 +315,6 @@ public class CourseFragment extends Fragment {
         searchAreaAutoFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                asyncDialog.show();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -384,12 +328,11 @@ public class CourseFragment extends Fragment {
         searchRadiusAutoFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                asyncDialog.show();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         Message msg_getLocation = Message.obtain();
-                        msg_getLocation.what=1002;
+                        msg_getLocation.what=1001;
                         handler.sendMessage(msg_getLocation);
                     }
                 }).start();
@@ -529,15 +472,11 @@ public class CourseFragment extends Fragment {
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
         if (requestCode == SIGNAL_PERMISSON) {
-            Log.d(TAG, "권한 : " + grantResults.length +" / " + grantResults[0]);
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Log.d(TAG, "권한 : " + grantResults[0]);
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //Toast.makeText(getApplicationContext(), permissions[i] + " 권한이 승인됨.", Toast.LENGTH_LONG).show();
                     Log.d(TAG, "권한 승인");
                     runGPS();
                 } else {
-                    //Toast.makeText(getApplicationContext(), permissions[i] + " 권한이 승인되지 않음.", Toast.LENGTH_LONG).show();
                     Log.d(TAG, "권한 승인되지 않음.");
                 }
             }

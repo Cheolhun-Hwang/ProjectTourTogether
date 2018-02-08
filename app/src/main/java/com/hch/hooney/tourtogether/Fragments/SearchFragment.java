@@ -36,8 +36,8 @@ import com.hch.hooney.tourtogether.Service.GPS;
  */
 public class SearchFragment extends Fragment {
     private final String TAG = "SearchFragment";
-    private final int SIGNAL_PERMISSON = 8001;
-    private final int SIGNAL_SELECTMAP = 9009;
+    private final int SIGNAL_PERMISSON = 8002;
+    private final int SIGNAL_SELECTMAP = 9008;
     private ProgressDialog asyncDialog;
     //Layout Resource
     private Button searchArea;
@@ -497,17 +497,12 @@ public class SearchFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
-        Log.d(TAG, "권한 : " + requestCode +" / " + SIGNAL_PERMISSON);
         if (requestCode == SIGNAL_PERMISSON) {
-            Log.d(TAG, "권한 : " + grantResults.length +" / " + grantResults[0]);
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Log.d(TAG, "권한 : " + grantResults[0]);
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //Toast.makeText(getApplicationContext(), permissions[i] + " 권한이 승인됨.", Toast.LENGTH_LONG).show();
                     Log.d(TAG, "권한 승인");
                     runGPS();
                 } else {
-                    //Toast.makeText(getApplicationContext(), permissions[i] + " 권한이 승인되지 않음.", Toast.LENGTH_LONG).show();
                     Log.d(TAG, "권한 승인되지 않음.");
                 }
             }
