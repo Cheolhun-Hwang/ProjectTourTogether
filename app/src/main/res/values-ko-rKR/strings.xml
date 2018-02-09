@@ -95,4 +95,7 @@
 
     <string name="add_course_add_Error">나만의 코스 등록 시에는\n반드시 장소가 한곳 이상 지정되어야 합니다.</string>
     <string name="add_course_add_Error_title">나만의 코스 등록 시\n해당 코스의 제목이 필요합니다.</string>
+
+    <string name="create_post_title">포스트 작성.</string>
+    <string name="create_post_complete">작성 완료</string>
 </resources>

@@ -93,4 +93,12 @@
 
     <string name="add_course_add_Error">When registering your own course,\nyou must specify at least one place.</string>
     <string name="add_course_add_Error_title">When you register your course,\nyou need the title of the course.</string>
+
+    <string name="create_post_title">Create Post.</string>
+    <string name="create_post_complete">Completed</string>
+    <string name="create_post_select_field">1. Select Field</string>
+    <string name="create_post_select_location">2. Select Location</string>
+    <string name="create_post_detailed_location">* write detail location name.</string>
+    <string name="create_post_selected_gallery">3. Select Photo in gallery.</string>
+    <string name="create_post_write_context">4. Write post content.</string>
 </resources>

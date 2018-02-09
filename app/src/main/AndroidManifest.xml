@@ -78,7 +78,8 @@
         <activity android:name=".ResultCourseActivity" />
         <activity android:name=".SelectMapActivity" />
         <activity android:name=".AddMyCourseActivity" />
-        <activity android:name=".JustShowMapActivity"></activity>
+        <activity android:name=".JustShowMapActivity" />
+        <activity android:name=".PostEditActivity"></activity>
     </application>
 
 </manifest>
