@@ -43,7 +43,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "tel text NOT NULL, "+
                 "directions text NOT NULL, "+
                 "overview text NOT NULL, "+
-                "ispost boolean Not NULL"+
+                "ispost int Not NULL"+
                 ")";
 
         String sql2 = "CREATE TABLE IF NOT EXISTS b_course("+
@@ -65,7 +65,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "tel text NOT NULL, "+
                 "directions text NOT NULL, "+
                 "overview text NOT NULL, "+
-                "ispost boolean Not NULL"+
+                "ispost int Not NULL"+
                 ")";
 
         db.execSQL(sql1);

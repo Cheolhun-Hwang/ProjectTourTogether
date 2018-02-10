@@ -1,6 +1,8 @@
 package com.hch.hooney.tourtogether;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,20 +42,25 @@ public class LoadingActivity extends AppCompatActivity {
                     DAO.setCountryAndLanguage(getApplicationContext());
                     DAO.init_static();
                     DAO.init_handler(getApplicationContext());
-                    DAO.loadData_mainPostList();
                     DAO.load_bookmarkSpot();
                     DAO.load_bookmarkCourse();
+
+                    PackageInfo info = getApplication().getPackageManager().getPackageInfo(getApplicationContext().getPackageName(), 0);
+                    DAO.nowVersion=info.versionName;
 
                     Thread.sleep(2000);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             progressBar.setVisibility(View.GONE);
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             finish();
                         }
                     });
                 } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (PackageManager.NameNotFoundException e) {
                     e.printStackTrace();
                 }
             }

@@ -1,12 +1,15 @@
 package com.hch.hooney.tourtogether.DAO;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.clustering.ClusterItem;
+
 import java.io.Serializable;
 
 /**
  * Created by qewqs on 2018-01-23.
  */
 
-public class mainPostItem extends TourApiItem implements Serializable{
+public class mainPostItem extends TourApiItem implements Serializable, ClusterItem{
     /*
     key : ContentID
     분야 : ContentTypeId
@@ -32,7 +35,7 @@ public class mainPostItem extends TourApiItem implements Serializable{
 
     public mainPostItem() {
         super();
-        super.isPost = true;
+        super.isPost = 1;
         this.UId = "";
         this.UPROFILEIMAGE = "";
         this.UNAME = "";
@@ -44,7 +47,7 @@ public class mainPostItem extends TourApiItem implements Serializable{
     public mainPostItem(String UId, String UPROFILEIMAGE, String UNAME, String UCountry,
                         String uLanguage, String commentCount) {
         super();
-        super.isPost = true;
+        super.isPost = 1;
         this.UId = UId;
         this.UPROFILEIMAGE = UPROFILEIMAGE;
         this.UNAME = UNAME;
@@ -53,7 +56,7 @@ public class mainPostItem extends TourApiItem implements Serializable{
         this.commentCount = commentCount;
     }
 
-    public mainPostItem(boolean isPost, String addr1, String addr2, String areaCode, String cat1,
+    public mainPostItem(int isPost, String addr1, String addr2, String areaCode, String cat1,
                         String cat2, String cat3, String contentID, String contentTypeID,
                         String firstImage, double mapx, double mapy, String modifyDateTIme,
                         String readCount, String sigunguCode, String title, String tel,
@@ -62,7 +65,7 @@ public class mainPostItem extends TourApiItem implements Serializable{
         super(isPost, addr1, addr2, areaCode, cat1, cat2, cat3, contentID, contentTypeID,
                 firstImage, mapx, mapy, modifyDateTIme, readCount, sigunguCode, title, tel,
                 directions, basic_overView);
-        super.isPost = true;
+        super.isPost = 1;
         this.UId = UId;
         this.UPROFILEIMAGE = UPROFILEIMAGE;
         this.UNAME = UNAME;
@@ -74,7 +77,7 @@ public class mainPostItem extends TourApiItem implements Serializable{
     public mainPostItem(TourApiItem item, String UId, String UPROFILEIMAGE, String UNAME,
                         String UCountry, String uLanguage, String commentCount) {
         super(item);
-        super.isPost = true;
+        super.isPost = 1;
         this.UId = UId;
         this.UPROFILEIMAGE = UPROFILEIMAGE;
         this.UNAME = UNAME;
@@ -138,5 +141,10 @@ public class mainPostItem extends TourApiItem implements Serializable{
 
     public void setCommentCount(String commentCount) {
         this.commentCount = commentCount;
+    }
+
+    @Override
+    public LatLng getPosition() {
+        return new LatLng(getMapy(), getMapx());
     }
 }

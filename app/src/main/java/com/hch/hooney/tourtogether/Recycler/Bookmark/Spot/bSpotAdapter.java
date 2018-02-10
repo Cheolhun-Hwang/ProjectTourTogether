@@ -3,6 +3,7 @@ package com.hch.hooney.tourtogether.Recycler.Bookmark.Spot;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.hch.hooney.tourtogether.DiningAndAccomodationActivity;
 import com.hch.hooney.tourtogether.FacilityActivity;
 import com.hch.hooney.tourtogether.LeisureActivity;
 import com.hch.hooney.tourtogether.NatureActivity;
+import com.hch.hooney.tourtogether.PostCommentActivity;
+import com.hch.hooney.tourtogether.PostMapActivity;
 import com.hch.hooney.tourtogether.R;
 import com.hch.hooney.tourtogether.ShoppingActivity;
 import com.squareup.picasso.Picasso;
@@ -52,7 +55,7 @@ public class bSpotAdapter extends RecyclerView.Adapter {
         bSpotHolder hold = (bSpotHolder) holder;
         final TourApiItem item = DAO.bookmarkSpotList.get(position);
 
-        if(item.isPost()){
+        if(item.isPost()==1){
             //post
             hold.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.red_50));
         }else{
@@ -108,10 +111,23 @@ public class bSpotAdapter extends RecyclerView.Adapter {
         hold.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("basic", item);
-                intent.putExtra("field", feild);
-                mContext.startActivity(intent);
+                Log.d("bSpotAdapter", "ContentID : " + item.getContentID());
+                Log.d("bSpotAdapter", "Title : " + item.getTitle());
+                Log.d("bSpotAdapter", "isPost : " + item.isPost());
+
+                if(item.isPost() == 1){
+                    Intent intentforPost = new Intent(mContext, PostMapActivity.class);
+                    intentforPost.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intentforPost.putExtra("func", "focus");
+                    intentforPost.putExtra("mapx", item.getMapx());
+                    intentforPost.putExtra("mapy", item.getMapy());
+                    mContext.startActivity(intentforPost);
+                }else{
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("basic", item);
+                    intent.putExtra("field", feild);
+                    mContext.startActivity(intent);
+                }
             }
         });
 

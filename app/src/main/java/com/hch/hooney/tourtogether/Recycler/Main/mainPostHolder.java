@@ -24,6 +24,8 @@ public class mainPostHolder extends RecyclerView.ViewHolder {
     public RelativeLayout postBookMarginRL;
     public ImageView postBookMarginImage;
     public TextView postBookMarginText;
+    public TextView postCategory;
+    public TextView postWriteDate;
 
     public RelativeLayout postCommentRL;
     public TextView postCommentText;
@@ -42,5 +44,7 @@ public class mainPostHolder extends RecyclerView.ViewHolder {
         postBookMarginText = (TextView) itemView.findViewById(R.id.postBookMarkingCount);
         postCommentRL = (RelativeLayout) itemView.findViewById(R.id.postCommentLayout);
         postCommentText = (TextView) itemView.findViewById(R.id.postCommentText);
+        postWriteDate = (TextView) itemView.findViewById(R.id.postWriteDate);
+        postCategory = (TextView) itemView.findViewById(R.id.postCategory);
     }
 }

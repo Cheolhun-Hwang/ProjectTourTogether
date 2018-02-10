@@ -1,5 +1,6 @@
 package com.hch.hooney.tourtogether;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
 
     //Layout Resource
-    private TextView mTextMessage;
     private BottomNavigationView navigation;
     private ImageButton post_on_Map;
 
@@ -140,7 +140,9 @@ public class MainActivity extends AppCompatActivity {
             post_on_Map.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(getApplicationContext(), PostMapActivity.class);
+                    intent.putExtra("func", "none");
+                    startActivity(intent);
                 }
             });
 
@@ -159,4 +161,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        DAO.fUser = DAO.mAuth.getCurrentUser();
+    }
 }

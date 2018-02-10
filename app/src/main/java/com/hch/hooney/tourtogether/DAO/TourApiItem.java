@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 
 public class TourApiItem implements Serializable {
-    protected boolean isPost;
+    protected int isPost;
     protected String addr1;
     protected String addr2;
     protected String areaCode;
@@ -28,7 +28,7 @@ public class TourApiItem implements Serializable {
     protected String basic_overView;
 
     public TourApiItem() {
-        this.isPost = false;
+        this.isPost = 0;
         this.addr1 = "";
         this.addr2 = "";
         this.areaCode = "";
@@ -49,7 +49,7 @@ public class TourApiItem implements Serializable {
         this.basic_overView = "";
     }
 
-    public TourApiItem(boolean isPost, String addr1, String addr2, String areaCode, String cat1, String cat2, String cat3, String contentID, String contentTypeID, String firstImage, double mapx, double mapy, String modifyDateTIme, String readCount, String sigunguCode, String title, String tel, String directions, String basic_overView) {
+    public TourApiItem(int isPost, String addr1, String addr2, String areaCode, String cat1, String cat2, String cat3, String contentID, String contentTypeID, String firstImage, double mapx, double mapy, String modifyDateTIme, String readCount, String sigunguCode, String title, String tel, String directions, String basic_overView) {
         this.isPost = isPost;
         this.addr1 = addr1;
         this.addr2 = addr2;
@@ -72,7 +72,7 @@ public class TourApiItem implements Serializable {
     }
 
     public TourApiItem(TourApiItem item){
-        this.isPost = false;
+        this.isPost = item.isPost;
         this.addr1 = item.getAddr1();
         this.addr2 = item.getAddr2();
         this.areaCode = item.getAreaCode();
@@ -93,11 +93,11 @@ public class TourApiItem implements Serializable {
         this.basic_overView = item.getBasic_overView();
     }
 
-    public boolean isPost() {
+    public int isPost() {
         return isPost;
     }
 
-    public void setPost(boolean post) {
+    public void setPost(int post) {
         isPost = post;
     }
 

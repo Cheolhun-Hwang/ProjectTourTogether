@@ -68,7 +68,7 @@
             android:id="@+id/course_activity_search_edittext"
             android:layout_weight="1"
             android:drawableTint="@color/orange_500"
-            android:backgroundTint="@color/dark_purple_500"
+            android:backgroundTint="@color/MainColor"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:layout_width="match_parent"

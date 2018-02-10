@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TourTogether</string>
+    <string name="facebook_app_id">1694306907293044</string>
+    <string name="fb_login_protocol_scheme">fb1694306907293044</string>
 
     <string name="nav_home">홈</string>
     <string name="nav_search">장소검색</string>
@@ -13,7 +15,7 @@
     <string name="search_radius">반경으로 검색</string>
 
     <string name="search_tab1">자연</string>
-    <string name="search_tab2">문화/\n역사</string>
+    <string name="search_tab2">문화 /\n역사</string>
     <string name="search_tab3">레저\n스포츠</string>
     <string name="search_tab4">쇼핑</string>
     <string name="search_tab5">먹거리</string>
@@ -98,4 +100,34 @@
 
     <string name="create_post_title">포스트 작성.</string>
     <string name="create_post_complete">작성 완료</string>
+    <string name="create_post_select_field">1. * 분야 선택.</string>
+    <string name="create_post_select_location">2. * 장소 선택.</string>
+    <string name="create_post_detailed_location">* 세부 장소 이름 작성.</string>
+    <string name="create_post_selected_gallery">3. 사진 선택.</string>
+    <string name="create_post_write_context">4. * 내용 작성.</string>
+
+    <string name="create_post_error_location">장소 선택 양식을 모두 선택해 주세요.</string>
+    <string name="create_post_error_content">포스트 내용을 작성해주세요.</string>
+
+    <string name="create_post_alert_title">포스트 업로드</string>
+    <string name="create_post_alert_msg">포스트를 업로드 하시겠습니까?</string>
+    <string name="create_post_alert_cancel">게시물 업로드를 취소하였습니다.</string>
+    <string name="create_post_alert_complete">게시물을 업로드하였습니다.</string>
+
+    <string name="post_map_title">지도로 포스트 보기.</string>
+
+    <string name="post_comment_zero_comment">첫 댓글을 작성해보세요.</string>
+    <string name="post_comment_error_fill_form">댓글을 작성해야 보낼 수 있습니다.</string>
+
+    <string name="popup_menu_remove">삭제</string>
+
+    <string name="setting_push">푸시 알림</string>
+
+    <string name="setting_notice">공지사항</string>
+    <string name="setting_event">이벤트</string>
+    <string name="setting_translate">나만의 번역 리스트</string>
+    <string name="setting_Converter">환율 계산기</string>
+    <string name="setting_logout">로그아웃</string>
+
+    <string name="login_failed">로그인에 실패하였습니다. 다시 시도해주세요.</string>
 </resources>

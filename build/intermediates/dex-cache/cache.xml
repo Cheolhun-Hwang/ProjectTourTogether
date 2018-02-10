@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-iid-11.8.0.aar\5f8445789173608d9ea4ba8885b492ed\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="fe3a72bee9f9eda45a5940a278fd9c1979b14a37">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\176\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-panorama-11.8.0.aar\fbfa8807a18ef56d635fddafd48ccb8f\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="890ae0bc8fff3c23e8759304235e14b3a536ad80">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\182\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-basement-11.8.0.aar\15c83f8404d5e8fe7e772dd37de07bfb\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="5ad3911825107d8dd4b017fdecebfd23c08048dd">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\200\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-vision-common-11.8.0.aar\6c3f9faf654aec51d46e82164b4091c4\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="cf42968b00f665dae552206e33705877b949b333">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\186\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-instantapps-11.8.0.aar\b679d9618b3bf1b3e987ce9db491caf7\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="b5c787f82f3e31a1c639c799d19b9999dcb4f451">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\177\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\204\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-base-11.8.0.aar\4848cb0b428ec3f65c4ccf661c0666fb\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="233d88c6f961d2a84758dfe27b7af61318190c7b">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\188\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\c3dc9db32b2c4463a18e757c1390ef0a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="d7cc5473b9cf4ea159a263cd477fb3ecb2987b96">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\227\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-crash-11.8.0.aar\294efb08515ddefd147749aaf956c165\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="4b882397288de69e13ff147bdefe584cc6deb055">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\189\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-auth-11.8.0.aar\804b59af217abc51c96d74e061abd48d\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="c5bc72ad3250d065128d1d7514279be703e57bd0">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\153\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-gass-11.8.0.aar\edd5949364c7e89a6338181f2b74767a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="a7760a45a6c9f425aaa43ef391a8cf28a8bcb4a1">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\198\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-auth-api-phone-11.8.0.aar\ceeff20171b057ad92c1b8baf6795666\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="fe94ced585bffcf3c7f788a294cc54e6785544ac">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\163\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-appindexing-11.8.0.aar\193498973e7f67531a0086a374255211\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="2208fc058d44d1bfdd3c713185fc13c8ea333320">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\173\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\785a68b507b9b016663d1a24c64c8a15\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="bcd0bcdef85b31a656af76e39c0c95ce70800772">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\201\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-cast-11.8.0.aar\329288431caecd03d8171e4371c50f67\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="cd3e4eb77a31986f61e69f12fcad302618db34b7">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\148\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-11.8.0.aar\72da141f315d117786a48007ac94dfaf\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="24cb9bae5fbe94df0f55d87452a291b69a2f22bf">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\156\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-tagmanager-11.8.0.aar\f88f6cfc256f8ae11529805b7c6610c8\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="31ef45383dcfc253588a3be0b49996821ce816c5">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\158\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-appinvite-11.8.0.aar\d98b12ad17da0beec8b7d3ef380d1a0b\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="4e7ca65463655d11456435e37fba9500c070d05e">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\161\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\dc1163e11e1d923767043dedc949fc1e\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="caa03787689212c10939f308a55a8dc8a3333ed2">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\214\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-places-11.8.0.aar\a83c5d8080adf3c627ec149d79b0e26d\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="38ceaeb22ef95d1a0d320ecdad9be7383d6b7923">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\179\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-analytics-11.8.0.aar\28ce7dc7093b9503bbed2be366495633\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="4f525403c809a032a6849519be7aa8bb98146946">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\157\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\facebook-common-4.30.0.aar\7bde7e0d40f2b60ed41bcef95accfa62\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="e3b8ecc558c6deeb90eb3934c1c715128ab26dcd">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\145\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\facebook-applinks-4.30.0.aar\763dfda88ee4bd5cb57a893623d521e8\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="82ea5a937ab84229fbd2f3fc8cf2a72cbdf0ee0f">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\208\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-database-11.8.0.aar\e8c298d16f954520bce9abbc086d490a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="1b982cc8b5ab6f788690238dbe3ac3bb19f88b1a">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\151\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-wallet-11.8.0.aar\454076454b01b7704edbbf057e939c80\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="6cdca967c6341e3e8dce1aff35352a903ad47ca7">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\174\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-fitness-11.8.0.aar\743ec32636c25eb833b92ff4abca1b53\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="428d38169e58cef7cfcac5776135a82cc9f6735e">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\171\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\248fc6e00b7eeae2c2b007d8205a3a67\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="264ad23f9752aabecfa41115c52a25a023a08839">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\195\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Develop\Android\SDK\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\222\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\394e1cbdd6c53e916d10b3c65057543e\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="ac2ce6027755bcf49442e70597bec0feb9064f68">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\212\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\facebook-core-4.30.0.aar\1bd848faa16fadb85b446809759305af\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="8fb648e3321f9556ac5b36485b0028f455350c4a">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\210\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-identity-11.8.0.aar\73e65d03e6c754ef0c5c29e0b0f74e5e\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="99e6d4fce7eaa92916cf26f951414b1849ce4ef5">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\175\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.30.0.aar\57307028badcfe2b4b7a83d2bb29b1ff\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="b1c250352bb7bbd5ea1982ca5165f2a81f36b530">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\142\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-ads-11.8.0.aar\5af94a2f9f732f11605f80a128d3fb8d\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="aeca0a0ab86831ec59a54723205ce9341ac22d1b">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\155\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.0.2.aar\0de9eb0c6ddf7c5ef14a3e40da145d64\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="9296d6f092fcdba4fafb6ac26546a39babdab46a">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\205\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\transition-27.0.2.aar\6175e51348b4a7ab648da4afb5e3f64d\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="a5fa2e3704f51b30b7b47e12a3a2909728799583">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\215\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\a9cbf5514a4186682048e36d88c16ea9\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="fe3916317a699975bcce0cba2d13fd2d8cf88922">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\213\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\67ca70296d1db148e90e19f2793bb1dd\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="601ebd8fa027a3dad924ffa1cb14689ced5aa436">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\180\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-drive-11.8.0.aar\373aa29d23f1f5126a657db24d660dbb\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="263d4b3cb11781467a6fa04450b1a72727c541f3">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\168\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\facebook-messenger-4.30.0.aar\5f0661694f2ddde9f9290c219e6b3c6c\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="2482bfd874e8b3927f4141105674ad392ff83698">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\209\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-cast-framework-11.8.0.aar\a5351179522f2c6064bc5f2a613a12cf\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="7edf6db4e4e673ee210c68bc16f0ac01b3153e81">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\147\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\facebook-places-4.30.0.aar\35e846ccc8cf0feea5662e4abd7e462d\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="821200fa3e07f93d0ae66e4a5917db8bac69dfe1">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\207\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\65b305f5caff45151f03b5b8287bf5b1\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="25c8cb628374f9a2d59ff9e1172753751e9a9f84">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\218\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-config-11.8.0.aar\6726dfb479a0cfb323da8c331cc1e667\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="d9a09584e04eb95d247f251d5d498eb57fcf6e41">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\165\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-gcm-11.8.0.aar\a114cfc470a87001df7dadf3f2c4ac45\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="4b7dbd963f54ff7b600c647d14ca381f110d9c9a">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\172\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-nearby-11.8.0.aar\c5e6cc057889220343073fe57fa06f05\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="541e0b6826726943a93e78613feaa4c6e7915e35">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\181\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-wearable-11.8.0.aar\ee1f4f61d7b9eefc1c2ce5a146098979\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="c86b9ff3ff60aa61ee5a9116c3c06a533ff324c9">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\187\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\30e130b682602af58b83453ade2f4ae2\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="ed6560f31a6a40b5965f5879d8f2eab1f68def05">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\216\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\a10d198acefd1d8c3ce5bf661f286b32\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="618f75fe11febf263e3234c7da7dc892232a5608">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\206\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-messaging-11.8.0.aar\8cbbf11239b4e4ff80b98d3c7bd849b8\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="c44026185adf61f12630db36ac6781481f559e7c">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\154\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-location-11.8.0.aar\935e3a11f9b1049b1e6d363d6079c86e\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="f0f484b1a18c1676984dfea4e572ceffda2f3b78">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\178\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\customtabs-27.0.2.aar\d5f368cab44bf3e528885ee58ce5dbb9\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="cdebcd9e0580b35115f655f8dc8ed7a66a8ef0fc">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\217\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\modules-2\files-2.1\android.arch.lifecycle\common\1.0.3\7d7f60c4783872861222166f6164215f8951c7b1\common-1.0.3.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="7d7f60c4783872861222166f6164215f8951c7b1">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\276\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\palette-v7-27.0.2.aar\66d1389a533f4b71dcd061dd479e0e8b\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="5ecd2525355de8083d4c1f11bcddb9141750e682">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\211\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\cf026e0c3979eaeb773cb77a6ac8d441\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="122de0d704f76d2bb5cb9db66e00fe90a0a41e78">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\194\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\09009eb36a5d4421b5d25668dc84ffc2\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="42c9659c973e311ffdb645ed057e5053e0ab5c78">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\193\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-safetynet-11.8.0.aar\fb3c1bc6a1d55b5bf49db9f0c9ec39e5\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="67fc961d875e770ba5f9a4f4573d5b257c06424a">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\184\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\facebook-share-4.30.0.aar\1a843f1d9c12eb5ba1aa45aad9ac7235\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="95d97996ec624fca99f6b06ad6004c749259970d">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\144\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-awareness-11.8.0.aar\93406424cdae5a862d098450d541999c\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="d6de702a84f62173f3a9c7a1066d81cd11120f40">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\166\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\modules-2\files-2.1\com.google.zxing\core\3.3.0\73c49077166faa4c3c0059c5f583d1d7bd1475fe\core-3.3.0.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="73c49077166faa4c3c0059c5f583d1d7bd1475fe">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\275\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-tagmanager-api-11.8.0.aar\6e4557b5c2f71c71b056821ded4aa1b7\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="16f186a432ab801268bee4a20c038c9fa35a2901">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\192\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-plus-11.8.0.aar\5f1fbe19bd4eed661d78983e800def10\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="fba4fe02a4ea786ef5f2e78fcbd8f51d999ad767">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\183\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\facebook-login-4.30.0.aar\d5b316ebdf2e2ff303878cf13d916d1d\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="b8b26b28aae0ba8e2db55ad9fe0ebc770530c5ef">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\143\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\fcde6366951c3e4d36ce516a77889e03\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="14bfdbf5594d4d7c320de20831849050788ab1e3">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\220\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-storage-common-11.8.0.aar\a106d39b6887c1f08f54cf0d13f39173\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="08bbb31d3aae0e337647a49575c2d1f1ec7d6996">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\196\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-fido-11.8.0.aar\cd90c276411f9c519036aa301f329ba0\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="9b7d070f3024fde0cb59e6358f44e6c076025426">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\169\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-dynamic-links-11.8.0.aar\5517b2be9c8344722d3e0690460cd448\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="e59236507fc1c595cd784ce9aa81c2c04888fd40">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\170\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-common-11.8.0.aar\630fded9ffa6262034257dbb70e4f742\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="e6aeff19a2ce1eb896557be73cb9ceb56f8d1cf3">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\197\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-tasks-11.8.0.aar\2c29d3d486a98a99e17724f7f5c65cf4\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="d2af2ef4d987d753f2e8ee2d1480ab964d5c7273">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\199\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-tasks\1.4.0\d85884acf6810a3bbbecb587f239005cbc846dc4\bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\279\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-auth-11.8.0.aar\b536c3d725606d2ccd355be7d5a2575a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="6746a3078625563a9eb381920f34e47ccd6bab87">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\162\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\modules-2\files-2.1\android.arch.core\common\1.0.0\a2d487452376193fc8c103dd2b9bd5f2b1b44563\common-1.0.0.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="a2d487452376193fc8c103dd2b9bd5f2b1b44563">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\277\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-games-11.8.0.aar\a48d1fc4fadf421146d47af2a7cee9f6\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="f4daa3cdaa8476e1e952279e9a7b3ba6ac8012fe">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\167\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-tagmanager-v4-impl-11.8.0.aar\ff58e6950c9f982bd70a08762e8407bc\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="aba77345f8bb32d4433b88c51ced5b9c5f2d4459">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\159\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\c9d2ebf22993328b8a0bc14d721a8b36\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="04cd0cacbedcb338f64665b88bad64d145325fbd">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\150\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\d0739def12a2de6a8d58b1909be92465\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="6f57b76211a1d7b0c1f18873af59faad95664681">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\203\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-vision-11.8.0.aar\e533f117c4d9d5b4b5de56aa27f42d70\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="ecd0a96f6bda796eeffafb066a93c84163b72234">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\185\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\design-27.0.2.aar\e561e2d2c986a0c3190ada134706a278\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="031cc16b7b6e77b3c050134ecab9fa5c2640a069">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\141\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-database-connection-11.8.0.aar\241458b2552cd86a32d5bff175cfdd70\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="ed04a0ae7198b0d5d0e965d6afdb0fe784dcfbee">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\190\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-applinks\1.4.0\8ad21bf21784dacce5f2043afb97218cc377e835\bolts-applinks-1.4.0.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="8ad21bf21784dacce5f2043afb97218cc377e835">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\278\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\27.0.2\b9ef4342c934a1a8b107506273dc8061662a322\support-annotations-27.0.2.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="0b9ef4342c934a1a8b107506273dc8061662a322">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\221\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\mediarouter-v7-27.0.2.aar\d320739b006f49e37d3ab568d9c99615\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="5979ad0ce9542ec0617f37cf2f18b5e093b9e107">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\149\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\f7b61a64415bd4839556ceffa6e43843\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\202\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\b2c5eb9438894022a205b975ee4ebdb5\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="b432e82447a3af781e927b9ba0bbb9fe2a496d4a">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\219\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\firebase-storage-11.8.0.aar\863ff151c283660b440767122f588e26\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="c59cc4d67084879423713a416182208836c0a29f">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\152\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-analytics-impl-11.8.0.aar\88000aedc917ccd2401e47db87e6c44b\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="07ce024be0a1c178d857ec2fe55a99011c2ff7a2">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\160\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hch\.gradle\caches\transforms-1\files-1.1\play-services-auth-base-11.8.0.aar\e926daa2ecec3ef12f2fcfb832b1f06d\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="22"
+        optimize="true"
+        revision="27.0.0"
+        sha1="0a23c4daa97697118d96f2b09d1dbaf9ea943d8d">
+        <dex dex="D:\workspace\github\ProjectTourTogether\app\build\intermediates\transforms\preDex\release\164\classes.dex" />
+    </item>
+
+</items>

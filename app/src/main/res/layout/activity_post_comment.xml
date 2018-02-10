@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hch.hooney.tourtogether.PostCommentActivity">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@drawable/toplayout_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+        <ImageButton
+            android:id="@+id/post_comment_back_btn"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_chevron_left"
+            android:background="@color/alpha"
+            android:layout_width="48dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/post_comment_title"
+            android:textStyle="bold"
+            android:textColor="@color/MainColor"
+            android:textSize="15sp"
+            android:text="title"
+            android:paddingLeft="15dp"
+            android:gravity="left|center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/post_comment_uProfile"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:src="@drawable/noimage"
+            android:layout_width="36dp"
+            android:layout_height="36dp" />
+        <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <EditText
+                android:id="@+id/post_comment_edittext"
+                android:layout_weight="1"
+                android:drawableTint="@color/orange_500"
+                android:backgroundTint="@color/dark_purple_500"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <ImageButton
+                android:id="@+id/post_comment_send_btn"
+                android:src="@drawable/ic_send"
+                android:background="@drawable/basic_btn"
+                android:layout_weight="4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="1"
+        android:background="@color/grey_200"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/post_comment_zero_list"
+            android:textStyle="bold|italic"
+            android:textColor="@color/grey_600"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:text="@string/post_comment_zero_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/post_comment_list"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

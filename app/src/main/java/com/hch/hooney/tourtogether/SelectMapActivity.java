@@ -110,6 +110,8 @@ public class SelectMapActivity extends AppCompatActivity {
                     intent = new Intent(getApplicationContext(), SearchFragment.class);
                 }else if(who.equals("course")){
                     intent = new Intent(getApplicationContext(), CourseFragment.class);
+                }else if(who.equals("edit")){
+                    intent = new Intent(getApplicationContext(), PostEditActivity.class);
                 }
 
                 intent.putExtra("mapx", searchMapx);

@@ -147,6 +147,12 @@ public class MySQLiteHandler {
         return c;
     }
 
+    public Cursor selectAll_setting(){
+        db = helper.getWritableDatabase();
+        Cursor c = db.query("setting", null, null, null, null, null, null);
+        return c;
+    }
+
     public Cursor selectByID_spot(String contentid){
         db = helper.getWritableDatabase();
         Cursor c = db.query("b_spot", null, "contentid = ?", new String[]{contentid}, null, null, null);

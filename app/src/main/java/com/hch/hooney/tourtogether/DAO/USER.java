@@ -9,22 +9,32 @@ public class USER {
     private String UUID;
     private String UNAME;
     private String UPROFILEIMAGE;
-    private String UCOUNTRY;
+    private String UEMAIL;
+    private String UPHONE;
 
     public USER() {
         this.UID = "";
         this.UUID = "";
         this.UNAME = "";
         this.UPROFILEIMAGE = "";
-        this.UCOUNTRY = "";
+        this.UEMAIL = "";
+        this.UPHONE="";
     }
 
-    public USER(String UID, String UUID, String UNAME, String UPROFILEIMAGE, String UCOUNTRY) {
-        this.UID = UID;
-        this.UUID = UUID;
-        this.UNAME = UNAME;
-        this.UPROFILEIMAGE = UPROFILEIMAGE;
-        this.UCOUNTRY = UCOUNTRY;
+    public String getUEMAIL() {
+        return UEMAIL;
+    }
+
+    public void setUEMAIL(String UEMAIL) {
+        this.UEMAIL = UEMAIL;
+    }
+
+    public String getUPHONE() {
+        return UPHONE;
+    }
+
+    public void setUPHONE(String UPHONE) {
+        this.UPHONE = UPHONE;
     }
 
     public String getUID() {
@@ -59,11 +69,4 @@ public class USER {
         this.UPROFILEIMAGE = UPROFILEIMAGE;
     }
 
-    public String getUCOUNTRY() {
-        return UCOUNTRY;
-    }
-
-    public void setUCOUNTRY(String UCOUNTRY) {
-        this.UCOUNTRY = UCOUNTRY;
-    }
 }

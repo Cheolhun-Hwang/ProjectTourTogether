@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">TourTogether</string>
+    <string name="facebook_app_id">1694306907293044</string>
+    <string name="fb_login_protocol_scheme">fb1694306907293044</string>
 
     <string name="nav_home">Home</string>
     <string name="nav_search">Search</string>
@@ -12,7 +14,7 @@
     <string name="search_radius">Search Radius</string>
 
     <string name="search_tab1">Nature</string>
-    <string name="search_tab2">Culture/\nHistory</string>
+    <string name="search_tab2">Culture /\nHistory</string>
     <string name="search_tab3">Leisure\nSports</string>
     <string name="search_tab4">Shopping</string>
     <string name="search_tab5">Food</string>
@@ -96,9 +98,34 @@
 
     <string name="create_post_title">Create Post.</string>
     <string name="create_post_complete">Completed</string>
-    <string name="create_post_select_field">1. Select Field</string>
-    <string name="create_post_select_location">2. Select Location</string>
+    <string name="create_post_select_field">1. * Select Field</string>
+    <string name="create_post_select_location">2. * Select Location</string>
     <string name="create_post_detailed_location">* write detail location name.</string>
     <string name="create_post_selected_gallery">3. Select Photo in gallery.</string>
-    <string name="create_post_write_context">4. Write post content.</string>
+    <string name="create_post_write_context">4. * Write post content.</string>
+
+    <string name="create_post_error_location">Please select all place selection forms.</string>
+    <string name="create_post_error_content">Please fill in the post content.</string>
+
+    <string name="create_post_alert_title">Post upload</string>
+    <string name="create_post_alert_msg">Would you want to upload the post?</string>
+    <string name="create_post_alert_cancel">canceled the post upload.</string>
+    <string name="create_post_alert_complete">uploaded a post.</string>
+
+    <string name="post_map_title">View post by map.</string>
+
+    <string name="post_comment_zero_comment">Write your first comment.</string>
+    <string name="post_comment_error_fill_form">Write a comment before you can send it.</string>
+
+    <string name="popup_menu_remove">remove</string>
+
+    <string name="setting_push">Push Alarm</string>
+
+    <string name="setting_notice">Notice</string>
+    <string name="setting_event">Event</string>
+    <string name="setting_translate">My own translation list</string>
+    <string name="setting_Converter">Currency Converter</string>
+    <string name="setting_logout">Log out</string>
+
+    <string name="login_failed">Login failed. please try again.</string>
 </resources>

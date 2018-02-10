@@ -1,6 +1,7 @@
 package com.hch.hooney.tourtogether.Fragments;
 
 
+import android.content.Intent;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
@@ -14,10 +15,13 @@ import android.support.design.widget.TabLayout;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.hch.hooney.tourtogether.DAO.DAO;
+import com.hch.hooney.tourtogether.LoginActivity;
 import com.hch.hooney.tourtogether.R;
+import com.hch.hooney.tourtogether.SettingActivity;
 import com.hch.hooney.tourtogether.SettingForEvent.AccountTabAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -26,6 +30,7 @@ import com.squareup.picasso.Picasso;
  */
 public class AccountFragment extends Fragment {
     private final String TAG = "AccountFragment";
+    private final int SIGNAL_SETTING = 7005;
 
     //Layout Resource
     private ViewPager viewPager;
@@ -85,7 +90,8 @@ public class AccountFragment extends Fragment {
         Setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), SettingActivity.class);
+                startActivityForResult(intent, SIGNAL_SETTING);
             }
         });
 
@@ -108,4 +114,22 @@ public class AccountFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == SIGNAL_SETTING){
+            switch (resultCode){
+                case 9008:
+                    //logout
+                    DAO.mAuth.signOut();
+                    DAO.fUser = null;
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    getActivity().finish();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

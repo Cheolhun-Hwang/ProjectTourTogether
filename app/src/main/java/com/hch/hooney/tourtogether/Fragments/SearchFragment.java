@@ -450,9 +450,7 @@ public class SearchFragment extends Fragment {
                     }else{
                         searchRadiusShowLocation.setText(areaResult);
                     }
-                    if(DAO.Language == "en"){
-                        Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_SHORT).show();
-                    }
+
                     ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
                     convertAreaCode.filteringToAuto(areaResult);
                     AREACODE = convertAreaCode.getAreaCode();
@@ -526,9 +524,7 @@ public class SearchFragment extends Fragment {
                 }else{
                     searchRadiusShowLocation.setText(areaResult);
                 }
-                if(DAO.Language == "en"){
-                    Toast.makeText(getContext(), getResources().getText(R.string.notify_get_gps), Toast.LENGTH_SHORT).show();
-                }
+
                 ConvertAreaCode convertAreaCode = new ConvertAreaCode(getContext());
                 convertAreaCode.filteringToAuto(areaResult);
                 AREACODE = convertAreaCode.getAreaCode();

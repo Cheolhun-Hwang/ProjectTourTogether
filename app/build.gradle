@@ -3,6 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     buildToolsVersion "27.0.0"
+
+    repositories {
+        mavenCentral()
+    }
+
     defaultConfig {
         applicationId "com.hch.hooney.tourtogether"
         minSdkVersion 22
@@ -10,6 +15,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
     }
     buildTypes {
         release {
@@ -31,14 +37,18 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services:11.8.0'
+    compile 'com.google.maps.android:android-maps-utils:0.4+'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:mediarouter-v7:27.+'
-    compile 'com.android.support:recyclerview-v7:27.+'
-
     compile 'com.google.firebase:firebase-core:11.8.0'
     compile 'com.google.firebase:firebase-database:11.8.0'
     compile 'com.google.firebase:firebase-storage:11.8.0'
+    compile 'com.google.firebase:firebase-auth:11.8.0'
+    compile 'com.google.firebase:firebase-messaging:11.8.0'
 
+    compile 'com.android.support:recyclerview-v7:27.+'
+
+    compile 'com.facebook.android:facebook-android-sdk:4.+'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -366,14 +366,6 @@ public class ShoppingActivity extends AppCompatActivity {
                         .title(shopping.getTitle())
                         .zIndex((float) 0)
                 );
-
-//                if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
-//                        == PackageManager.PERMISSION_GRANTED) {
-//                    googleMap.setMyLocationEnabled(true);
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "GPS 권한을 확인해주세요.", Toast.LENGTH_SHORT).show();
-//                }
-
             }
         });
     }

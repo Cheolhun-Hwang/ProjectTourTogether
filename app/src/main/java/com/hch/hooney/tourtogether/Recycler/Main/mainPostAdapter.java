@@ -1,27 +1,40 @@
 package com.hch.hooney.tourtogether.Recycler.Main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.provider.ContactsContract;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hch.hooney.tourtogether.DAO.DAO;
+import com.hch.hooney.tourtogether.DAO.TourApiItem;
 import com.hch.hooney.tourtogether.DAO.mainPostItem;
+import com.hch.hooney.tourtogether.PostCommentActivity;
+import com.hch.hooney.tourtogether.PostMapActivity;
 import com.hch.hooney.tourtogether.R;
+import com.hch.hooney.tourtogether.ResourceCTRL.Location;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 /**
  * Created by qewqs on 2018-01-23.
@@ -29,20 +42,24 @@ import com.squareup.picasso.Picasso;
 
 public class mainPostAdapter extends RecyclerView.Adapter {
     private Context mContext;
+    private ArrayList<mainPostItem> list;
+    private RecyclerView recyclerView;
 
     private DatabaseReference rootRef;
-    private DatabaseReference mainPostRef;
-    private DatabaseReference myPostRef;
+    private DatabaseReference postRef;
+    private DatabaseReference userRef;
 
     // Allows to remember the last item shown on screen
     private int lastPosition = -1;
 
-    public mainPostAdapter(Context mContext) {
+    public mainPostAdapter(Context mContext, ArrayList<mainPostItem> list, RecyclerView recyclerView) {
         this.mContext = mContext;
+        this.list = list;
+        this.recyclerView = recyclerView;
         //firebase;
         rootRef = FirebaseDatabase.getInstance().getReference();
-        mainPostRef = rootRef.child("mainPost");
-        myPostRef = rootRef.child("myPost").child(DAO.user.getUID());
+        postRef = rootRef.child("post");
+        userRef = rootRef.child("ulog").child(DAO.user.getUID());
     }
 
     @Override
@@ -53,9 +70,10 @@ public class mainPostAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        mainPostHolder hold = (mainPostHolder) holder;
-        final mainPostItem item = DAO.mainPostList.get(position);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        final mainPostHolder hold = (mainPostHolder) holder;
+
+        final mainPostItem item = list.get(position);
 
         //User
         hold.userName.setText(item.getUNAME());
@@ -64,14 +82,50 @@ public class mainPostAdapter extends RecyclerView.Adapter {
         hold.userProfile.setClipToOutline(true);
 
         //menu
-//        hold.postMenu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(mContext, "Menu !!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        if(item.getUId().equals(DAO.user.getUID())){
+            hold.postMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PopupMenu popup = new PopupMenu(mContext,v);
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem menuItem) {
+                            switch (menuItem.getItemId()){
+                                case R.id.menu_main_post_remove:
+                                    remove(item.getContentID(), position);
+                                    break;
+                            }
+                            return true;
+                        }
+                    });// to implement on click event on items of menu
+                    MenuInflater inflater = popup.getMenuInflater();
+                    inflater.inflate(R.menu.main_post, popup.getMenu());
+                    popup.show();
+                }
+            });
+        }else{
+            hold.postMenu.setVisibility(View.GONE);
+        }
 
-        hold.postMenu.setVisibility(View.GONE);
+        //category
+        String feild = "";
+        if(item.getContentTypeID().equals("32")||item.getContentTypeID().equals("80")){
+            feild = mContext.getResources().getText(R.string.search_tab6).toString();
+        }else if(item.getContentTypeID().equals("12")||item.getContentTypeID().equals("76")){
+            feild = mContext.getResources().getText(R.string.search_tab1).toString();
+        }else if(item.getContentTypeID().equals("14")||item.getContentTypeID().equals("78")){
+            feild = mContext.getResources().getText(R.string.search_tab2).toString();
+        }else if(item.getContentTypeID().equals("28")||item.getContentTypeID().equals("75")){
+            feild = mContext.getResources().getText(R.string.search_tab3).toString();
+        }else if(item.getContentTypeID().equals("38")||item.getContentTypeID().equals("79")){
+            feild = mContext.getResources().getText(R.string.search_tab4).toString();
+        }else if(item.getContentTypeID().equals("39")||item.getContentTypeID().equals("82")){
+            feild = mContext.getResources().getText(R.string.search_tab5).toString();
+        }
+        hold.postCategory.setText("Category : " + feild.replace("\n", " "));
+
+        //write date
+        hold.postWriteDate.setText(item.getModifyDateTIme());
 
         //Post
         if(item.getFirstImage().equals("")){
@@ -82,14 +136,19 @@ public class mainPostAdapter extends RecyclerView.Adapter {
         hold.postContext.setText(item.getBasic_overView());
 
         //위치 밑줄처리
-        SpannableString locationString = new SpannableString(item.getAddr1());
+        SpannableString locationString = new SpannableString(new Location(mContext, item.getMapy(), item.getMapx()).searchLocation());
         locationString.setSpan(new UnderlineSpan(), 0, item.getAddr1().length(), 0);
         hold.postLocation.setText(locationString);
 
         hold.postLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Show Map !!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, PostMapActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("func", "focus");
+                intent.putExtra("mapx", item.getMapx());
+                intent.putExtra("mapy", item.getMapy());
+                mContext.startActivity(intent);
             }
         });
 
@@ -107,15 +166,37 @@ public class mainPostAdapter extends RecyclerView.Adapter {
         hold.postBookMarginRL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DAO.handler.insert_spot(item.getSuper());
-                DAO.load_bookmarkSpot();
+                if(!DAO.chkAddBookmarking(item.getContentID())){
+                    TourApiItem titem = item.getSuper();
+                    titem.setBasic_overView("");
+                    DAO.handler.insert_spot(titem);
+                    DAO.load_bookmarkSpot();
+                    hold.postBookMarginImage.setImageResource(R.drawable.bookmark_do);
+                    int before = Integer.parseInt(item.getReadCount());
+                    hold.postBookMarginText.setText(""+(before+1));
+                    item.setReadCount(""+(before+1));
+                    addOriginal(item);
+                }else{
+                    TourApiItem titem = item.getSuper();
+                    hold.postBookMarginImage.setImageResource(R.drawable.bookmark_undo);
+                    int before = Integer.parseInt(item.getReadCount());
+                    hold.postBookMarginText.setText(""+(before-1));
+                    item.setReadCount(""+(before-1));
+                    DAO.handler.delete_spot(titem.getContentID());
+                    DAO.load_bookmarkSpot();
+                    subOriginal(item);
+                }
             }
         });
 
         hold.postCommentRL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Comment !!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, PostCommentActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("contentid", item.getContentID());
+                intent.putExtra("title", item.getTitle());
+                mContext.startActivity(intent);
             }
         });
 
@@ -124,7 +205,7 @@ public class mainPostAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return DAO.mainPostList.size();
+        return list.size();
     }
 
     private void setAnimation(View viewToAnimate, int position) {
@@ -134,5 +215,44 @@ public class mainPostAdapter extends RecyclerView.Adapter {
             viewToAnimate.startAnimation(animation);
             lastPosition = position;
         }
+    }
+
+    private void addOriginal(final mainPostItem item){
+        postRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int nowBookCount = Integer.parseInt((String)dataSnapshot.child(item.getContentID()).child("readCount").getValue());
+                postRef.child(item.getContentID()).child("readCount").setValue((nowBookCount+1)+"");
+                userRef.child(item.getContentID()).child("readCount").setValue((nowBookCount+1)+"");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void subOriginal(final mainPostItem item){
+        postRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int nowBookCount = Integer.parseInt((String)dataSnapshot.child(item.getContentID()).child("readCount").getValue());
+                postRef.child(item.getContentID()).child("readCount").setValue((nowBookCount-1)+"");
+                userRef.child(item.getContentID()).child("readCount").setValue((nowBookCount-1)+"");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void remove(String contentid, int position){
+        postRef.child(contentid).removeValue();
+        userRef.child(contentid).removeValue();
+        list.remove(position);
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }
