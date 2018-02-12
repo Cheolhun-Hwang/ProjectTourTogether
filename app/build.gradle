@@ -5,6 +5,7 @@ android {
     buildToolsVersion "27.0.0"
 
     repositories {
+        jcenter()
         mavenCentral()
     }
 

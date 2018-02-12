@@ -156,6 +156,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "250495192905-0oj2uen88plhdin4hclk0fv19045cssf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hch.hooney.tourtogether",
+            "certificate_hash": "9d58518ae775bdabf359afa1c0f48be33bd07525"
+          }
+        },
+        {
           "client_id": "250495192905-f2ut3je5fhf5mrfve4uq0raiq41baqvc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
