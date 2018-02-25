@@ -57,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
                         post_on_Map.setVisibility(View.GONE);
                     }
                     return true;
-                case R.id.navigation_course:
-                    if(selectTab!=3) {
-                        selectTab = 3;
-                        switchFragment(new CourseFragment());
-                        post_on_Map.setVisibility(View.GONE);
-                    }
-                    return true;
+//                case R.id.navigation_course:
+//                    if(selectTab!=3) {
+//                        selectTab = 3;
+//                        switchFragment(new CourseFragment());
+//                        post_on_Map.setVisibility(View.GONE);
+//                    }
+//                    return true;
                 case R.id.navigation_account:
                     if(selectTab!=4) {
                         selectTab = 4;

@@ -52,6 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:hint="@string/location_hint"
             android:id="@+id/select_map_edittext"
             android:layout_weight="1"
             android:drawableTint="@color/orange_500"

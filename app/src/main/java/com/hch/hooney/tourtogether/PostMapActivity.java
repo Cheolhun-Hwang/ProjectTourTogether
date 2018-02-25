@@ -398,9 +398,14 @@ public class PostMapActivity extends AppCompatActivity {
                         }else{
                             Picasso.with(getApplicationContext()).load(item.getFirstImage()).into(mainPostImage);
                         }
-                        maiPostContent.setText(item.getBasic_overView());
 
-
+                        if(DAO.Language.equals("ko")){
+                            maiPostContent.setText(item.getKrContext());
+                        }else if(DAO.Language.equals("en")){
+                            maiPostContent.setText(item.getEnContext());
+                        }else{
+                            maiPostContent.setText(item.getBasic_overView());
+                        }
                         return view;
                     }
                 });

@@ -1,6 +1,7 @@
 package com.hch.hooney.tourtogether;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
@@ -43,11 +44,20 @@ public class SettingActivity extends AppCompatActivity {
         version.setText(DAO.nowVersion);
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        setResult(Activity.RESULT_CANCELED);
+        savePreferences();
+        finish();
+    }
+
     private void setEvent(){
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setResult(Activity.RESULT_CANCELED);
+                savePreferences();
                 finish();
             }
         });
@@ -65,8 +75,17 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setResult(9008);
+                savePreferences();
                 finish();
             }
         });
+    }
+
+    // 값 저장하기
+    private void savePreferences(){
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean("ispush", DAO.isPush);
+        editor.commit();
     }
 }

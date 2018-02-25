@@ -37,7 +37,7 @@ public class ConvertAreaCode {
         }else{
             String split[] = AutoResult.split(", ");
 
-            getAreaAndSiCode(split[3], split[2]);
+            getAreaAndSiCode(split[2], split[1]);
 
         }
     }

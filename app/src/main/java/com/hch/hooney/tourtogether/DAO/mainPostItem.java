@@ -33,6 +33,11 @@ public class mainPostItem extends TourApiItem implements Serializable, ClusterIt
 
     private String commentCount;
 
+    private String trtitle;
+
+    private String krContext;
+    private String enContext;
+
     public mainPostItem() {
         super();
         super.isPost = 1;
@@ -42,6 +47,9 @@ public class mainPostItem extends TourApiItem implements Serializable, ClusterIt
         this.UCountry = "";
         this.uLanguage = "";
         this.commentCount = "";
+        this.krContext = "";
+        this.enContext="";
+        this.trtitle = "";
     }
 
     public mainPostItem(String UId, String UPROFILEIMAGE, String UNAME, String UCountry,
@@ -93,6 +101,30 @@ public class mainPostItem extends TourApiItem implements Serializable, ClusterIt
                 super.mapx, super.mapy, super.modifyDateTIme, super.readCount, super.sigunguCode,
                 super.title, super.tel, super.directions, super.basic_overView
         );
+    }
+
+    public String getTrtitle() {
+        return trtitle;
+    }
+
+    public void setTrtitle(String trtitle) {
+        this.trtitle = trtitle;
+    }
+
+    public String getKrContext() {
+        return krContext;
+    }
+
+    public void setKrContext(String krContext) {
+        this.krContext = krContext;
+    }
+
+    public String getEnContext() {
+        return enContext;
+    }
+
+    public void setEnContext(String enContext) {
+        this.enContext = enContext;
     }
 
     public String getUId() {

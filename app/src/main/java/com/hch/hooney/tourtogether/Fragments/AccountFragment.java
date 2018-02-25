@@ -2,6 +2,7 @@ package com.hch.hooney.tourtogether.Fragments;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import com.hch.hooney.tourtogether.R;
 import com.hch.hooney.tourtogether.SettingActivity;
 import com.hch.hooney.tourtogether.SettingForEvent.AccountTabAdapter;
 import com.squareup.picasso.Picasso;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,8 +80,9 @@ public class AccountFragment extends Fragment {
         viewPager = (ViewPager) view.findViewById(R.id.account_viewpager);
 
         tabLayout = (TabLayout) view.findViewById(R.id.account_tabs);
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.account_tab0));
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getText(R.string.account_tab1)));
-        tabLayout.addTab(tabLayout.newTab().setText(getResources().getText(R.string.account_tab2)));
+//        tabLayout.addTab(tabLayout.newTab().setText(getResources().getText(R.string.account_tab2)));
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getText(R.string.account_tab3)));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
@@ -124,6 +128,7 @@ public class AccountFragment extends Fragment {
                     //logout
                     DAO.mAuth.signOut();
                     DAO.fUser = null;
+                    saveAutoLoginPreferences(0);
                     startActivity(new Intent(getContext(), LoginActivity.class));
                     getActivity().finish();
                     break;
@@ -131,5 +136,12 @@ public class AccountFragment extends Fragment {
                     break;
             }
         }
+    }
+    private void saveAutoLoginPreferences(int num){
+        //구글 1 페이스북 2 나머지 0
+        SharedPreferences pref = getActivity().getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("autologin", num);
+        editor.commit();
     }
 }

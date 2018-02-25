@@ -43,6 +43,7 @@ import com.hch.hooney.tourtogether.DAO.mainPostItem;
 import com.hch.hooney.tourtogether.ResourceCTRL.ConvertAreaCode;
 import com.hch.hooney.tourtogether.ResourceCTRL.Location;
 import com.hch.hooney.tourtogether.Service.GPS;
+import com.hch.hooney.tourtogether.TranslateNaver.PapagoSMT;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -410,20 +411,11 @@ public class PostEditActivity extends AppCompatActivity {
             if(resultCode == Activity.RESULT_OK){
                 try {
                     mainPostImage = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), Uri.parse(data.getDataString()));
+                    Log.d("Bitmap", "before ==> width : " + mainPostImage.getWidth()+" / Height : " + mainPostImage.getHeight());
+
                     //리사이즈
-                    int height = mainPostImage.getHeight();
-                    int width = mainPostImage.getWidth();
-
-                    Bitmap resized = null;
-
-                    //높이가 1080이상 일때
-                    while (height > 540) {
-                        resized = Bitmap.createScaledBitmap(mainPostImage, (width * 540) / height, 540, true);
-                        height = resized.getHeight();
-                        width = resized.getWidth();
-                    }
-
-                    mainPostImage = resized;
+                    mainPostImage = resizeBitmapImageFn(mainPostImage, 480);
+                    Log.d("Bitmap", "after ==> width : " + mainPostImage.getWidth()+" / Height : " + mainPostImage.getHeight());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -437,16 +429,23 @@ public class PostEditActivity extends AppCompatActivity {
                 item.setMapy(data.getDoubleExtra("mapy", 0.0));
                 item.setMapx(data.getDoubleExtra("mapx", 0.0));
                 if(item.getMapy() == 0.0 && item.getMapx() == 0.0 ){
-                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.error_gps_loading), Toast.LENGTH_SHORT).show();
                 }else{
-                    Location location = new Location(getApplicationContext(), item.getMapy(), item.getMapx());
-                    String areaResult = location.searchLocation();
-                    showLocation.setText(areaResult);
+                    try{
+                        Log.d("Selected map", "Mapy : " + item.getMapy()+" / Mapx : " + item.getMapx());
 
-                    ConvertAreaCode convertAreaCode = new ConvertAreaCode(getApplicationContext());
-                    convertAreaCode.filteringToAuto(areaResult);
-                    item.setAreaCode(convertAreaCode.getAreaCode());
-                    item.setSigunguCode(convertAreaCode.getSigunguCode());
+                        Location location = new Location(getApplicationContext(), item.getMapy(), item.getMapx());
+                        String areaResult = location.searchLocation();
+
+                        Log.d("Location convert", "Location : " + location);
+                        showLocation.setText(areaResult);
+
+                        ConvertAreaCode convertAreaCode = new ConvertAreaCode(getApplicationContext());
+                        convertAreaCode.filteringToAuto(areaResult);
+                        item.setAreaCode(convertAreaCode.getAreaCode());
+                        item.setSigunguCode(convertAreaCode.getSigunguCode());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -475,47 +474,113 @@ public class PostEditActivity extends AppCompatActivity {
 
     private void upload(){
         progressBar.setVisibility(View.VISIBLE);
-        item.setTitle(detailLocation.getText().toString());
-        item.setReadCount("0");
-        item.setAddr1(showLocation.getText().toString());
-        item.setBasic_overView(context.getText().toString());
-        item.setCommentCount("0");
-        Date nowDate = new Date();
-        SimpleDateFormat dateSet = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        item.setModifyDateTIme(dateSet.format(nowDate));
-        item.setPost(1);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                item.setReadCount("0");
+                item.setAddr1(showLocation.getText().toString());
 
-        item.setUCountry(DAO.Country);
-        item.setUId(DAO.user.getUID());
-        item.setUNAME(DAO.user.getUNAME());
-        item.setUPROFILEIMAGE(DAO.user.getUPROFILEIMAGE());
-        item.setuLanguage(DAO.Language);
+                item.setCommentCount("0");
+                Date nowDate = new Date();
+                SimpleDateFormat dateSet = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                item.setModifyDateTIme(dateSet.format(nowDate));
+                item.setPost(1);
 
-        if(mainPostImage ==null){
-            item.setFirstImage("");
-            postRef.child(key).setValue(item);
-            userRef.child(key).setValue(item);
-            progressBar.setVisibility(View.GONE);
-            Toast.makeText(getApplicationContext(), getResources().getText(R.string.create_post_alert_complete), Toast.LENGTH_SHORT).show();
-            finish();
-        }else{
-            //Bitmap to byteArray
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            mainPostImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
+                item.setUCountry(DAO.Country);
+                item.setUId(DAO.user.getUID());
+                item.setUNAME(DAO.user.getUNAME());
+                item.setUPROFILEIMAGE(DAO.user.getUPROFILEIMAGE());
+                item.setuLanguage(DAO.Language);
+                item.setBasic_overView(context.getText().toString());
+                item.setTitle(detailLocation.getText().toString());
 
-            UploadTask uploadTask = stref.putBytes(byteArray);
-            uploadTask.addOnSuccessListener(PostEditActivity.this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    item.setFirstImage(taskSnapshot.getDownloadUrl().toString());
-                    postRef.child(key).setValue(item);
-                    userRef.child(key).setValue(item);
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.create_post_alert_complete), Toast.LENGTH_SHORT).show();
-                    finish();
+                String from = DAO.Language;
+                String to = "";
+                if(from.equals("ko")){
+                    to = "en";
+                    item.setKrContext(context.getText().toString());
+                    String res = new PapagoSMT(PostEditActivity.this, from, to, context.getText().toString()).send();
+                    String rest = new PapagoSMT(PostEditActivity.this, from, to, detailLocation.getText().toString()).send();
+                    if(res.equals("none")){
+                        item.setTrtitle(detailLocation.getText().toString());
+                        item.setEnContext(context.getText().toString());
+                    }else{
+                        item.setTrtitle(rest);
+                        item.setEnContext(res);
+                    }
+                }else if(from.equals("en")){
+                    to="ko";
+                    item.setEnContext(context.getText().toString());
+                    String res = new PapagoSMT(PostEditActivity.this, from, to, context.getText().toString()).send();
+                    String rest = new PapagoSMT(PostEditActivity.this, from, to, detailLocation.getText().toString()).send();
+                    if(res.equals("none")){
+                        item.setTrtitle(detailLocation.getText().toString());
+                        item.setKrContext(context.getText().toString());
+                    }else{
+                        item.setTrtitle(rest);
+                        item.setKrContext(res);
+                    }
                 }
-            });
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(mainPostImage ==null){
+                            item.setFirstImage("");
+                            postRef.child(key).setValue(item);
+                            userRef.child(key).setValue(item);
+
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(getApplicationContext(), getResources().getText(R.string.create_post_alert_complete), Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else{
+                            //Bitmap to byteArray
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            mainPostImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                            byte[] byteArray = stream.toByteArray();
+
+                            UploadTask uploadTask = stref.putBytes(byteArray);
+                            uploadTask.addOnSuccessListener(PostEditActivity.this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    item.setFirstImage(taskSnapshot.getDownloadUrl().toString());
+                                    postRef.child(key).setValue(item);
+                                    userRef.child(key).setValue(item);
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.create_post_alert_complete), Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            });
+                        }
+                    }
+                });
+
+            }
+        }).start();
+    }
+
+    private Bitmap resizeBitmapImageFn(Bitmap bmpSource, int maxResolution){
+        //가로 세로 모두해서 최소 max 해상도로
+        int iWidth = bmpSource.getWidth();      //비트맵이미지의 넓이
+        int iHeight = bmpSource.getHeight();     //비트맵이미지의 높이
+        int newWidth = iWidth ;
+        int newHeight = iHeight ;
+        float rate = 0.0f;
+
+        //이미지의 가로 세로 비율에 맞게 조절
+        if(iWidth > iHeight ){
+            if(maxResolution < iWidth ){
+                rate = maxResolution / (float) iWidth ;
+                newHeight = (int) (iHeight * rate);
+                newWidth = maxResolution;
+            }
+        }else{
+            if(maxResolution < iHeight ){
+                rate = maxResolution / (float) iHeight ;
+                newWidth = (int) (iWidth * rate);
+                newHeight = maxResolution;
+            }
         }
+        return Bitmap.createScaledBitmap(
+                bmpSource, newWidth, newHeight, true);
     }
 }

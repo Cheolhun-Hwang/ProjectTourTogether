@@ -49,6 +49,8 @@ public class mainPostAdapter extends RecyclerView.Adapter {
     private DatabaseReference postRef;
     private DatabaseReference userRef;
 
+    private int isLog;
+
     // Allows to remember the last item shown on screen
     private int lastPosition = -1;
 
@@ -56,10 +58,21 @@ public class mainPostAdapter extends RecyclerView.Adapter {
         this.mContext = mContext;
         this.list = list;
         this.recyclerView = recyclerView;
+        this.isLog = 0;
         //firebase;
         rootRef = FirebaseDatabase.getInstance().getReference();
         postRef = rootRef.child("post");
         userRef = rootRef.child("ulog").child(DAO.user.getUID());
+    }
+
+    public mainPostAdapter(Context mContext, ArrayList<mainPostItem> list, RecyclerView recyclerView,
+                           int isLog) {
+        this.mContext = mContext;
+        this.list = list;
+        this.recyclerView = recyclerView;
+        this.isLog = isLog;
+        //firebase;
+        rootRef = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -74,6 +87,8 @@ public class mainPostAdapter extends RecyclerView.Adapter {
         final mainPostHolder hold = (mainPostHolder) holder;
 
         final mainPostItem item = list.get(position);
+        postRef = rootRef.child("post");
+        userRef = rootRef.child("ulog").child(item.getUId());
 
         //User
         hold.userName.setText(item.getUNAME());
@@ -133,11 +148,19 @@ public class mainPostAdapter extends RecyclerView.Adapter {
         }else{
             Picasso.with(mContext).load(item.getFirstImage()).into(hold.postImage);
         }
-        hold.postContext.setText(item.getBasic_overView());
+
+        if(DAO.Language.equals("ko")){
+            hold.postContext.setText(item.getKrContext());
+        }else if(DAO.Language.equals("en")){
+            hold.postContext.setText(item.getEnContext());
+        }else{
+            hold.postContext.setText(item.getBasic_overView());
+        }
+
 
         //위치 밑줄처리
         SpannableString locationString = new SpannableString(new Location(mContext, item.getMapy(), item.getMapx()).searchLocation());
-        locationString.setSpan(new UnderlineSpan(), 0, item.getAddr1().length(), 0);
+        locationString.setSpan(new UnderlineSpan(), 0, locationString.length(), 0);
         hold.postLocation.setText(locationString);
 
         hold.postLocation.setOnClickListener(new View.OnClickListener() {
@@ -163,31 +186,51 @@ public class mainPostAdapter extends RecyclerView.Adapter {
         //Comment
         hold.postCommentText.setText(item.getCommentCount());
 
-        hold.postBookMarginRL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!DAO.chkAddBookmarking(item.getContentID())){
-                    TourApiItem titem = item.getSuper();
-                    titem.setBasic_overView("");
-                    DAO.handler.insert_spot(titem);
-                    DAO.load_bookmarkSpot();
-                    hold.postBookMarginImage.setImageResource(R.drawable.bookmark_do);
-                    int before = Integer.parseInt(item.getReadCount());
-                    hold.postBookMarginText.setText(""+(before+1));
-                    item.setReadCount(""+(before+1));
-                    addOriginal(item);
-                }else{
-                    TourApiItem titem = item.getSuper();
-                    hold.postBookMarginImage.setImageResource(R.drawable.bookmark_undo);
-                    int before = Integer.parseInt(item.getReadCount());
-                    hold.postBookMarginText.setText(""+(before-1));
-                    item.setReadCount(""+(before-1));
-                    DAO.handler.delete_spot(titem.getContentID());
-                    DAO.load_bookmarkSpot();
-                    subOriginal(item);
+        if(isLog==0){
+            hold.postBookMarginRL.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!DAO.chkAddBookmarking(item.getContentID())){
+                        TourApiItem titem = item.getSuper();
+                        titem.setBasic_overView("");
+                        if(item.getuLanguage().equals("ko")){
+                            //title ko
+                            //tr en
+                            if(DAO.Language.equals("ko")){
+                                titem.setTitle(item.getTitle());
+                            }else{
+                                titem.setTitle(item.getTrtitle());
+                            }
+                        }else if(item.getuLanguage().equals("en")){
+                            //title anything
+                            if(DAO.Language.equals("en")){
+                                titem.setTitle(item.getTitle());
+                            }else{
+                                titem.setTitle(item.getTrtitle());
+                            }
+                        }else{
+                            titem.setTitle(item.getTitle());
+                        }
+                        DAO.handler.insert_spot(titem);
+                        DAO.load_bookmarkSpot();
+                        hold.postBookMarginImage.setImageResource(R.drawable.bookmark_do);
+                        int before = Integer.parseInt(item.getReadCount());
+                        hold.postBookMarginText.setText(""+(before+1));
+                        item.setReadCount(""+(before+1));
+                        addOriginal(item);
+                    }else{
+                        TourApiItem titem = item.getSuper();
+                        hold.postBookMarginImage.setImageResource(R.drawable.bookmark_undo);
+                        int before = Integer.parseInt(item.getReadCount());
+                        hold.postBookMarginText.setText(""+(before-1));
+                        item.setReadCount(""+(before-1));
+                        DAO.handler.delete_spot(titem.getContentID());
+                        DAO.load_bookmarkSpot();
+                        subOriginal(item);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         hold.postCommentRL.setOnClickListener(new View.OnClickListener() {
             @Override

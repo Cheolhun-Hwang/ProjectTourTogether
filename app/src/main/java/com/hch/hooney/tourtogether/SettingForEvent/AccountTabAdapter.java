@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.hch.hooney.tourtogether.Fragments.Bookmarking.BCourseFragment;
+import com.hch.hooney.tourtogether.Fragments.Bookmarking.MPostFragment;
 import com.hch.hooney.tourtogether.Fragments.Bookmarking.MyDairyFragment;
 import com.hch.hooney.tourtogether.Fragments.Bookmarking.SpotFragment;
 
@@ -32,11 +33,11 @@ public class AccountTabAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
+                MPostFragment tabFragment0 = new MPostFragment();
+                return tabFragment0;
+            case 1:
                 SpotFragment tabFragment1 = new SpotFragment();
                 return tabFragment1;
-            case 1:
-                BCourseFragment tabFragment2 = new BCourseFragment();
-                return tabFragment2;
             case 2:
                 MyDairyFragment tabFragment3 = new MyDairyFragment();
                 return tabFragment3;

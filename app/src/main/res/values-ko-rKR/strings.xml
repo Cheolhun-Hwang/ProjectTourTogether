@@ -4,6 +4,9 @@
     <string name="facebook_app_id">1694306907293044</string>
     <string name="fb_login_protocol_scheme">fb1694306907293044</string>
 
+    <string name="naver_id">mFVYwtHSU2tG_s7HuXPV</string>
+    <string name="naver_secret">8MrksGIBxZ</string>
+
     <string name="nav_home">홈</string>
     <string name="nav_search">장소검색</string>
     <string name="nav_course">추천코스</string>
@@ -28,9 +31,10 @@
     <string name="recommend_tab5">캠핑</string>
     <string name="recommend_tab6">먹거리</string>
 
-    <string name="account_tab1">장소\n북마크</string>
-    <string name="account_tab2">코스\n북마크</string>
-    <string name="account_tab3">나만의\n코스</string>
+    <string name="account_tab0">나의 포스트</string>
+    <string name="account_tab1">장소 북마크</string>
+    <string name="account_tab2">코스 북마크</string>
+    <string name="account_tab3">나만의 코스</string>
 
     <string name="search_activity_Registered">등록순</string>
     <string name="search_activity_Popularity">인기순</string>
@@ -123,11 +127,16 @@
 
     <string name="setting_push">푸시 알림</string>
 
+    <string name="setting_title">설정</string>
     <string name="setting_notice">공지사항</string>
     <string name="setting_event">이벤트</string>
-    <string name="setting_translate">나만의 번역 리스트</string>
+    <string name="setting_translate">번역</string>
+    <string name="setting_translate_list">나의 번역 리스트</string>
     <string name="setting_Converter">환율 계산기</string>
+    <string name="setting_qa">건의하기</string>
     <string name="setting_logout">로그아웃</string>
+
+    <string name="location_hint"> * 위치 검색</string>
 
     <string name="login_failed">로그인에 실패하였습니다. 다시 시도해주세요.</string>
 </resources>

@@ -11,10 +11,10 @@
         android:icon="@drawable/ic_search"
         android:title="@string/nav_search" />
 
-    <item
-        android:id="@+id/navigation_course"
-        android:icon="@drawable/corse_icon"
-        android:title="@string/nav_course" />
+    <!--<item-->
+        <!--android:id="@+id/navigation_course"-->
+        <!--android:icon="@drawable/corse_icon"-->
+        <!--android:title="@string/nav_course" />-->
 
     <item
         android:id="@+id/navigation_account"

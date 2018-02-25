@@ -93,6 +93,12 @@ public class SelectMapActivity extends AppCompatActivity {
         setMap();
     }
 
+    @Override
+    public void onBackPressed() {
+        setResult(Activity.RESULT_CANCELED);
+        finish();
+    }
+
     private void setEvent(){
         back.setOnClickListener(new View.OnClickListener() {
             @Override

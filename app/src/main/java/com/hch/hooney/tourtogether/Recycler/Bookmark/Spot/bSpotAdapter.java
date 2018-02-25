@@ -79,31 +79,38 @@ public class bSpotAdapter extends RecyclerView.Adapter {
             }
         });
 
+        String txtCategory = "";
+        if(DAO.Language.equals("kr")){
+            txtCategory = "카테고리 : ";
+        }else{
+            txtCategory = "Category : ";
+        }
+
 
         if(item.getContentTypeID().equals("32")||item.getContentTypeID().equals("80")){
             intent = new Intent(mContext, DiningAndAccomodationActivity.class);
             feild = mContext.getResources().getText(R.string.search_tab6).toString();
-            hold.bs_cat.setText(feild.replace("\n", " "));
+            hold.bs_cat.setText(txtCategory+feild.replace("\n", " "));
         }else if(item.getContentTypeID().equals("12")||item.getContentTypeID().equals("76")){
             intent = new Intent(mContext, NatureActivity.class);
             feild = mContext.getResources().getText(R.string.search_tab1).toString();
-            hold.bs_cat.setText(feild.replace("\n", " "));
+            hold.bs_cat.setText(txtCategory+feild.replace("\n", " "));
         }else if(item.getContentTypeID().equals("14")||item.getContentTypeID().equals("78")){
             intent = new Intent(mContext, FacilityActivity.class);
             feild = mContext.getResources().getText(R.string.search_tab2).toString();
-            hold.bs_cat.setText(feild.replace("\n", " "));
+            hold.bs_cat.setText(txtCategory+feild.replace("\n", " "));
         }else if(item.getContentTypeID().equals("28")||item.getContentTypeID().equals("75")){
             intent = new Intent(mContext, LeisureActivity.class);
             feild = mContext.getResources().getText(R.string.search_tab3).toString();
-            hold.bs_cat.setText(feild.replace("\n", " "));
+            hold.bs_cat.setText(txtCategory+feild.replace("\n", " "));
         }else if(item.getContentTypeID().equals("38")||item.getContentTypeID().equals("79")){
             intent = new Intent(mContext, ShoppingActivity.class);
             feild = mContext.getResources().getText(R.string.search_tab4).toString();
-            hold.bs_cat.setText(feild.replace("\n", " "));
+            hold.bs_cat.setText(txtCategory+feild.replace("\n", " "));
         }else if(item.getContentTypeID().equals("39")||item.getContentTypeID().equals("82")){
             intent = new Intent(mContext, DiningAndAccomodationActivity.class);
             feild = mContext.getResources().getText(R.string.search_tab5).toString();
-            hold.bs_cat.setText(feild.replace("\n", " "));
+            hold.bs_cat.setText(txtCategory+feild.replace("\n", " "));
         }else{
             //Intent intent = new Intent(mContext, AnotherFieldActivity.class);
         }

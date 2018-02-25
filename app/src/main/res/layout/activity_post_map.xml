@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context="com.hch.hooney.tourtogether.PostMapActivity">
     <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="horizontal"
         android:background="@drawable/toplayout_shadow"
         android:layout_width="match_parent"
@@ -18,27 +20,11 @@
             android:background="@color/alpha"
             android:layout_width="48dp"
             android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/post_map_title"
-            android:textStyle="bold"
-            android:textColor="@color/MainColor"
-            android:textSize="15sp"
-            android:text="@string/post_map_title"
-            android:paddingLeft="15dp"
-            android:gravity="left|center"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-    <LinearLayout
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <EditText
+            android:hint="@string/location_hint"
             android:id="@+id/post_map_edittext"
             android:layout_weight="1"
+            android:cursorVisible="false"
             android:drawableTint="@color/orange_500"
             android:backgroundTint="@color/dark_purple_500"
             android:paddingLeft="15dp"

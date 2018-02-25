@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.util.Log;
 
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.hch.hooney.tourtogether.Database.MySQLiteHandler;
@@ -39,7 +40,6 @@ public class DAO {
 
     public static void init_static(){
         DAO.user = new USER();
-        DAO.isPush = true;
         DAO.init_bookmarkSpot();
         DAO.init_bookmarkRoute();
         DAO.init_myCourse();
