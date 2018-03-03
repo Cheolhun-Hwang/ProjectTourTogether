@@ -118,9 +118,6 @@ public class bSpotAdapter extends RecyclerView.Adapter {
         hold.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("bSpotAdapter", "ContentID : " + item.getContentID());
-                Log.d("bSpotAdapter", "Title : " + item.getTitle());
-                Log.d("bSpotAdapter", "isPost : " + item.isPost());
 
                 if(item.isPost() == 1){
                     Intent intentforPost = new Intent(mContext, PostMapActivity.class);

@@ -471,15 +471,17 @@ public class SearchFragment extends Fragment {
         };
 
         //권한을 가지고 있는지 체크
+        boolean isall = true;
         int permissionCheck = PackageManager.PERMISSION_GRANTED;
         for (int i = 0; i < permissions.length; i++) {
             permissionCheck = ContextCompat.checkSelfPermission(getActivity(), permissions[i]);
             if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+                isall = false;
                 break;
             }
         }
 
-        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+        if (isall) {
             Log.d(TAG, "권한있음");
             runGPS();
         } else {
@@ -496,13 +498,17 @@ public class SearchFragment extends Fragment {
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
         if (requestCode == SIGNAL_PERMISSON) {
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d(TAG, "권한 승인");
-                    runGPS();
-                } else {
-                    Log.d(TAG, "권한 승인되지 않음.");
+            boolean isall = true;
+            for(int temp : grantResults){
+                if(temp == PackageManager.PERMISSION_DENIED){
+                    isall = false;
                 }
+            }
+
+            if(isall){
+                runGPS();
+            }else{
+                checkDangerousPermissions();
             }
         }
     }//end of onRequestPermissionsResult

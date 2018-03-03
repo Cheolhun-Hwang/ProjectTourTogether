@@ -68,8 +68,18 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "ispost int Not NULL"+
                 ")";
 
+        String sql3 = "CREATE TABLE IF NOT EXISTS translate("+
+                "t_id text NOT NULL PRIMARY KEY, "+
+                "t_from int NOT NULL, "+
+                "t_to int NOT NULL, "+
+                "t_origin text NOT NULL, "+
+                "t_trans text NOT NULL "+
+                ")";
+
+
         db.execSQL(sql1);
         db.execSQL(sql2);
+        db.execSQL(sql3);
     }
 
     @Override
@@ -77,9 +87,11 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         Log.d(TAG, "onUpgrade.. to Delete");
         String sql1 = "DROP TABLE IF EXISTS b_spot";
         String sql2 = "DROP TABLE IF EXISTS b_course";
+        String sql3 = "DROP TABLE IF EXISTS translate";
 
         db.execSQL(sql1);
         db.execSQL(sql2);
+        db.execSQL(sql3);
 
         onCreate(db);
     }

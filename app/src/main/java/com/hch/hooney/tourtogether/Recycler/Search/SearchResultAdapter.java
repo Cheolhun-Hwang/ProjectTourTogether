@@ -54,8 +54,6 @@ public class SearchResultAdapter extends RecyclerView.Adapter {
         SearchResultHolder hold = (SearchResultHolder) holder;
         final TourApiItem item = resultList.get(position);
 
-        Log.d("Result Image", item.getFirstImage());
-
         if(item.getFirstImage().equals("")){
         }else{
             Picasso.with(mContext).load(item.getFirstImage()).into(hold.sr_Image);

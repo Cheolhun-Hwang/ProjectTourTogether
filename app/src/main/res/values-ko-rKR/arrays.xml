@@ -7,6 +7,14 @@
         <item>20 km</item>
     </string-array>
 
+    <string-array name="lang">
+        <item>한국어</item>
+        <item>영어</item>
+        <item>일본어</item>
+        <item>중국어 (간체)</item>
+        <item>중국어 (번체)</item>
+    </string-array>
+
     <string-array name="field">
         <item>@string/search_tab1</item>
         <item>@string/search_tab2</item>

@@ -94,12 +94,19 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/noimage" />
                 <LinearLayout
+                    android:paddingRight="9dp"
+                    android:paddingLeft="9dp"
+                    android:background="@drawable/edittext_background"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical"
                     android:paddingTop="7dp"
                     android:paddingBottom="7dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -126,6 +133,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -152,6 +160,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -178,9 +187,10 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         android:id="@+id/ls_result_directions_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -204,6 +214,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="vertical"
@@ -239,21 +250,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <android.support.v7.widget.RecyclerView
-                        android:background="@color/white"
+                        android:background="@color/grey_300"
                         android:id="@+id/ls_result_smallImageView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
                 <LinearLayout
+                    android:paddingLeft="9dp"
+                    android:paddingRight="9dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:paddingTop="7dp"
                     android:paddingBottom="7dp"
-                    android:background="@color/white"
+                    android:background="@drawable/edittext_background"
                     android:visibility="visible"
                     android:id="@+id/ls_result_basic_layout"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -280,6 +297,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -306,6 +324,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -332,6 +351,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -358,6 +378,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -384,6 +405,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -410,6 +432,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -436,6 +459,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -462,26 +486,35 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
-                    android:background="@color/white"
-                    android:visibility="visible"
                     android:id="@+id/ls_result_add_layout"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="9dp"
+                    android:paddingRight="9dp"
+                    android:paddingTop="7dp"
+                    android:visibility="visible">
+
                     <TextView
+                        android:id="@+id/ls_result_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edittext_background"
                         android:gravity="left"
+                        android:paddingBottom="10dp"
                         android:paddingLeft="15sp"
                         android:paddingRight="15sp"
-                        android:id="@+id/ls_result_add"
-                        android:textColor="@color/grey_600"
+                        android:paddingTop="10dp"
                         android:text="0000"
-                        android:textStyle="bold"
+                        android:textColor="@color/grey_600"
                         android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout

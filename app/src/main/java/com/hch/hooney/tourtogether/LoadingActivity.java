@@ -19,6 +19,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -77,6 +78,8 @@ public class LoadingActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
+                    MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.adsmode_id));
+
                     DAO.setCountryAndLanguage(getApplicationContext());
                     DAO.init_static();
                     DAO.init_handler(getApplicationContext());

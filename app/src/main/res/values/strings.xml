@@ -2,6 +2,8 @@
     <string name="app_name">TourTogether</string>
     <string name="facebook_app_id">1694306907293044</string>
     <string name="fb_login_protocol_scheme">fb1694306907293044</string>
+    <string name="adsmode_id">8466123349</string>
+    <string name="weather_api">fb6e08e3-0308-4c55-a1c2-eb4c39ca0265</string>
 
     <string name="naver_id">mFVYwtHSU2tG_s7HuXPV</string>
     <string name="naver_secret">8MrksGIBxZ</string>
@@ -132,6 +134,7 @@
     <string name="setting_translate_list">My translation list</string>
     <string name="setting_Converter">Currency Converter</string>
     <string name="setting_qa">Suggestions</string>
+    <string name="setting_t_a_p">Terms and Policy</string>
     <string name="setting_logout">Log out</string>
 
     <string name="location_hint"> * Search for location</string>
@@ -140,4 +143,26 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="translate_title">Translation</string>
+    <string name="translate_spinner">Select Language</string>
+    <string name="translate_hearing">Hearing</string>
+    <string name="translate_save">Save</string>
+    <string name="translate_text">* Please fill in the content to be translated.</string>
+    <string name="translate_same_Language">Please check the country you are translating.</string>
+    <string name="translate_error_speak">This feature is available after the translation.</string>
+    <string name="translate_func_save">Your translation has been saved.</string>
+
+    <string name="translate_list_title">My Translation List</string>
+    <string name="translate_list_before">Original</string>
+    <string name="translate_list_after">Translation</string>
+    <string name="translate_list_empty">No saved translations.</string>
+
+    <string name="translate_country_0">Korea</string>
+    <string name="translate_country_1">English</string>
+    <string name="translate_country_2">Japanese</string>
+    <string name="translate_country_3">Chinese (Simplified)</string>
+    <string name="translate_country_4">Chinese (Traditional)</string>
+
+    <string name="currency_converter_title">Translation</string>
 </resources>

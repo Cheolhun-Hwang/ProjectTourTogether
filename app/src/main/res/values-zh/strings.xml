@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="translate_country_0">朝鮮的</string>
+    <string name="translate_country_1">英語</string>
+    <string name="translate_country_2">日本</string>
+    <string name="translate_country_3">中文 (簡體)</string>
+    <string name="translate_country_4">中文 (繁體)</string>
+</resources>

@@ -93,141 +93,168 @@
                     android:layout_height="220dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/noimage" />
+
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_background"
+                    android:orientation="vertical"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="9dp"
+                    android:paddingRight="9dp"
+                    android:paddingTop="7dp">
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="horizontal"
                         android:id="@+id/nt_result_addr_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_addr"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="@string/result_addr"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/nt_result_addr"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:paddingLeft="10sp"
                             android:paddingRight="10sp"
-                            android:id="@+id/nt_result_addr"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="horizontal"
                         android:id="@+id/nt_result_homepage_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_homepage"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="@string/result_homepage"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/nt_result_homepage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:paddingLeft="10sp"
                             android:paddingRight="10sp"
-                            android:id="@+id/nt_result_homepage"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="horizontal"
                         android:id="@+id/nt_result_tel_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_tel"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="@string/result_tel"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/nt_result_tel"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:paddingLeft="10sp"
                             android:paddingRight="10sp"
-                            android:id="@+id/nt_result_tel"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="vertical"
                         android:id="@+id/nt_result_directions_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_direction"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@string/result_direction"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/nt_result_directions"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:paddingLeft="10sp"
                             android:paddingRight="10sp"
-                            android:id="@+id/nt_result_directions"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="vertical"
                         android:id="@+id/nt_result_overview_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_overview"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@string/result_overview"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/nt_result_overview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="left"
                             android:paddingLeft="15sp"
                             android:paddingRight="15sp"
-                            android:id="@+id/nt_result_overview"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -239,119 +266,144 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <android.support.v7.widget.RecyclerView
-                        android:background="@color/white"
+                        android:background="@color/grey_300"
                         android:id="@+id/nt_result_smallImageView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
-                    android:background="@color/white"
-                    android:visibility="visible"
                     android:id="@+id/nt_result_basic_layout"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_background"
+                    android:orientation="vertical"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="9dp"
+                    android:paddingRight="9dp"
+                    android:paddingTop="7dp"
+                    android:visibility="visible">
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="horizontal"
                         android:id="@+id/nt_result_useTime_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="13sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_useTime"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="@string/result_useTime"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/nt_result_useTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:paddingLeft="15sp"
                             android:paddingRight="15sp"
-                            android:id="@+id/nt_result_useTime"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="horizontal"
                         android:id="@+id/nt_result_restDate_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="13sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_rest"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="@string/result_rest"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/nt_result_restDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:paddingLeft="15sp"
                             android:paddingRight="15sp"
-                            android:id="@+id/nt_result_restDate"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="horizontal"
                         android:id="@+id/nt_result_contactus_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="13sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_contactus"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="@string/result_contactus"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/nt_result_contactus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:paddingLeft="15sp"
                             android:paddingRight="15sp"
-                            android:id="@+id/nt_result_contactus"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
-                    android:background="@color/white"
-                    android:visibility="visible"
                     android:id="@+id/nt_result_add_layout"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="9dp"
+                    android:paddingRight="9dp"
+                    android:paddingTop="7dp"
+                    android:visibility="visible">
+
                     <TextView
+                        android:id="@+id/nt_result_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edittext_background"
                         android:gravity="left"
+                        android:paddingBottom="10dp"
                         android:paddingLeft="15sp"
                         android:paddingRight="15sp"
-                        android:id="@+id/nt_result_add"
-                        android:textColor="@color/grey_600"
+                        android:paddingTop="10dp"
                         android:text="0000"
-                        android:textStyle="bold"
+                        android:textColor="@color/grey_600"
                         android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout

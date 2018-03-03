@@ -72,7 +72,6 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical"
-                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -94,12 +93,19 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/noimage" />
                 <LinearLayout
+                    android:paddingLeft="9dp"
+                    android:paddingRight="9dp"
+                    android:background="@drawable/edittext_background"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical"
                     android:paddingTop="7dp"
                     android:paddingBottom="7dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -126,6 +132,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -152,6 +159,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="horizontal"
@@ -178,6 +186,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="vertical"
@@ -204,6 +213,7 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:paddingRight="7dp"
                         android:paddingLeft="7dp"
                         android:orientation="vertical"
@@ -231,7 +241,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:background="@color/grey_300"
+                    android:background="@color/white"
                     android:id="@+id/sp_result_smallImageView_layout"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
@@ -239,197 +249,234 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <android.support.v7.widget.RecyclerView
-                        android:background="@color/white"
+                        android:background="@color/grey_300"
                         android:id="@+id/sp_result_smallImageView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
-                    android:background="@color/white"
-                    android:visibility="visible"
                     android:id="@+id/sp_result_basic_layout"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_background"
+                    android:orientation="vertical"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="9dp"
+                    android:paddingRight="9dp"
+                    android:paddingTop="7dp"
+                    android:visibility="visible">
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="horizontal"
                         android:id="@+id/sp_result_openTime_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="13sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_openingHours"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="@string/result_openingHours"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/sp_result_openTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:paddingLeft="15sp"
                             android:paddingRight="15sp"
-                            android:id="@+id/sp_result_openTime"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="horizontal"
                         android:id="@+id/sp_result_rest_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="13sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_rest"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="@string/result_rest"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/sp_result_rest"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:paddingLeft="15sp"
                             android:paddingRight="15sp"
-                            android:id="@+id/sp_result_rest"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="horizontal"
                         android:id="@+id/sp_result_saleItem_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="13sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_saleGoods"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="@string/result_saleGoods"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/sp_result_saleItem"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:paddingLeft="15sp"
                             android:paddingRight="15sp"
-                            android:id="@+id/sp_result_saleItem"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="horizontal"
                         android:id="@+id/sp_result_parking_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="13sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_parking"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="@string/result_parking"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/sp_result_parking"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:paddingLeft="15sp"
                             android:paddingRight="15sp"
-                            android:id="@+id/sp_result_parking"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="horizontal"
                         android:id="@+id/sp_result_restRoom_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="13sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_restRoom"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="@string/result_restRoom"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/sp_result_restRoom"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:paddingLeft="15sp"
                             android:paddingRight="15sp"
-                            android:id="@+id/sp_result_restRoom"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:paddingRight="7dp"
-                        android:paddingLeft="7dp"
-                        android:orientation="horizontal"
                         android:id="@+id/sp_result_infoCenter_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp">
+
                         <TextView
-                            android:textSize="13sp"
-                            android:textColor="@color/black"
-                            android:text="@string/result_contactus"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="@string/result_contactus"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
                         <TextView
+                            android:id="@+id/sp_result_infoCenter"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:paddingLeft="15sp"
                             android:paddingRight="15sp"
-                            android:id="@+id/sp_result_infoCenter"
-                            android:textColor="@color/grey_600"
                             android:text="0000"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_600"
                             android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
-                    android:background="@color/white"
-                    android:visibility="visible"
                     android:id="@+id/sp_result_add_layout"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="9dp"
+                    android:paddingRight="9dp"
+                    android:paddingTop="7dp"
+                    android:visibility="visible">
+
                     <TextView
+                        android:id="@+id/sp_result_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edittext_background"
                         android:gravity="left"
+                        android:paddingBottom="10dp"
                         android:paddingLeft="15sp"
                         android:paddingRight="15sp"
-                        android:id="@+id/sp_result_add"
-                        android:textColor="@color/grey_600"
+                        android:paddingTop="10dp"
                         android:text="0000"
-                        android:textStyle="bold"
+                        android:textColor="@color/grey_600"
                         android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout

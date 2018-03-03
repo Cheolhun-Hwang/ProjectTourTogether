@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.hch.hooney.tourtogether.DAO.TourApiItem;
+import com.hch.hooney.tourtogether.Recycler.Translate.TranslateItem;
 
 /**
  * Created by hch on 2018-02-03.
@@ -77,6 +78,17 @@ public class MySQLiteHandler {
         db.insert("b_course", null, vales);
     }
 
+    public void insert_translate(TranslateItem item){
+        db = helper.getWritableDatabase();
+        ContentValues vales = new ContentValues();
+        vales.put("t_id", item.getT_id());
+        vales.put("t_from", item.getT_from());
+        vales.put("t_to", item.getT_to());
+        vales.put("t_origin", item.getT_origin());
+        vales.put("t_trans", item.getT_translate());
+        db.insert("translate", null, vales);
+    }
+
     public void updeate_spot(TourApiItem item){
         db = helper.getWritableDatabase();
         ContentValues vales = new ContentValues();
@@ -125,14 +137,26 @@ public class MySQLiteHandler {
         db.update("b_course", vales, "contentid = ?", new String[]{item.getContentID()});
     }
 
-    public void delete_spot(String contentid){
+    public void update_translate(TranslateItem item){
+        db = helper.getWritableDatabase();
         ContentValues vales = new ContentValues();
+        vales.put("t_from", item.getT_from());
+        vales.put("t_to", item.getT_to());
+        vales.put("t_origin", item.getT_origin());
+        vales.put("t_trans", item.getT_translate());
+        db.update("translate", vales, "t_id = ?", new String[]{item.getT_id()});
+    }
+
+    public void delete_spot(String contentid){
         db.delete("b_spot", "contentid = ?", new String[]{contentid});
     }
 
     public void delete_course(String contentid){
-        ContentValues vales = new ContentValues();
         db.delete("b_course", "contentid = ?", new String[]{contentid});
+    }
+
+    public void delete_translate(String id){
+        db.delete("translate", "t_id = ?", new String[]{id});
     }
 
     public Cursor selectAll_spot(){
@@ -147,11 +171,12 @@ public class MySQLiteHandler {
         return c;
     }
 
-    public Cursor selectAll_setting(){
+    public Cursor selectAll_translate(){
         db = helper.getWritableDatabase();
-        Cursor c = db.query("setting", null, null, null, null, null, null);
+        Cursor c = db.query("translate", null, null, null, null, null, null);
         return c;
     }
+
 
     public Cursor selectByID_spot(String contentid){
         db = helper.getWritableDatabase();

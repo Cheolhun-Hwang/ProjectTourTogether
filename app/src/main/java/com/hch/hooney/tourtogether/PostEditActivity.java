@@ -222,14 +222,14 @@ public class PostEditActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 int length = s.length();
-                if(length > 300){
+                if(length > 150){
                     isContextRight = false;
                     textCount.setTextColor(getResources().getColor(R.color.red_400));
                 }else{
                     isContextRight = true;
                     textCount.setTextColor(getResources().getColor(R.color.grey_600));
                 }
-                textCount.setText(length+" / 300");
+                textCount.setText(length+" / 150");
             }
 
             @Override
@@ -414,7 +414,7 @@ public class PostEditActivity extends AppCompatActivity {
                     Log.d("Bitmap", "before ==> width : " + mainPostImage.getWidth()+" / Height : " + mainPostImage.getHeight());
 
                     //리사이즈
-                    mainPostImage = resizeBitmapImageFn(mainPostImage, 480);
+                    mainPostImage = resizeBitmapImageFn(mainPostImage, 400);
                     Log.d("Bitmap", "after ==> width : " + mainPostImage.getWidth()+" / Height : " + mainPostImage.getHeight());
                 } catch (IOException e) {
                     e.printStackTrace();

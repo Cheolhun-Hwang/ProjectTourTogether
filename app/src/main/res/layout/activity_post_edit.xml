@@ -183,7 +183,7 @@
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/create_post_textCount"
-                    android:text="0 / 300"
+                    android:text="0 / 150"
                     android:textSize="10sp"
                     android:gravity="right"
                     android:textColor="@color/grey_600"

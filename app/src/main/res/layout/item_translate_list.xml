@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/round_login_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/item_translateList_from"
+                android:paddingRight="7dp"
+                android:paddingLeft="7dp"
+                android:textStyle="italic"
+                android:textColor="@color/grey_700"
+                android:textSize="16sp"
+                android:text="from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_marginRight="7dp"
+                android:layout_marginLeft="7dp"
+                android:src="@drawable/arrow_right"
+                android:scaleType="fitCenter"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+            <TextView
+                android:id="@+id/item_translateList_to"
+                android:paddingRight="7dp"
+                android:paddingLeft="7dp"
+                android:textStyle="italic"
+                android:textColor="@color/grey_700"
+                android:textSize="16sp"
+                android:text="to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:gravity="right"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageButton
+                    android:id="@+id/item_translateList_remove"
+                    android:src="@drawable/ic_close_red"
+                    android:scaleType="fitCenter"
+                    android:background="@color/alpha"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="9sp"
+                android:text="@string/translate_list_before"
+                android:textColor="@color/grey_700"
+                android:textStyle="italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/item_translateList_origin"
+                android:text="original text"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:src="@drawable/ic_swap_vert"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+            <TextView
+                android:textSize="9sp"
+                android:text="@string/translate_list_after"
+                android:textColor="@color/grey_700"
+                android:textStyle="italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/item_translateList_translate"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="translate text"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:gravity="right"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/item_translateList_hearing"
+                    android:src="@drawable/ic_hearing_white"
+                    android:background="@drawable/round"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        
+    </LinearLayout>
+</LinearLayout>

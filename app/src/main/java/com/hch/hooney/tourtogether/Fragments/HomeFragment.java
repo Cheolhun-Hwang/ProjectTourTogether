@@ -59,9 +59,14 @@ public class HomeFragment extends Fragment {
 
         init();
         setEvent();
-        setUI();
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        loadDataOnServer();
     }
 
     private void init(){
@@ -89,14 +94,13 @@ public class HomeFragment extends Fragment {
     }
 
     private void setUI(){
-        mainRecyclerview.setAdapter(new mainPostAdapter(getContext(), mainList, mainRecyclerview));
+        if(mainList.size() > 0){
+            mainRecyclerview.setAdapter(new mainPostAdapter(getContext(), mainList, mainRecyclerview));
+        }
     }
 
     @Override
     public void onResume() {
-
-        loadDataOnServer();
-
         super.onResume();
     }
 
@@ -111,8 +115,7 @@ public class HomeFragment extends Fragment {
                     item.setContentID(items.getKey());
                     mainList.add(0, item);
                 }
-
-                mainRecyclerview.getAdapter().notifyDataSetChanged();
+                setUI();
                 asyncDialog.dismiss();
             }
 

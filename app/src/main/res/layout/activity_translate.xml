@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.hch.hooney.tourtogether.TranslateActivity">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@drawable/toplayout_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+        <ImageButton
+            android:id="@+id/translate_back"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_chevron_left"
+            android:background="@color/alpha"
+            android:layout_width="48dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/sp_result_field"
+            android:textStyle="bold"
+            android:textColor="@color/MainColor"
+            android:textSize="15sp"
+            android:text="@string/translate_title"
+            android:paddingLeft="15dp"
+            android:gravity="left|center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@color/grey_300"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/translate_adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                ads:adSize="BANNER"
+                ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/round_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Spinner
+                    android:layout_weight="1"
+                    android:id="@+id/tr_spinner_from"
+                    android:entries="@array/lang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <ImageButton
+                    android:id="@+id/translate_switch_spinner"
+                    android:background="@drawable/basic_btn"
+                    android:src="@drawable/ic_compare_arrows"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:layout_weight="1"
+                    android:id="@+id/tr_spinner_to"
+                    android:entries="@array/lang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:background="@drawable/edittext_background_2"
+                    android:padding="9dp"
+                    android:gravity="top|left"
+                    android:lines="7"
+                    android:textSize="13sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/translate_editText" />
+
+                <TextView
+                    android:id="@+id/translate_textCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/translate_runTR"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="9dp"
+                    android:text="0/100"
+                    android:textColor="@color/grey_700"
+                    android:textSize="12sp" />
+
+                <ImageButton
+                    android:id="@+id/translate_runTR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/translate_editText"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/round"
+                    android:src="@drawable/ic_g_translate" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/translate_result_textview"
+                android:padding="5dp"
+                android:text="@string/translate_text"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="35dp">
+
+                <Button
+                    android:id="@+id/translate_healing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/basic_white"
+                    android:drawableStart="@drawable/ic_hearing"
+                    android:text="@string/translate_hearing"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/translate_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/basic_btn"
+                    android:drawableStart="@drawable/ic_add_white"
+                    android:text="@string/translate_save"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

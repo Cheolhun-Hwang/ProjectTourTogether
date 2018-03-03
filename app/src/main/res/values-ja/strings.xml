@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="translate_country_0">韓国語</string>
+    <string name="translate_country_1">英語</string>
+    <string name="translate_country_2">日本語</string>
+    <string name="translate_country_3">中国語 (簡体)</string>
+    <string name="translate_country_4">中国語 (本体)</string>
+</resources>

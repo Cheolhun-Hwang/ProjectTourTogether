@@ -53,129 +53,350 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:background="@color/grey_200"
+
+    <RelativeLayout
+        android:paddingBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:padding="15dp"
-            android:gravity="center"
-            android:background="@color/white"
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </LinearLayout>
-        <LinearLayout
-            android:gravity="center"
-            android:layout_marginTop="9dp"
-            android:layout_marginBottom="9dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:padding="5dp"
-            android:orientation="horizontal"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:text="@string/setting_push"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/setting_push"
-                android:paddingRight="50dp"
-                android:paddingLeft="50dp"
-                android:textOn="On"
-                android:textOff="Off"
-                android:checked="true"
-                android:theme="@style/MySwitch"
-                android:switchMinWidth="100dp"
-                android:switchPadding="20dp"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:gravity="center"
-            android:layout_marginTop="9dp"
-            android:layout_marginBottom="9dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:padding="5dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/setting_notice"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/basic_white"
-                android:text="@string/setting_notice"
-                android:visibility="visible" />
-            <Button
-                android:visibility="gone"
-                android:layout_marginBottom="1dp"
-                android:id="@+id/setting_event"
-                android:text="@string/setting_event"
-                android:background="@drawable/basic_white"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/setting_translate"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/basic_white"
-                android:text="@string/setting_translate"
-                android:visibility="visible" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:background="@color/grey_200"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/setting_translate_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/basic_white"
-                android:text="@string/setting_translate_list"
-                android:visibility="visible" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@color/MainColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/setting_convert"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/basic_white"
-                android:text="@string/setting_Converter"
-                android:visibility="visible" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-            <Button
-                android:layout_marginBottom="1dp"
-                android:id="@+id/setting_qa"
-                android:text="@string/setting_qa"
-                android:background="@drawable/basic_white"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                            <TextView
+                                android:layout_alignParentBottom="true"
+                                android:paddingBottom="10dp"
+                                android:id="@+id/weather_spot_name"
+                                android:paddingLeft="10dp"
+                                android:textStyle="bold|italic"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:text="Now Spot"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent" />
 
-            <Button
-                android:layout_marginBottom="1dp"
-                android:id="@+id/setting_logout"
-                android:text="@string/setting_logout"
-                android:background="@drawable/basic_white"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+                            <ImageButton
+                                android:id="@+id/weather_spot_refresh"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/ic_autorenew"
+                                android:background="@drawable/round"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
 
-    </LinearLayout>
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:background="@color/MainColor"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/weather_today_text"
+                                    android:gravity="center"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/white"
+                                    android:text="Today"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                                <ImageView
+                                    android:src="@drawable/sun"
+                                    android:id="@+id/weather_today_image"
+                                    android:scaleType="fitCenter"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="48dp" />
+
+                                <TextView
+                                    android:paddingRight="10dp"
+                                    android:gravity="right"
+                                    android:textSize="11sp"
+                                    android:textColor="@color/white"
+                                    android:id="@+id/weather_today_tmin"
+                                    android:text="min : 0"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+                                <TextView
+                                    android:paddingRight="10dp"
+                                    android:gravity="right"
+                                    android:textSize="11sp"
+                                    android:textColor="@color/white"
+                                    android:id="@+id/weather_today_tmax"
+                                    android:text="max : 0"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:background="@color/MainColor"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <TextView
+                                    android:id="@+id/weather_tomorrow_text"
+                                    android:gravity="center"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/white"
+                                    android:text="Tomorrow"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                                <ImageView
+                                    android:src="@drawable/sun"
+                                    android:id="@+id/weather_tomorrow_image"
+                                    android:scaleType="fitCenter"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="48dp" />
+
+                                <TextView
+                                    android:paddingRight="10dp"
+                                    android:gravity="right"
+                                    android:textSize="11sp"
+                                    android:textColor="@color/white"
+                                    android:id="@+id/weather_tomorrow_tmin"
+                                    android:text="min : 0"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+                                <TextView
+                                    android:paddingRight="10dp"
+                                    android:gravity="right"
+                                    android:textSize="11sp"
+                                    android:textColor="@color/white"
+                                    android:id="@+id/weather_tomorrow_tmax"
+                                    android:text="max : 0"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:background="@color/MainColor"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <TextView
+                                    android:id="@+id/weather_dayaftertomorrow_text"
+                                    android:gravity="center"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/white"
+                                    android:text="Day after Tomorrow"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                                <ImageView
+                                    android:src="@drawable/sun"
+                                    android:id="@+id/weather_dayaftertomorrow_image"
+                                    android:scaleType="fitCenter"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="48dp" />
+
+                                <TextView
+                                    android:paddingRight="10dp"
+                                    android:gravity="right"
+                                    android:textSize="11sp"
+                                    android:textColor="@color/white"
+                                    android:id="@+id/weather_dayaftertomorrow_tmin"
+                                    android:text="min : 0"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+                                <TextView
+                                    android:paddingRight="10dp"
+                                    android:gravity="right"
+                                    android:textSize="11sp"
+                                    android:textColor="@color/white"
+                                    android:id="@+id/weather_dayaftertomorrow_tmax"
+                                    android:text="max : 0"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginBottom="9dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:padding="5dp"
+                        android:orientation="horizontal"
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:text="@string/setting_push"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <android.support.v7.widget.SwitchCompat
+                            android:id="@+id/setting_push"
+                            android:paddingRight="50dp"
+                            android:paddingLeft="50dp"
+                            android:textOn="On"
+                            android:textOff="Off"
+                            android:checked="true"
+                            android:theme="@style/MySwitch"
+                            android:switchMinWidth="100dp"
+                            android:switchPadding="20dp"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginBottom="9dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:padding="5dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:id="@+id/setting_notice"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="1dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/basic_white"
+                            android:text="@string/setting_notice"
+                            android:visibility="visible" />
+                        <Button
+                            android:visibility="gone"
+                            android:layout_marginBottom="1dp"
+                            android:id="@+id/setting_event"
+                            android:text="@string/setting_event"
+                            android:background="@drawable/basic_white"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <Button
+                            android:id="@+id/setting_translate"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="1dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/basic_white"
+                            android:text="@string/setting_translate"
+                            android:visibility="visible" />
+
+                        <Button
+                            android:id="@+id/setting_translate_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="1dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/basic_white"
+                            android:text="@string/setting_translate_list"
+                            android:visibility="visible" />
+
+                        <Button
+                            android:id="@+id/setting_convert"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="1dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/basic_white"
+                            android:text="@string/setting_Converter"
+                            android:visibility="visible" />
+
+                        <Button
+                            android:layout_marginBottom="1dp"
+                            android:id="@+id/setting_qa"
+                            android:text="@string/setting_qa"
+                            android:background="@drawable/basic_white"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <Button
+                            android:layout_marginBottom="1dp"
+                            android:id="@+id/setting_t_a_p"
+                            android:text="@string/setting_t_a_p"
+                            android:background="@drawable/basic_white"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <Button
+                            android:layout_marginBottom="1dp"
+                            android:id="@+id/setting_logout"
+                            android:text="@string/setting_logout"
+                            android:background="@drawable/basic_white"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:paddingTop="10dp"
+                        android:paddingBottom="70dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:gravity="center"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:text="Contact us : qewqsa@naver.com\n\nCopyright © TourTogether"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/setting_adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
+
+    </RelativeLayout>
+
 </LinearLayout>
