@@ -141,9 +141,6 @@
 
     <string name="login_failed">Login failed. please try again.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="translate_title">Translation</string>
     <string name="translate_spinner">Select Language</string>
     <string name="translate_hearing">Hearing</string>

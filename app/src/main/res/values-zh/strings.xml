@@ -1,5 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">TourTogether</string>
+    <string name="facebook_app_id">1694306907293044</string>
+    <string name="fb_login_protocol_scheme">fb1694306907293044</string>
+    <string name="adsmode_id">8466123349</string>
+    <string name="weather_api">fb6e08e3-0308-4c55-a1c2-eb4c39ca0265</string>
+
+    <string name="naver_id">mFVYwtHSU2tG_s7HuXPV</string>
+    <string name="naver_secret">8MrksGIBxZ</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_course">Course</string>
+    <string name="nav_account">Account</string>
+
+    <string name="search_q1">1. Set Location</string>
+    <string name="search_q2">2. Set Field</string>
+    <string name="search_area">Search Area</string>
+    <string name="search_radius">Search Radius</string>
+
+    <string name="search_tab1">Nature</string>
+    <string name="search_tab2">Culture /\nHistory</string>
+    <string name="search_tab3">Leisure\nSports</string>
+    <string name="search_tab4">Shopping</string>
+    <string name="search_tab5">Food</string>
+    <string name="search_tab6">Accom-\nmodation</string>
+
+    <string name="recommend_tab1">Family</string>
+    <string name="recommend_tab2">Alone</string>
+    <string name="recommend_tab3">Healing</string>
+    <string name="recommend_tab4">Walking</string>
+    <string name="recommend_tab5">Camping</string>
+    <string name="recommend_tab6">Taste</string>
+
+    <string name="account_tab0">My Post</string>
+    <string name="account_tab1">Bookmark\nSpot</string>
+    <string name="account_tab2">Bookmark\nCourse</string>
+    <string name="account_tab3">My Travel\nCourse</string>
+
+    <string name="search_activity_Registered">Registered</string>
+    <string name="search_activity_Popularity">Popularity</string>
+    <string name="search_activity_NoneList">Search result does not exist.\nWe will try to provide many services.</string>
+    <string name="bookmark_add">Complete Adding to My Route.</string>
+    <string name="mycourse_info">Create your own course\nthrough bookmarked places.</string>
+
+    <string name="bookmark_remove">Complete Removing from Bookmark.</string>
+    <string name="mycourse_remove">Complete Removing from My Route.</string>
+
+    <string name="service_location_check_gps_net">Please check if GPS or network is allowed.</string>
+    <string name="service_location_check_gps">GPS presence setting.</string>
+    <string name="service_location_check_gps_msg">No GPS settings\nDo you want to go to the settings window?</string>
+
+    <string name="notify_get_gps">It will automatically be returned\nto your Korean address.</string>
+    <string name="notify_search_Fail">Please fill in the form.</string>
+    <string name="notify_loading_data">Loading.</string>
+    <string name="notify_add_bookmarking">Complete Adding to Bookmark.</string>
+    <string name="notify_already_add_bookmarking">Already added it to your bookmarks.</string>
+
+    <string name="error_location_set_areacode">Invalid request.\nPlease check your GPS again.</string>
+    <string name="error_intent">Error. Please try again.</string>
+    <string name="error_gps_loading">GPS signal is in preparation.\nplease try again.</string>
+    <string name="error_location">Your current location is not in Korea.</string>
+
+    <string name="result_addr">Address</string>
+    <string name="result_homepage">Homepage</string>
+    <string name="result_tel">Tel</string>
+    <string name="result_direction">Directions</string>
+    <string name="result_overview">Overview</string>
+    <string name="result_contactus">Contact Us</string>
+    <string name="result_parking">Parking</string>
+    <string name="result_parkingFee">Parking Fee</string>
+    <string name="result_cooking">Cooking</string>
+    <string name="result_chkIn">Check In</string>
+    <string name="result_chkOut">Check Out</string>
+    <string name="result_roomType">Room Type</string>
+    <string name="result_foodAndBeverage">Food And Beverage</string>
+    <string name="result_subFacility">Sub Facility</string>
+    <string name="result_reservation">Reservation</string>
+    <string name="result_openingHours">Open</string>
+    <string name="result_cookMenu">Menu</string>
+    <string name="result_rest">Rest</string>
+    <string name="result_smoke">Smoking Place</string>
+    <string name="result_useTime">Usage Time</string>
+    <string name="result_spendtime">Take Time</string>
+    <string name="result_fee">Fee</string>
+    <string name="result_openPeriod">Open Period</string>
+    <string name="result_saleGoods">Sale Goods</string>
+    <string name="result_restRoom">Restroom</string>
+
+    <string name="course_total_distance">Total distance</string>
+    <string name="course_time">Time</string>
+
+    <string name="map_select_gps">Selected</string>
+    <string name="map_select_title">Please choose a place.</string>
+    <string name="map_select_check_edittext">Please check input address.</string>
+
+    <string name="create_mycourse_title">Create My Course</string>
+    <string name="create_mycourse_finish">Complete</string>
+    <string name="create_mycourse_form_title">Title : </string>
+    <string name="create_mycourse_form_course">Course : </string>
+
+    <string name="add_course_add_Error">When registering your own course,\nyou must specify at least one place.</string>
+    <string name="add_course_add_Error_title">When you register your course,\nyou need the title of the course.</string>
+
+    <string name="create_post_title">Create Post.</string>
+    <string name="create_post_complete">Completed</string>
+    <string name="create_post_select_field">1. * Select Field</string>
+    <string name="create_post_select_location">2. * Select Location</string>
+    <string name="create_post_detailed_location">* write detail location name.</string>
+    <string name="create_post_selected_gallery">3. Select Photo in gallery.</string>
+    <string name="create_post_write_context">4. * Write post content.</string>
+
+    <string name="create_post_error_location">Please select all place selection forms.</string>
+    <string name="create_post_error_content">Please fill in the post content.</string>
+
+    <string name="create_post_alert_title">Post upload</string>
+    <string name="create_post_alert_msg">Would you want to upload the post?</string>
+    <string name="create_post_alert_cancel">canceled the post upload.</string>
+    <string name="create_post_alert_complete">uploaded a post.</string>
+
+    <string name="post_map_title">View post by map.</string>
+
+    <string name="post_comment_zero_comment">Write your first comment.</string>
+    <string name="post_comment_error_fill_form">Write a comment before you can send it.</string>
+
+    <string name="popup_menu_remove">remove</string>
+
+    <string name="setting_push">Push Alarm</string>
+
+    <string name="setting_title">Setting</string>
+    <string name="setting_notice">Notice</string>
+    <string name="setting_event">Event</string>
+    <string name="setting_translate">translation</string>
+    <string name="setting_translate_list">My translation list</string>
+    <string name="setting_Converter">Currency Converter</string>
+    <string name="setting_qa">Suggestions</string>
+    <string name="setting_t_a_p">Terms and Policy</string>
+    <string name="setting_logout">Log out</string>
+
+    <string name="location_hint"> * Search for location</string>
+
+    <string name="login_failed">Login failed. please try again.</string>
+
+    <string name="translate_title">Translation</string>
+    <string name="translate_spinner">Select Language</string>
+    <string name="translate_hearing">Hearing</string>
+    <string name="translate_save">Save</string>
+    <string name="translate_text">* Please fill in the content to be translated.</string>
+    <string name="translate_same_Language">Please check the country you are translating.</string>
+    <string name="translate_error_speak">This feature is available after the translation.</string>
+    <string name="translate_func_save">Your translation has been saved.</string>
+
+    <string name="translate_list_title">My Translation List</string>
+    <string name="translate_list_before">Original</string>
+    <string name="translate_list_after">Translation</string>
+    <string name="translate_list_empty">No saved translations.</string>
+
+    <string name="currency_converter_title">Translation</string>
     <string name="translate_country_0">朝鮮的</string>
     <string name="translate_country_1">英語</string>
     <string name="translate_country_2">日本</string>

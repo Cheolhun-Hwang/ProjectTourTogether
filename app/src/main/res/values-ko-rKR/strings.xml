@@ -4,6 +4,7 @@
     <string name="facebook_app_id">1694306907293044</string>
     <string name="fb_login_protocol_scheme">fb1694306907293044</string>
     <string name="adsmode_id">8466123349</string>
+    <string name="weather_api">fb6e08e3-0308-4c55-a1c2-eb4c39ca0265</string>
 
     <string name="naver_id">mFVYwtHSU2tG_s7HuXPV</string>
     <string name="naver_secret">8MrksGIBxZ</string>

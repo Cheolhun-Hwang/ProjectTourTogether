@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string-array name="radius">
+        <item>2 km</item>
+        <item>5 km</item>
+        <item>10 km</item>
+        <item>20 km</item>
+    </string-array>
+
+
     <string-array name="lang">
         <item>朝鮮的</item>
         <item>英語</item>
@@ -7,4 +16,14 @@
         <item>中文 (簡體)</item>
         <item>中文 (繁體)</item>
     </string-array>
+
+    <string-array name="field">
+        <item>@string/search_tab1</item>
+        <item>@string/search_tab2</item>
+        <item>@string/search_tab3</item>
+        <item>@string/search_tab4</item>
+        <item>@string/search_tab5</item>
+        <item>@string/search_tab6</item>
+    </string-array>
+
 </resources>
