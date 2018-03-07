@@ -21,13 +21,14 @@
             android:layout_width="48dp"
             android:layout_height="match_parent" />
         <EditText
+            android:layout_marginLeft="15dp"
             android:singleLine="true"
             android:maxLines="1"
             android:hint="@string/location_hint"
             android:id="@+id/post_map_edittext"
             android:layout_weight="1"
             android:cursorVisible="false"
-            android:background="@drawable/edittext_background_2"
+            android:background="@drawable/edittext_background"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:layout_width="match_parent"
@@ -36,7 +37,7 @@
             android:id="@+id/post_map_search_btn"
             android:src="@drawable/ic_search_white"
             android:background="@drawable/basic_btn"
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

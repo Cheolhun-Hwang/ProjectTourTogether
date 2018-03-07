@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.LoginActivity;
 import com.hch.hooney.tourtogether.R;
@@ -126,9 +128,10 @@ public class AccountFragment extends Fragment {
             switch (resultCode){
                 case 9008:
                     //logout
-                    DAO.mAuth.signOut();
-                    DAO.fUser = null;
                     saveAutoLoginPreferences(0);
+                    FirebaseAuth.getInstance().getCurrentUser().delete();
+                    FirebaseAuth.getInstance().signOut();
+
                     startActivity(new Intent(getContext(), LoginActivity.class));
                     getActivity().finish();
                     break;

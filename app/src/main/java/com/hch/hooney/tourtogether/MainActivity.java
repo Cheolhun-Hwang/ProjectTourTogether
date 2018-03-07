@@ -1,6 +1,9 @@
 package com.hch.hooney.tourtogether;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.hch.hooney.tourtogether.DAO.DAO;
 import com.hch.hooney.tourtogether.DAO.USER;
 import com.hch.hooney.tourtogether.Fragments.AccountFragment;
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     //Layout Resource
     private BottomNavigationView navigation;
     private ImageButton post_on_Map;
+    private String regId;
 
     //variable
     private FragmentManager manager;
@@ -164,6 +169,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        DAO.fUser = DAO.mAuth.getCurrentUser();
     }
 }

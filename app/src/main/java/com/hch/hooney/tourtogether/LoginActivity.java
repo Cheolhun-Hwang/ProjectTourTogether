@@ -1,5 +1,6 @@
 package com.hch.hooney.tourtogether;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -47,8 +48,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private CallbackManager callbackManager;
     private GoogleApiClient mGoogleApiClient;
+    private FirebaseUser fUser;
+    private FirebaseAuth mAuth;
     private ImageButton facebookLogin;
     private ImageButton googleLogin;
+    private ProgressDialog asyncDialog;
 
     private DatabaseReference rootRef;
     private DatabaseReference userRef;
@@ -64,6 +68,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void init(){
+        asyncDialog = new ProgressDialog(this);
+        asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        asyncDialog.setMessage(getResources().getString(R.string.notify_loading_data));
+
+        mAuth = FirebaseAuth.getInstance();
         facebookLogin = (ImageButton) findViewById(R.id.facebook_imageBTN);
         googleLogin = (ImageButton) findViewById(R.id.google_imageBTN);
         rootRef = FirebaseDatabase.getInstance().getReference();
@@ -91,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
         googleLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                asyncDialog.show();
                 signIn();
             }
         });
@@ -125,18 +135,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        DAO.mAuth.signInWithCredential(credential)
+        mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            DAO.fUser = DAO.mAuth.getCurrentUser();
-                            saveAutoLoginPreferences(1);
+                            fUser = mAuth.getCurrentUser();
+                            saveAutoLoginPreferences(1, fUser.getToken(true).toString());
+                            asyncDialog.dismiss();
                             after_complete_login();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -156,7 +165,6 @@ public class LoginActivity extends AppCompatActivity {
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(final LoginResult result) {
-                facebookLogin.setVisibility(View.GONE);
                 handleFacebookAccessToken(result.getAccessToken());
             }
 
@@ -177,15 +185,15 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        DAO.mAuth.signInWithCredential(credential)
+        mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            DAO.fUser = DAO.mAuth.getCurrentUser();
-                            saveAutoLoginPreferences(2);
+                            fUser = mAuth.getCurrentUser();
+                            saveAutoLoginPreferences(2, fUser.getToken(true).toString());
                             after_complete_login();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -198,21 +206,22 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void after_complete_login(){
-        DAO.user.setUID(DAO.fUser.getUid());
-        DAO.user.setUNAME(DAO.fUser.getDisplayName());
-        DAO.user.setUPROFILEIMAGE(DAO.fUser.getPhotoUrl().toString());
-        DAO.user.setUEMAIL(DAO.fUser.getEmail());
-        DAO.user.setUPHONE(DAO.fUser.getPhoneNumber());
+        DAO.user.setUID(fUser.getUid());
+        DAO.user.setUNAME(fUser.getDisplayName());
+        DAO.user.setUPROFILEIMAGE(fUser.getPhotoUrl().toString());
+        DAO.user.setUEMAIL(fUser.getEmail());
+        DAO.user.setUPHONE(fUser.getPhoneNumber());
         userRef.child(DAO.user.getUID()).setValue(DAO.user);
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         finish();
     }
 
-    private void saveAutoLoginPreferences(int num){
+    private void saveAutoLoginPreferences(int num, String token){
         //구글 1 페이스북 2 나머지 0
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt("autologin", num);
+        editor.putString("token", token);
         editor.commit();
     }
 

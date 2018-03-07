@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -164,6 +165,9 @@ public class PostMapActivity extends AppCompatActivity {
                 searchLocation(addrEditText.getText().toString());
                 focusMap();
                 addrEditText.setText("");
+                //키보드 숨기기
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(addrEditText.getWindowToken(), 0);
             }
         });
         tab1.setOnClickListener(new View.OnClickListener() {
@@ -343,6 +347,7 @@ public class PostMapActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), PostCommentActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("contentid", item.getContentID());
+                        intent.putExtra("user", item.getUId());
                         intent.putExtra("title", item.getTitle());
                         startActivity(intent);
                     }

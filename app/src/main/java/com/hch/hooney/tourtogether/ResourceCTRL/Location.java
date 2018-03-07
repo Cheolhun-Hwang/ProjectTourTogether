@@ -3,7 +3,6 @@ package com.hch.hooney.tourtogether.ResourceCTRL;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.hch.hooney.tourtogether.DAO.DAO;
@@ -57,7 +56,6 @@ public class Location {
                         }
                         result_addr = outAddrStr.toString();
                     }
-                    Log.d("Location", "Now : "+result_addr);
                     return result_addr;
                 }
             }

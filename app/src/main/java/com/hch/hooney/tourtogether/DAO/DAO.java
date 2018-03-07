@@ -27,9 +27,6 @@ public class DAO {
     public static String Language="";
     public static USER user;
     public static String nowVersion;
-    public static FirebaseUser fUser;
-    public static FirebaseAuth mAuth;
-    public static boolean isPush;
 
     public static MySQLiteHandler handler;
 

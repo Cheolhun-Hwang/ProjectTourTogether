@@ -41,7 +41,7 @@ public class SettingActivity extends AppCompatActivity {
     private AdView adView;
     private ImageButton back, weather_refresh;
     private SwitchCompat push;
-    private Button logout, notice, traslate, traslateList, CurrencyConvert, qa;
+    private Button logout, notice, traslate, traslateList, CurrencyConvert, qa, termAndPolicy;
     private TextView version;
     private Handler handler;
 
@@ -81,6 +81,7 @@ public class SettingActivity extends AppCompatActivity {
         traslate = (Button) findViewById(R.id.setting_translate);
         traslateList = (Button) findViewById(R.id.setting_translate_list);
         CurrencyConvert = (Button) findViewById(R.id.setting_convert);
+        termAndPolicy = (Button) findViewById(R.id.setting_t_a_p);
 
         weather_spot_name = (TextView) findViewById(R.id.weather_spot_name);
         weather_refresh = (ImageButton) findViewById(R.id.weather_spot_refresh);
@@ -96,7 +97,7 @@ public class SettingActivity extends AppCompatActivity {
 
         qa = (Button)findViewById(R.id.setting_qa);
 
-        if(DAO.isPush){
+        if(getisPush()){
             push.setChecked(true);
         }else{
             push.setChecked(false);
@@ -136,7 +137,6 @@ public class SettingActivity extends AppCompatActivity {
     public void onBackPressed() {
         //super.onBackPressed();
         setResult(Activity.RESULT_CANCELED);
-        savePreferences();
         finish();
     }
 
@@ -145,7 +145,6 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setResult(Activity.RESULT_CANCELED);
-                savePreferences();
                 finish();
             }
         });
@@ -153,9 +152,9 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    DAO.isPush = true;
+                    saveIsPushPreferences(true);
                 }else{
-                    DAO.isPush = false;
+                    saveIsPushPreferences(false);
                 }
             }
         });
@@ -185,22 +184,35 @@ public class SettingActivity extends AppCompatActivity {
                 }).start();
             }
         });
+
+        CurrencyConvert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ConvertCurrencyActivity.class));
+            }
+        });
+
+        termAndPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), TermsAndPolicyActivity.class));
+            }
+        });
+
+        qa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SuggetionsActivity.class));
+            }
+        });
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setResult(9008);
-                savePreferences();
                 finish();
             }
         });
-    }
-
-    // 값 저장하기
-    private void savePreferences(){
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean("ispush", DAO.isPush);
-        editor.commit();
     }
 
     private void getWeather(){
@@ -215,21 +227,21 @@ public class SettingActivity extends AppCompatActivity {
                     JSONObject obj_grid = obj_summary.getJSONObject("grid");
 
                     obj_today = obj_summary.getJSONObject("today");
-                    Log.d(TAG, "TODAY JSON : " + obj_today);
+                    //Log.d(TAG, "TODAY JSON : " + obj_today);
                     obj_tomorrow = obj_summary.getJSONObject("tomorrow");
-                    Log.d(TAG, "TOMORROW JSON : " + obj_tomorrow);
+                    //Log.d(TAG, "TOMORROW JSON : " + obj_tomorrow);
                     obj_dayaftertomorrow = obj_summary.getJSONObject("dayAfterTomorrow");
-                    Log.d(TAG, "DAYAFTERTOMORROW JSON : " + obj_dayaftertomorrow);
+                    //Log.d(TAG, "DAYAFTERTOMORROW JSON : " + obj_dayaftertomorrow);
 
                     String addr = obj_grid.getString("city") + " " + obj_grid.getString("county")
                             + " " + obj_grid.getString("village");
-                    Log.d(TAG, "Now Addr : " + addr);
+                    //Log.d(TAG, "Now Addr : " + addr);
 
                     if(DAO.Language.equals("en")) {
                         String from = "ko";
                         String to = "en";
                         addr = new PapagoNMT(SettingActivity.this, from, to, addr).send();
-                        Log.d(TAG, "Convert KR _ EN : " + addr);
+                        //Log.d(TAG, "Convert KR _ EN : " + addr);
                     }
 
                     Message msg = handler.obtainMessage();
@@ -292,14 +304,15 @@ public class SettingActivity extends AppCompatActivity {
             if(isall){
                 runGPS();
             }else{
-                checkDangerousPermissions();
+                Toast.makeText(getApplicationContext(), getResources().getText(R.string.require_permission),
+                        Toast.LENGTH_SHORT).show();
             }
         }
     }//end of onRequestPermissionsResult
 
     private void runGPS(){
         asyncDialog.show();
-        GPS gps = new GPS(getApplicationContext());
+        GPS gps = new GPS(SettingActivity.this);
         if(gps.isGetLocation()){
             lat = gps.getLat();
             lon = gps.getLon();
@@ -377,5 +390,17 @@ public class SettingActivity extends AppCompatActivity {
         setWeatherImage(sky.getString("code"), weather_afterTomorrow_i);
         weather_at_max.setText("max : " + tem.getString("tmax"));
         weather_at_min.setText("min : " + tem.getString("tmin"));
+    }
+
+    private void saveIsPushPreferences(boolean ispush){
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean("ispush", ispush);
+        editor.commit();
+    }
+
+    private boolean getisPush(){
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        return pref.getBoolean("ispush", true);
     }
 }

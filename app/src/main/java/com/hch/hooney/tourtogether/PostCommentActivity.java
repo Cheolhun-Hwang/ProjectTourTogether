@@ -1,13 +1,16 @@
 package com.hch.hooney.tourtogether;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -34,6 +37,7 @@ public class PostCommentActivity extends AppCompatActivity {
 
     private String contentID;
     private String comment_title;
+    private String post_user;
 
     private ArrayList<Comment> commentlist;
 
@@ -60,8 +64,10 @@ public class PostCommentActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.error_intent), Toast.LENGTH_SHORT).show();
             finish();
         }else{
+            post_user = getIntent().getStringExtra("user");
             contentID = getIntent().getStringExtra("contentid");
             comment_title = getIntent().getStringExtra("title");
+            Log.d(TAG, "CID : " + contentID);
 
             init();
             setEvent();
@@ -75,7 +81,7 @@ public class PostCommentActivity extends AppCompatActivity {
         //firebase;
         rootRef = FirebaseDatabase.getInstance().getReference();
         postRef = rootRef.child("post");
-        userRef = rootRef.child("ulog").child(DAO.user.getUID());
+        userRef = rootRef.child("ulog").child(post_user);
         commentRef = rootRef.child("comment");
 
         back = (ImageButton) findViewById(R.id.post_comment_back_btn);
@@ -94,7 +100,7 @@ public class PostCommentActivity extends AppCompatActivity {
         CommentListView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false));
         CommentListView.setAdapter(new CommentAdapter(this, commentlist, CommentListView,
-                contentID));
+                contentID, post_user));
     }
 
     private void setEvent(){
@@ -115,7 +121,7 @@ public class PostCommentActivity extends AppCompatActivity {
                     Date date = new Date(System.currentTimeMillis());
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy_MM_dd_HH_mm_sss");
-                    String key = DAO.user.getUID()+"_"+dateFormat2.format(date);
+                    String key = dateFormat2.format(date)+"__"+DAO.user.getUID();
 
                     Comment item = new Comment();
                     item.setC_Key(key);
@@ -153,6 +159,10 @@ public class PostCommentActivity extends AppCompatActivity {
                     });
 
                     uWriteContent.setText("");
+
+                    //키보드 숨기기
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(uWriteContent.getWindowToken(), 0);
                 }
             }
         });

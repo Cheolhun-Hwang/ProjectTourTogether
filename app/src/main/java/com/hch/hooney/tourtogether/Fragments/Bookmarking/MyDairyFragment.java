@@ -120,9 +120,9 @@ public class MyDairyFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "requestCode : " + requestCode);
+        //Log.d(TAG, "requestCode : " + requestCode);
         if(requestCode == SIGNAL_CREATE_LIST){
-            Log.d(TAG, "resultCode : " + resultCode);
+            //Log.d(TAG, "resultCode : " + resultCode);
             if(resultCode == Activity.RESULT_OK){
                 //myCourseView.getAdapter().notifyDataSetChanged();
             }else if(resultCode == Activity.RESULT_CANCELED){

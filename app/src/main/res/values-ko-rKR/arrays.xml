@@ -23,4 +23,28 @@
         <item>@string/search_tab5</item>
         <item>@string/search_tab6</item>
     </string-array>
+
+    <string-array name="currency">
+        <item>USD (미국)</item>
+        <item>AED (아랍에미리트)</item>
+        <item>AUD (호주)</item>
+        <item>BHD (바레인)</item>
+        <item>CAD (캐나다)</item>
+        <item>CHF (스위스)</item>
+        <item>CNH (위안화)</item>
+        <item>DKK (덴마크)</item>
+        <item>EUR (유로)</item>
+        <item>GBP (영국)</item>
+        <item>HKD (홍콩)</item>
+        <item>IDR (인도네시아)</item>
+        <item>JPY (일본)</item>
+        <item>KWD (쿠웨이트)</item>
+        <item>MYR (말레이시아)</item>
+        <item>NOK (노르웨이)</item>
+        <item>NZD (뉴질랜드)</item>
+        <item>SAR (사우디)</item>
+        <item>SEK (스웨덴)</item>
+        <item>SGD (싱가포르)</item>
+        <item>THB (태국)</item>
+    </string-array>
 </resources>

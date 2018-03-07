@@ -3,18 +3,16 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     buildToolsVersion "27.0.0"
-
     repositories {
         jcenter()
         mavenCentral()
     }
-
     defaultConfig {
         applicationId "com.hch.hooney.tourtogether"
         minSdkVersion 22
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.1.2"
+        versionCode 5
+        versionName '1.1.5'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
     }
@@ -23,6 +21,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    productFlavors {
     }
 }
 
@@ -49,7 +49,7 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:11.8.0'
     compile 'com.facebook.android:facebook-android-sdk:4.+'
     compile 'com.google.firebase:firebase-ads:11.8.0'
-
+    compile 'com.google.android.gms:play-services-ads:11.8.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -237,6 +237,7 @@ public class mainPostAdapter extends RecyclerView.Adapter {
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, PostCommentActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("user", item.getUId());
                 intent.putExtra("contentid", item.getContentID());
                 intent.putExtra("title", item.getTitle());
                 mContext.startActivity(intent);

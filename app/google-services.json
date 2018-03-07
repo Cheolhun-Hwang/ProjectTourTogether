@@ -8,153 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:250495192905:android:55700d1958432ddf",
-        "android_client_info": {
-          "package_name": "com.hchooney.qewqs.sns_version_170801"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "250495192905-3ig8r2l4h424fn7rmnquqrici0fub1jh.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.hchooney.qewqs.sns_version_170801",
-            "certificate_hash": "a8b1358ca7f4f175906c3bebe4fa6434820b5939"
-          }
-        },
-        {
-          "client_id": "250495192905-msq3fajtkoctqegsnc63bq7s5ca6i8vl.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAklhpqE2pJQyI3-1h9nUEnEwD1Gnp0zFU"
-        },
-        {
-          "current_key": "AIzaSyAyvEM1-6jYXWH8uYCrBAKc5aTYdM-1pzk"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "250495192905-msq3fajtkoctqegsnc63bq7s5ca6i8vl.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:250495192905:android:30d1ee4f4b5dc626",
-        "android_client_info": {
-          "package_name": "com.hchooney.qewqs.geosnsapp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "250495192905-uj2ilt2fnseiko34ct28vs7ssahmub8j.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.hchooney.qewqs.geosnsapp",
-            "certificate_hash": "a8b1358ca7f4f175906c3bebe4fa6434820b5939"
-          }
-        },
-        {
-          "client_id": "250495192905-msq3fajtkoctqegsnc63bq7s5ca6i8vl.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAklhpqE2pJQyI3-1h9nUEnEwD1Gnp0zFU"
-        },
-        {
-          "current_key": "AIzaSyAyvEM1-6jYXWH8uYCrBAKc5aTYdM-1pzk"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "250495192905-msq3fajtkoctqegsnc63bq7s5ca6i8vl.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:250495192905:android:d3b2729eecf2e7da",
-        "android_client_info": {
-          "package_name": "com.hchooney.qewqs.tourtogether"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "250495192905-ls518nnrg43fcb25348c32vr76b7ceu6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.hchooney.qewqs.tourtogether",
-            "certificate_hash": "a8b1358ca7f4f175906c3bebe4fa6434820b5939"
-          }
-        },
-        {
-          "client_id": "250495192905-msq3fajtkoctqegsnc63bq7s5ca6i8vl.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAklhpqE2pJQyI3-1h9nUEnEwD1Gnp0zFU"
-        },
-        {
-          "current_key": "AIzaSyAyvEM1-6jYXWH8uYCrBAKc5aTYdM-1pzk"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "250495192905-msq3fajtkoctqegsnc63bq7s5ca6i8vl.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:250495192905:android:4c354a5b0eb283bd",
         "android_client_info": {
           "package_name": "com.hch.hooney.tourtogether"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "250495192905-en8vtdoa6mcm5uoq13prqdbv5fi2f9hg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hch.hooney.tourtogether",
+            "certificate_hash": "559ef966f33ad89ee4fe87a0a1524e4f4a6e98c5"
+          }
+        },
         {
           "client_id": "250495192905-0oj2uen88plhdin4hclk0fv19045cssf.apps.googleusercontent.com",
           "client_type": 1,

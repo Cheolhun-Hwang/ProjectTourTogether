@@ -36,6 +36,7 @@ public class CommentAdapter extends RecyclerView.Adapter {
     private ArrayList<Comment> list;
     private RecyclerView recyclerView;
     private String Contentid;
+    private String user;
 
     private DatabaseReference rootRef;
     private DatabaseReference postRef;
@@ -46,16 +47,17 @@ public class CommentAdapter extends RecyclerView.Adapter {
     private int lastPosition = -1;
 
     public CommentAdapter(Context mContext, ArrayList<Comment> list, RecyclerView recyclerView,
-                            String contentid) {
+                            String contentid, String user) {
         this.mContext = mContext;
         this.list = list;
         this.recyclerView = recyclerView;
         this.Contentid = contentid;
+        this.user = user;
 
         //firebase;
         rootRef = FirebaseDatabase.getInstance().getReference();
         postRef = rootRef.child("post");
-        userRef = rootRef.child("ulog").child(DAO.user.getUID());
+        userRef = rootRef.child("ulog").child(user);
         commentRef = rootRef.child("comment");
     }
 

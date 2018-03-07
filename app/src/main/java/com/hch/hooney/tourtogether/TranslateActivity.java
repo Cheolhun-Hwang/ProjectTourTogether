@@ -106,20 +106,20 @@ public class TranslateActivity extends AppCompatActivity implements TextToSpeech
         if(requestCode == 8008){
             switch (resultCode){
                 case TextToSpeech.Engine.CHECK_VOICE_DATA_PASS:
-                    Log.d(TAG, "Case : CHECK_VOICE_DATA_PASS");
+                //    Log.d(TAG, "Case : CHECK_VOICE_DATA_PASS");
                     tts = null;
                     break;
                 case TextToSpeech.Engine.CHECK_VOICE_DATA_BAD_DATA:
                 case TextToSpeech.Engine.CHECK_VOICE_DATA_MISSING_DATA:
                 case TextToSpeech.Engine.CHECK_VOICE_DATA_MISSING_VOLUME:
-                    Log.d(TAG, "Case : 언어 요소 필요 > " + resultCode);
+                   // Log.d(TAG, "Case : 언어 요소 필요 > " + resultCode);
                     Intent installIntent = new Intent();
                     installIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
                     startActivity(installIntent);
                     break;
                 case TextToSpeech.Engine.CHECK_VOICE_DATA_FAIL:
                 default:
-                    Log.e(TAG, "None Exist TTS");
+                   // Log.e(TAG, "None Exist TTS");
             }
         }
     }
@@ -279,9 +279,9 @@ public class TranslateActivity extends AppCompatActivity implements TextToSpeech
                 String fromLan = getSpinnerText(from.getSelectedItemPosition());
                 String toLan = getSpinnerText(to.getSelectedItemPosition());
                 ttsTarget = toLan;
-                Log.d(TAG, "From : " + fromLan + " / To : " + toLan);
+                //Log.d(TAG, "From : " + fromLan + " / To : " + toLan);
                 if((fromLan.equals("None")) || (toLan.equals("None"))){
-                    Log.e(TAG, "Error Check from, to Language");
+                    //Log.e(TAG, "Error Check from, to Language");
                 }else{
                     if(isContextRight){
                         String res = "";
@@ -293,7 +293,7 @@ public class TranslateActivity extends AppCompatActivity implements TextToSpeech
                                     content.getText().toString()).send();
                         }
 
-                        Log.d(TAG, "RES : " + res);
+                        //Log.d(TAG, "RES : " + res);
 
                         if(res.equals("none")){
                             res = getResources().getString(R.string.translate_same_Language);
@@ -336,12 +336,12 @@ public class TranslateActivity extends AppCompatActivity implements TextToSpeech
 
             if(result == TextToSpeech.LANG_MISSING_DATA ||
                     result == TextToSpeech.LANG_NOT_SUPPORTED){
-                Log.e(TAG, "Language is not Available");
+               // Log.e(TAG, "Language is not Available");
             }else{
                 runTTS();
             }
         }else{
-            Log.e(TAG, "TTS is Not init()");
+           // Log.e(TAG, "TTS is Not init()");
         }
     }
 
@@ -363,7 +363,7 @@ public class TranslateActivity extends AppCompatActivity implements TextToSpeech
 
     private void runTTS(){
         String target = resultTextView.getText().toString();
-        Log.d(TAG, "Target : " + target);
+       // Log.d(TAG, "Target : " + target);
         tts.speak(target, TextToSpeech.QUEUE_ADD, null);
     }
 }

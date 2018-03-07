@@ -2,6 +2,7 @@ package com.hch.hooney.tourtogether;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -132,6 +134,9 @@ public class SelectMapActivity extends AppCompatActivity {
             public void onClick(View v) {
                 searchLocation(edittext_location.getText().toString());
                 focusMap();
+                //키보드 숨기기
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(edittext_location.getWindowToken(), 0);
             }
         });
     }
@@ -218,9 +223,9 @@ public class SelectMapActivity extends AppCompatActivity {
         }
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "권한있음");
+           // Log.d(TAG, "권한있음");
         } else {
-            Log.d(TAG, "권한없음");
+           // Log.d(TAG, "권한없음");
 
             ActivityCompat.requestPermissions(this, permissions, SIGNAL_PERMISSON);
         }
@@ -230,17 +235,17 @@ public class SelectMapActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
-        Log.d(TAG, "권한 : " + requestCode +" / " + SIGNAL_PERMISSON);
+       // Log.d(TAG, "권한 : " + requestCode +" / " + SIGNAL_PERMISSON);
         if (requestCode == SIGNAL_PERMISSON) {
-            Log.d(TAG, "권한 : " + grantResults.length +" / " + grantResults[0]);
+           // Log.d(TAG, "권한 : " + grantResults.length +" / " + grantResults[0]);
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Log.d(TAG, "권한 : " + grantResults[0]);
+              //  Log.d(TAG, "권한 : " + grantResults[0]);
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //Toast.makeText(getApplicationContext(), permissions[i] + " 권한이 승인됨.", Toast.LENGTH_LONG).show();
-                    Log.d(TAG, "권한 승인");
+                  //  Log.d(TAG, "권한 승인");
                 } else {
                     //Toast.makeText(getApplicationContext(), permissions[i] + " 권한이 승인되지 않음.", Toast.LENGTH_LONG).show();
-                    Log.d(TAG, "권한 승인되지 않음.");
+                  //  Log.d(TAG, "권한 승인되지 않음.");
                 }
             }
         }

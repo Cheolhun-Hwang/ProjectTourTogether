@@ -104,7 +104,7 @@ public class PostEditActivity extends AppCompatActivity {
 
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy_MM_dd_HH_mm_sss");
-        key = DAO.user.getUID()+"_"+dateFormat2.format(date);
+        key =dateFormat2.format(date)+"__"+ DAO.user.getUID();
         String fileName = "i_"+dateFormat2.format(date)+".jpg";
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
@@ -281,7 +281,7 @@ public class PostEditActivity extends AppCompatActivity {
         }else{
 
         }
-        Log.d(TAG, "ContentTypeID : "+item.getContentTypeID());
+        //Log.d(TAG, "ContentTypeID : "+item.getContentTypeID());
     }
 
     /* 사용자 권한 확인 메서드
@@ -304,10 +304,10 @@ public class PostEditActivity extends AppCompatActivity {
         }
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "권한있음");
+            //Log.d(TAG, "권한있음");
             runGPS();
         } else {
-            Log.d(TAG, "권한없음");
+            //Log.d(TAG, "권한없음");
 
             ActivityCompat.requestPermissions(this, permissions, SIGNAL_PERMISSON_GPS);
         }
@@ -332,10 +332,10 @@ public class PostEditActivity extends AppCompatActivity {
         }
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "권한있음");
+            //Log.d(TAG, "권한있음");
             runGallery();
         } else {
-            Log.d(TAG, "권한없음");
+            //Log.d(TAG, "권한없음");
 
             ActivityCompat.requestPermissions(this, permissions, SIGNAL_PERMISSON_GALLERY);
         }
@@ -348,19 +348,19 @@ public class PostEditActivity extends AppCompatActivity {
         if (requestCode == SIGNAL_PERMISSON_GPS) {
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d(TAG, "권한 승인");
+                    //Log.d(TAG, "권한 승인");
                     runGPS();
                 } else {
-                    Log.d(TAG, "권한 승인되지 않음.");
+                    //Log.d(TAG, "권한 승인되지 않음.");
                 }
             }
         }else if(requestCode == SIGNAL_PERMISSON_GALLERY){
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d(TAG, "권한 승인");
+                    //Log.d(TAG, "권한 승인");
                     runGallery();
                 } else {
-                    Log.d(TAG, "권한 승인되지 않음.");
+                    //Log.d(TAG, "권한 승인되지 않음.");
                 }
             }
         }
@@ -411,11 +411,11 @@ public class PostEditActivity extends AppCompatActivity {
             if(resultCode == Activity.RESULT_OK){
                 try {
                     mainPostImage = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), Uri.parse(data.getDataString()));
-                    Log.d("Bitmap", "before ==> width : " + mainPostImage.getWidth()+" / Height : " + mainPostImage.getHeight());
+                    //Log.d("Bitmap", "before ==> width : " + mainPostImage.getWidth()+" / Height : " + mainPostImage.getHeight());
 
                     //리사이즈
                     mainPostImage = resizeBitmapImageFn(mainPostImage, 400);
-                    Log.d("Bitmap", "after ==> width : " + mainPostImage.getWidth()+" / Height : " + mainPostImage.getHeight());
+                    //Log.d("Bitmap", "after ==> width : " + mainPostImage.getWidth()+" / Height : " + mainPostImage.getHeight());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -431,12 +431,12 @@ public class PostEditActivity extends AppCompatActivity {
                 if(item.getMapy() == 0.0 && item.getMapx() == 0.0 ){
                 }else{
                     try{
-                        Log.d("Selected map", "Mapy : " + item.getMapy()+" / Mapx : " + item.getMapx());
+                        //Log.d("Selected map", "Mapy : " + item.getMapy()+" / Mapx : " + item.getMapx());
 
                         Location location = new Location(getApplicationContext(), item.getMapy(), item.getMapx());
                         String areaResult = location.searchLocation();
 
-                        Log.d("Location convert", "Location : " + location);
+                        //Log.d("Location convert", "Location : " + location);
                         showLocation.setText(areaResult);
 
                         ConvertAreaCode convertAreaCode = new ConvertAreaCode(getApplicationContext());
@@ -478,6 +478,7 @@ public class PostEditActivity extends AppCompatActivity {
             @Override
             public void run() {
                 item.setReadCount("0");
+                item.setContentID(key);
                 item.setAddr1(showLocation.getText().toString());
 
                 item.setCommentCount("0");
